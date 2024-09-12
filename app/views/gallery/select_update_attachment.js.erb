@@ -1,0 +1,9 @@
+console.log('select_update_attachment')
+
+var arr = []
+arr.push('<%= j @blob.id %>')
+
+$('.frm-gallery .gallery-blob-selected input#selected_blob_id').val(arr).trigger('change')
+
+$('.frm-gallery .gallery-blob-selected .mini').html('<%= j content_tag :div, load_thumb(@blob, 64, 64), class: "thumb", id: @blob.id %>')
+

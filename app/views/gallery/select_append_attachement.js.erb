@@ -1,0 +1,21 @@
+console.log('select_append_attachement')
+
+var images = $('form.gallery-image-selected input#selected-blob-id').val()
+
+var arr = []
+
+if ( images.length == 0 ) {
+  arr.push('<%= j @blob.id %>')
+} else {
+  arr = images.split(', ')
+  arr.push('<%= j @blob.id %>')
+}
+
+console.log(arr)
+
+
+$('form.gallery-image-selected input#selected-blob-id').val(arr.join(', ')).trigger('change')
+
+$('form.gallery-image-selected .dialog-image-selected .thumbs').append('<%= j content_tag :div, load_thumb(@blob, 64, 64), class: "thumb", id: @blob.id %>')
+
+

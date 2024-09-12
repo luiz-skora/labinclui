@@ -1,0 +1,8 @@
+<%= form_with model: @anexo, url: adm_cursos_add_anexo_path(@curso.id, @modulo.id, @aula.id), method: :post, html:{ autocomplete: "off" }  do |f| %>
+  <fieldset>
+    <%= f.file_field :attachments, multiple: false, direct_upload: true, class: 'upload', style: 'display: none', data: {size: @anexo.attachments_max_size }, size: @anexo.attachments_max_size %>
+    <div class="msg">
+      <%= error_tag @anexo, :attachments %>
+    </div>
+  </fieldset>
+<% end %> 

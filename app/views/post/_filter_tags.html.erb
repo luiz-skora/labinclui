@@ -1,0 +1,3 @@
+<% @filter_tags.each do |t| %>
+  <%= content_tag :li, t.nome, id: "tag-#{t.id}", class: 'append_tag', data: { tag_id: t.id } %>
+<% end %>

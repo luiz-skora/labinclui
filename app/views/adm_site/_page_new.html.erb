@@ -1,0 +1,13 @@
+<div class="frm frm-page" id="form_page">
+
+  <%= content_tag :h6, 'Nova página', class: 'title' %>
+
+  <%= form_with model: @page, url: adm_site_page_create_path(), method: :patch, data: { turbo_method: :patch}, html: { autocomplete: "off"} do |f| %>
+    <%= render partial: 'page_form_fields', locals: { f: f } %>
+
+    <% @page.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+
+  <% end %>
+</div>

@@ -1,0 +1,18 @@
+<% has_image = !field.default_value.blank? %>
+<% target = "pm-image-#{DateTime.now.to_f.to_s.sub('.', '')}" %>
+<%= label_tag field.label, t("pagemaker.#{field.label}") %>
+<%= content_tag :div, '', class: 'select-image', id: target, data: {blob: field.default_value}  do %>
+  <%= hidden_field_tag :image, field.default_value, class: 'field' %>
+
+  <div class="image">
+    <% if has_image %>
+      <%= load_thumb(ActiveStorage::Blob.find(field.default_value.to_i), 170, 300) %>
+    <% end %>
+  </div>
+  <%= content_tag :div, class: "add-img-lnk#{has_image ? ' present' : ''}", data: { url: pagemaker_image_path(), image: field.default_value, target: target } do %>
+    <div>
+      <%= content_tag :h6, fas_icon('camera-retro') %>
+      <%= content_tag :h6, "Clique para #{has_image ? 'alterar' : 'escolher' } a imagem" %>
+    </div>
+  <% end %>
+<% end %>

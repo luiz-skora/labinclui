@@ -1,0 +1,17 @@
+<div class="frm frm-evaluation frm-questionario adm-aula" id="edit-questionario">
+  <%= content_tag :h6, "Avaliação do módulo - #{@modulo.nome}", class: 'title' %>
+  
+  <%= form_with model: @evaluation, url: adm_cursos_update_aula_evaluation_path(@curso.id, @modulo.id, -1, @evaluation.id), method: :post, html: { autocomplete: "off" }, class: 'avaliacao' do |f| %>
+    <div class="row">
+      <fieldset class="col-4">
+        <%= f.label :tipo, 'Tipo de Questionário:' %>
+        <%= f.select :tipo, tipo_questionario_for_select(f.object.tipo), include_blank: false %>
+        <%= content_tag :div, '', class: 'message', id: "evaluation-#{@evaluation.id}-tipo" %>
+      </fieldset>
+      <fieldset class="col-8"></fieldset>
+    </div>
+  <% end %>  
+  
+  <%= render partial: 'form_questionario' %>
+  
+</div>

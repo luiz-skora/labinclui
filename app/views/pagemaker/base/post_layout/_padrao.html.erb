@@ -1,0 +1,85 @@
+<%= content_tag :div, '', class: "article-header" do %>
+  <% if fields[:show_title] == '1' %>
+    <%= content_tag :h1, post.titulo, class: 'article-title' %>
+  <% end %>
+  <% if fields[:show_categories] == '1' %>
+    <%= content_tag :div, '', class: 'article-categories' do %>
+      <%= "Arquivado em: " %>
+        <%= content_tag :ul, class: 'post-categories' do %>
+          <% post.categories.each do |k| %>
+            <%= content_tag :li, class: 'post-category' do %>
+              <%= link_to k.nome, k.mount_url %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+    <% end %>
+  <% end %>
+  <% if fields[:show_author] == '1' %>
+    <% author = ", por: #{post.autor.present? ? post.autor : (ConfGrupo.find_by(nome: 'Publicações').conf.find_by(nome: 'Autor padrão').valor rescue '' )}" %>
+  <% else %>
+    <% autor = '' %>
+  <% end %>
+  <% if fields[:show_datetime_publish] == '1' %>
+    <%= content_tag :div, '', class: 'post-publish' do %>
+      <%= "Publicado #{l(post.published_in, format: :momentjs_LLLL)}#{author}" %>
+    <% end %>
+  <% end %>
+  <% if fields[:show_datetime_changed] == '1' && post.published_in < post.changed_in %>
+    <%= content_tag :div, '', class: 'post-last-change' do %>
+      <%= "Última alteraçao #{l(post.changed_in, format: :momentjs_LLLL)}" %>
+    <% end %>
+  <% end %>
+
+<% end %>
+
+<%= content_tag :div, '', class: 'article-highlights' do %>
+  <% if fields[:show_resumo] == '1' %>
+    <%= content_tag :div, '', class: 'post-resumo' do %>
+      <%= post.resumo %>
+    <% end %>
+  <% end %>
+  <% if fields[:show_imagem_destacada] == '1' %>
+    <%= content_tag :div, '', class: 'post-image', data: {controller: 'load_att', post: post.id, att: 'featured_image'} %>
+  <% end %>
+
+  <% if fields[:show_share_buttons] == '1' %>
+
+
+    <%= render partial: 'pagemaker/share_buttons', locals: { post: post } %>
+
+  <% end %>
+<% end %>
+
+<% if fields[:show_content] == '1' %>
+  <%= content_tag :div, '', class: 'article-content' do %>
+    <% if fields[:show_read_more_button] == '1' %>
+      <%= 'códigos para o leia mais' %>
+    <% else %>
+      <%= post.content.body %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if fields[:show_tags] == '1' %>
+  <%= content_tag :div, class: 'tags' do %>
+    <%= "Tags:" %>
+    <%= content_tag :ul, class: 'post-tags' do %>
+      <% post.tags.each do |k| %>
+        <%= content_tag :li, class: 'post-tag' do %>
+          <%= link_to k.nome, k.mount_url %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if fields[:show_related_posts] == '1' %>
+  <%= content_tag :div, '', class: 'article-related-posts' do %>
+    <% post.related_posts(3).each do |k| %>
+      <%= render partial: 'pagemaker/base/post_layout/padrao_related_post', locals: { related: k} %>
+    <% end %>
+  <% end %>
+<% end %>
+
+

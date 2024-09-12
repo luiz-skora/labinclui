@@ -1,0 +1,13 @@
+<div class="tab-lista-aulas">
+  <div class="lista-aulas-container">
+    <%= content_tag :label, fas_icon('plus', text: 'Adicionar Nova Aula'), class: 'label-lnk nova-aula', data: { url: adm_cursos_new_aula_path(@modulo.id, @curso.id) } %>
+    &nbsp;
+    <div class="lista">
+      <% @modulo.modulo_aula.order(:indice, :id).each do |k| %>
+        <ul>
+          <%= content_tag :li, "#{k.nome}", class: 'label-lnk aula', data: { url: adm_cursos_show_aula_path(@curso.id, @modulo.id, k.id)} %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>

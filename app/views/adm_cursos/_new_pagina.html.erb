@@ -1,0 +1,23 @@
+<div class="frm frm-new-aula">
+  <%= content_tag :h6, "Conteúdo da aula: #{@aula.nome}", class: 'title' %>
+  
+  <%= form_with model: @pagina, url: adm_cursos_create_pagina_path(@curso.id, @modulo.id, @aula.id), method: :post, html: { autocomplete: "off" }  do |f| %>
+  
+    <%= render partial: 'pagina_fields', locals: { f: f} %>
+
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Criar Página', data: { disable_with: 'Gravando Página...' } %>
+      <div class="message">
+        <%= flash[:msg].present? ? "#{flash[:msg]}" : '' %>
+      </end>
+    </fieldset>
+
+    <% @pagina.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+
+  <% end %>
+</div>
+
+
+

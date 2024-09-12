@@ -1,0 +1,23 @@
+<div class="frm frm-new-aula">
+  <%= content_tag :h6, "Conteúdo da aula: #{@aula.nome}", class: 'title' %>
+  <% indice = @paginas.pluck(:id) %>
+  <% pag = indice.index(@pagina.id) %>
+  <%= content_tag :label, "Página #{pag + 1} de #{indice.count}", class: 'pages-count' %>
+  <div class="pages-action">
+    
+    <ul>
+      <%= content_tag :li, fas_icon('angles-left', text:'Anterior'), class: ( pag == 0 ? 'label-lnk disable' : 'label-lnk'), data: { url: (pag == 0 ? '' : adm_cursos_show_pagina_path(@curso.id, @modulo.id, @aula.id, indice[pag -1])) } %>
+      <%= content_tag :li, 'Editar', class: 'label-lnk', data: { url: adm_cursos_edit_pagina_path(@curso.id, @modulo.id, @aula.id, indice[pag] )} %>
+      <%= content_tag :li, 'Nova', class: 'label-lnk', data: { url: adm_cursos_new_pagina_path(@curso.id, @modulo.id, @aula.id) } %>
+      <%= content_tag :li, fas_icon('angles-right', text: 'Próxima', right: true), class: ( pag == (indice.count - 1) ? 'label-lnk disable' : 'label-lnk'), data: { url: (pag == indice.count - 1 ? '' : adm_cursos_show_pagina_path(@curso.id, @modulo.id, @aula.id, indice[pag +1]))} %>
+    </ul>
+  </div>
+  
+  <div class="content-container">
+    <div class="trix-content">
+      <%= @pagina.content %>
+    </div>
+  </div>
+  
+  
+</div>

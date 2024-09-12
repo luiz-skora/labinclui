@@ -1,0 +1,74 @@
+<% @user_session ||= UserSession.new(session) %>
+
+<div class="frm frm-login">
+  <div class="mask">
+    <div style="text-align: center;">
+      <%= fas_icon('spinner', animation: 'spin') %>
+      <%= content_tag :p,'Por favor, aguarde alguns instantes antes de tentar novamente...' %>
+    </div>
+  </div>
+  <%= content_tag :h6, 'Login', class: 'title' %>
+   <% if @user_session.errors[:base].count == 0 %> 
+    <% if flash[:message].present? %>
+      <%= content_tag :p, flash[:message], class: 'success-message' %>
+    <% end %>
+    <% if flash[:error].present? %>
+      <%= content_tag :p, flash[:error], class: 'potential-span-message' %>
+    <% end %>
+    <% if flash[:span_message].present? %>
+      <%= content_tag :p, flash[:span_message].html_safe, class: 'potential-span-message' %>
+    <% end %>
+  <% end %>
+  
+  <%= form_with model: @user_session, url: {controller: :user_sessions, action: :create }, method: :post, html: { autocomplete: 'off' } do |f| %>
+    
+    <div id="flash">
+      <%= invisible_captcha :subtitle %>
+    </div>
+    
+    <%= hidden_field_tag :layout, @layout %>
+    
+    <fieldset class="form-login">
+      <%= f.label :email, 'email:' %>
+      <%= f.text_field :email, placeholder: 'email', autocomplete: 'off' %>
+    </fieldset>
+    &nbsp;
+    <fieldset class="form-login">
+      <div class="label-login fieldset-row">
+        <%= f.label :password, 'Senha:', class: 'label-login-password' %>
+      </div>
+      <%= f.password_field :password, placeholder: 'senha', autocomplete: 'off' %>
+    </fieldset>   
+    &nbsp;
+    
+    <% if flash[:span].present? && @user_session.errors[:base].count == 0 %>
+      <fieldset class="fieldset-inline">
+        <%= label_tag :is_human, flash[:question] %>
+        <%= number_field_tag :is_human %>
+        <%= hidden_field_tag :detect, flash[:response] %>
+      </fieldset>
+    <% end %>
+    
+    
+    <div class="btn-form form-login row">
+      <div class="recovery-pass col-7">
+        <%= link_to 'esqueceu a senha?', request_password_recovery_path, remote: true, method: :patch, class: 'label-login-recovery-pass', tabindex: '-1' %>
+      </div>
+      <div class="col-5">
+        <%= f.submit value: 'Entrar', data: { disable_with: 'entrar' } %>
+      </div>
+    </div>
+  
+  <% end %>
+ 
+  <div class="msg msg-especial">
+    &nbsp;
+    <%= content_tag :p,  @user_session.errors[:base].join(',') %>
+    <% if @user_session.errors[:unconfirmed_user].present? %>
+      <%= link_to 'clique aqui para reenviar o email de confirmação', user_send_confirm_mail_path(flash[:user_id]), remote: true, method: :patch, data: {disable_with: 'enviando'} %>
+    <% end %>
+  </div>
+
+  
+</div>
+

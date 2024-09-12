@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  curso_modulo: one
+  aula_id: 
+  tipo: MyString
+  indice: 1
+
+two:
+  curso_modulo: two
+  aula_id: 
+  tipo: MyString
+  indice: 1

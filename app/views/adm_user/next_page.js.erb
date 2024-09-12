@@ -1,0 +1,12 @@
+var more = '<%= j @more %>'
+
+$('.frm-tab-lista.users .tb-data').append('<%= j render "lista_users"%>') 
+
+if (more) {
+  $('.frm-tab-lista.users .more-itens .auto-load').attr('data-page', '<%= j @page + 1 %>').attr('data-query', '<%= j @query %>').removeClass('loading')
+  /*
+  $('.frm-tab-lista.users .more-itens .auto-load').attr('data-query', '<%= j @query %>')
+  */
+} else {
+  $('.frm-tab-lista.users .more-itens').html('')
+}

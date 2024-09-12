@@ -1,0 +1,6 @@
+$('.modulos-tree .modulo-evaluation').removeClass('selected')
+$('.modulos-tree .label-aula').removeClass('selected')
+$('.modulos-tree .label-lnk.aulas').addClass('selected')
+$('.frm-modulo .tabs-title li').removeClass('selected')
+$('.frm-modulo .tabs-title li.aula').addClass('selected')
+$('.frm-modulo .tabs-area').html('<%= j render "show_aulas" %>')

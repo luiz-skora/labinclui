@@ -1,0 +1,2 @@
+
+$('<%= j ".frm.adm-modulos .modulos-tree #modulo-#{@modulo.id} .modulo-nome" %>').removeClass('inativo').addClass('ativo').text('<%= j "#{@modulo.nome}" %>').trigger('click')

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  modulo_evaluation: one
+  indice: 1
+  tipo: MyString
+  peso: 1
+
+two:
+  modulo_evaluation: two
+  indice: 1
+  tipo: MyString
+  peso: 1

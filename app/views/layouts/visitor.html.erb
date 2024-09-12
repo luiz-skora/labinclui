@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="visitor">
+  <head>
+    <!--
+    <title><%= "#{Conf.find_by(nome: 'app_title').valor rescue 'CdB' }" %></title>
+    -->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= favicon_link_tag asset_path('ico.png', :rel => 'icon', :type =>  'image/png') %>
+    
+    <% @device ||= 'Mobile' %>
+
+    <%= display_meta_tags @meta %>
+    
+    <%= stylesheet_link_tag 'visitor_main', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'resset' %>
+    <%= stylesheet_link_tag 'tiny' %>
+    <%= stylesheet_link_tag 'pm' %>
+
+    <%= stylesheet_link_tag 'social-share-button' %>
+
+    <%= javascript_importmap_tags %>
+    <%= javascript_import_module_tag "visitor" %>
+
+
+    
+    <%= content_tag :script, type: 'text/javascript', async: 'async'  do %>
+      <%= raw App.first.front_script.header_scripts rescue '' %>
+
+    <% end %>
+
+    <%= content_tag :style do %>
+      <%= raw App.first.front_style.styles rescue '' %>
+    <% end %>
+
+    <!-- ads google -->
+    <%= raw ConfGrupo.find_by(nome: 'ads-google').conf.find_by(nome: 'script').valor rescue '' %>
+    <!-- end adsgoogle -->
+
+  </head>
+  <body>
+    <div class="content <%= @device %>">
+      <%= content_tag :div, class: 'body' do %>
+        <%= yield %>
+
+        <% if !cookies[:lgpd].present? %>
+          <%= render partial: 'shared/lgpd' rescue '' %>
+        <% end %>
+      <% end %>
+    </div>
+
+
+    <% if Rails.env.development? %>
+      <%= console %>
+    <% end %>    
+
+    <footer>
+      <%= content_tag :script, type:"text/javascript", async: "async" do %>
+        <%= raw App.first.front_script.footer_scripts rescue '' %>
+      <% end %>
+    </footer>
+  </body>
+
+</html>
+ 
+

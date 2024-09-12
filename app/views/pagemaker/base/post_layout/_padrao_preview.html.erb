@@ -1,0 +1,57 @@
+<%= content_tag :div, '', class: "article-header" do %>
+  <% if fields[:show_title] == '1' %>
+    <%= content_tag :h1, post.titulo, class: 'article-title' %>
+  <% end %>
+  <% if fields[:show_categories] == '1' %>
+    <%= content_tag :div, '', class: 'article-categories' do %>
+      <%= "Arquivado em: #{post.categories.pluck(:nome).join(', ') }" %>
+    <% end %>
+  <% end %>
+  <% if fields[:show_datetime_publish] == '1' %>
+    <%= content_tag :div, '', class: 'post-publish' do %>
+      <%= "Publicado #{l(post.published_in, format: :momentjs_LLLL)}" %>
+    <% end %>
+  <% end %>
+  <% if fields[:show_datetime_changed] == '1' && post.published_in < post.changed_in %>
+    <%= content_tag :div, '', class: 'post-last-change' do %>
+      <%= "Última alteraçao #{l(post.changed_in, format: :momentjs_LLLL)}" %>
+    <% end %>
+  <% end %>
+  <% if fields[:show_author] == '1' %>
+    <%= content_tag :div, "Por: #{post.autor.present? ? post.autor : (ConfGrupo.find_by(nome: 'Publicações').conf.find_by(nome: 'Autor padrão').valor rescue '' )}" , class: 'post-author' %>
+  <% end %>
+<% end %>
+
+<%= content_tag :div, '', class: 'article-highlights' do %>
+  <% if fields[:show_resumo] == '1' %>
+    <%= content_tag :div, '', class: 'post-resumo' do %>
+      <%= post.resumo %>
+    <% end %>
+  <% end %>
+  <% if fields[:show_imagem_destacada] == '1' %>
+    <%= content_tag :div, '', class: 'post-image' do %>
+      <% if post.featured_image.present? %>
+        <%= load_blob(post.featured_image, 1024, 1024)%>
+      <% else %>
+        <%= 'else' %>
+        <% if post.attachment.first.present? %>
+          <%= load_blob(post.attachment.first, 1024, 1024) %>
+         <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if fields[:show_content] == '1' %>
+  <%= content_tag :div, '', class: 'article-content' do %>
+    <% if fields[:show_read_more_button] == '1' %>
+      <%= 'códigos para o leia mais' %>
+    <% else %>
+      <%= raw prepare_edit(post.content.body) %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if fields[:show_tags] == '1' %>
+  <%= content_tag :div, "Tags: #{post.tags.pluck(:nome).join(', ')}", class: 'article-tags' %>
+<% end %>

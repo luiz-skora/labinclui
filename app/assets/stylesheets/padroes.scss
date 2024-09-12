@@ -1,0 +1,67 @@
+@font-face {
+  font-family: 'Roboto';
+  src: font-url('Roboto-Regular.ttf') format('truetype');
+  
+  font-weight: normal;
+  font-style: normal;
+}
+
+$roboto: 'Roboto', sans-serif;
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: font-url('Ubuntu-Regular.ttf') format('truetype');
+  
+  font-weight: normal;
+  font-style: normal;
+}
+$ubuntu: 'Ubuntu', sans-serif;
+
+/*******************************
+ * palheta de cores
+ * https://paletton.com/
+ * ****************************/
+
+$primary-color: #2D5CB3;  //#2d5db3
+$secondary-color-A: #fbbf09;
+$secondary-color-A-c: #4D32B9;
+$secondary-color-B: #78CC7E; 
+$secondary-color-C: #FFD72C; 
+$complementary-color: #FFB52C;
+$primary-border: #7395D4;
+$secondary-border-A: #8A77D7;
+$secondary-border-B: #FFE77D;
+$complementary-border: #FFD17D;
+$lista-hover-color: #bfe4c2;
+$light-color: #FFF;
+$dark-color: #000;
+$label-color: #999;
+$label-color-dark: #666;
+$error_color: red;
+$error_color_msg: red;
+$odd-color: aliceblue;
+$background-color: #fff;
+
+$link-color: #666;
+$link-color-hover: #333;
+$link-background-hover: #eee;
+
+
+// padrões
+$header-height: 30px;
+$header-margin: 5px;
+$menu_width: 200px;
+$left_menu_width: 220px;
+$right_menu_width: 200px;
+$tools_width: 350px;
+$body-max-width: 1170px; 
+$adm-left-bar-width: 150px; 
+
+//tipo de aula
+$aula-presencial: #8a2be2;
+$aula-remoto-ao-vivo: #008080;
+$aula-remoto-autonomo: #00bfff;
+$aula-laboratorio: #d2691e;
+$aula-evaluation: #8b0000;
+$aula-trabalho: #483d8b;
+

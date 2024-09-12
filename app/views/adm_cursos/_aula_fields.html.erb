@@ -1,0 +1,33 @@
+<div class="row">
+  <fieldset class="col-6">
+    <%= f.label :nome, 'Nome da aula:' %>
+    <%= f.text_field :nome, placeholder: 'Nome da aula' %>
+    <div class="msg" id="nome">&nbsp;
+      <%= error_tag @aula, :nome %>
+    </div>
+  </fieldset>
+      
+  <fieldset class="col-4">
+    <%= f.label :tipo, 'Tipo da aula:' %>
+    <%= f.select :tipo, aula_tipo_for_select((f.object.tipo.present? ? f.object.tipo : 'Fixação')), prompt: 'Selecione', include_blank: false %>
+    <div class="msg" id="tipo">&nbsp;
+      <%= error_tag @aula, :tipo %>
+    </div>
+  </fieldset>
+      
+  <fieldset class="col-2">
+    <%= f.label :indice, 'Ordem:' %>
+    <%= f.number_field :indice, min: 1, max: @modulo.modulo_aula.count + 1 %>
+    <div class="msg" id="indice">&nbsp;
+       <%= error_tag @aula, :indice %>
+    </div>
+  </fieldset>
+</div>
+    
+    <fieldset class="trix-container">
+      <%= f.label :content, 'Informações ao professor:' %>
+      <%= f.rich_text_area :content %>
+      <div class="msg" id="content">&nbsp;
+        <%= error_tag @modulo, :content %>
+      </div>
+    </fieldset> 

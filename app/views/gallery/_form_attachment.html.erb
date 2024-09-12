@@ -1,0 +1,26 @@
+<div id="gallery-add-attachment">
+
+<%= form_with model: @new_att, url: @new_path, method: :patch do |f| %>
+  <%= hidden_field_tag :att_type, @att_type %>
+  <% if @att_type == 'image' %>
+    <%= f.file_field :attachment, direct_upload: true, accept: 'image/jpeg, image/png, image/gif', class: 'add-attachment-field', size: @app.attachments_max_size, id: "attachment-picture", style: 'display: none;', multiple: false, data: { gallery: true, s: @app.attachments_max_size } %>
+    <%= content_tag :div, class: "add-attachment-btn", data: { type: @att_type, target: 'gallery' } do %>
+      <%= fas_icon('camera-retro', text: 'Enviar Imagem' ) %>
+      <%# target: "attachment-picture" %> 
+    <% end %>
+  <% end %>
+
+  <% if @att_type == 'pdf' %>
+    <%= f.file_field :attachment, direct_upload: true, accept: 'application/pdf', class: 'add-attachment-field', size: @app.attachments_max_size, id: "attachment-picture", style: 'display: none;', multiple: false, data: { gallery: true, s: @app.attachments_max_size, size: @app.attachments_max_size } %>
+    <%= content_tag :div, class: "add-attachment-btn", data: { type: @att_type, target: 'gallery' } do %>
+      <%= fas_icon('file-pdf', text: 'Enviar Arquivo PDF' ) %>
+      <%# target: "attachment-picture" %>
+    <% end %>
+  <% end %>
+  <div class="msg">
+    <%= error_tag @new_att, :attachment %>
+  </div>
+<% end %> 
+</div>
+
+

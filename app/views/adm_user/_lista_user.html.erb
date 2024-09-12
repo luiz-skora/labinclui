@@ -1,0 +1,8 @@
+<% k ||= @user %>
+<%= content_tag :li, k.nome, class: 'nome', title: k.nome %>
+<%= content_tag :li, k.login, class: 'identifier', title: k.login %>
+<%= content_tag :li, k.email, class: 'email', title: k.email %>
+<%= content_tag :li, l(k.nascimento, format: :default ), class: 'nasc', title: l(k.nascimento, format: :default ) %>
+<%= content_tag :li, user_level_to_text(k.user_level), class: 'tipo', title: user_level_to_text(k.user_level) %>
+<%= content_tag :li, (k.confirmation_at.present? ? far_icon('square-check') : 'Pendente' ), class: "confirm #{(k.confirmation_at.present? ? 'pass' : 'red' )}" %>
+ 

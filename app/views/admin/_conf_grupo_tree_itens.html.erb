@@ -1,0 +1,22 @@
+<% grupo_selected = @grupo.present? ? @grupo.id : 0 %>
+<% conf_selected = @conf.present? ? @conf.id : 0 %>
+<div id="configuracoes_tree">
+  <% @grupos.each do |k| %>
+    <% ico = (grupo_selected == k.id && conf_selected > 0 ? ' expand' : ' retract') %>
+    <%= content_tag :ul, class: "ul-grupo#{ico}" do %>
+      <%= content_tag :li, class: "expand-ico#{ico}" do %>
+        <%= far_icon('square-plus', class: 'ico retract') %>
+        <%= far_icon('square-minus', class: 'ico expand') %>
+      <% end %>
+      <%= content_tag :li, "#{k.nome}", class: "tree-item label-lnk conf-grupo#{k.id == grupo_selected ? ' selected' : ''}", id: "grupo-#{k.id}", data: { url: conf_grupo_edit_path(k.id), target: '.frm-configuracoes .tree-data .data'} %>
+      <%= content_tag :li, far_icon('square-plus'), class: 'label-lnk add_conf', data: { url: conf_new_path(k.id), target: '.frm-configuracoes .tree-data .data' }, title: 'Adicionar Configuração' %>
+      <%#= content_tag :li, class: 'tree-subitens' do %>
+        <% k.conf.order(:nome).each do |h| %>
+          <%= content_tag :ul, class: 'ul-subitem' do %>
+            <%= content_tag :li, "#{h.nome}", class: "sub-item label-lnk#{h.id == conf_selected ? ' selected' : ''}", id: "conf-#{h.id}", data: { url: conf_edit_path(k.id, h.id), target: '.frm-configuracoes .tree-data .data'} %>
+          <% end %>
+        <% end %>
+      <%# end %>
+    <% end %>
+  <% end %>
+</div>

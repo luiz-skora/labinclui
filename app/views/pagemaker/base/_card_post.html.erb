@@ -1,0 +1,15 @@
+<%= content_tag :div, class: "pm pm-card  #{(fields[:class].present? ? fields[:class] : 'default')} #{fields[:alignment]}" do %>
+  <% posts =  fields[:category].present? ? Category.find(fields[:category].to_i).get_posts(20+fields[:offset].to_i).offset(fields[:offset]).limit(fields[:num_posts].to_i).order(published_in: :desc) : Post.offset(fields[:offset]).limit(fields[:num_posts].to_i).order(published_in: :desc) %>
+  <% if fields[:category].present? && fields[:category_show] == '1' %>
+    <% category = Category.find(fields[:category].to_i) %>
+    <%= content_tag :h6, link_to( category.nome, category.mount_url), class: 'category-title' %>
+  <% end %>
+  <% posts.each do |post| %>
+    <% card_height = (fields[:card_height].present? ?  "height: #{fields[:card_height]}px" : '') %>
+    <%= content_tag :div, class: "post-card #{fields[:disposition]} #{fields[:alignment]}", style: card_height do %>
+      <%= render partial: "pagemaker/base/parts/card_post_#{fields[:disposition]}", locals: { fields: fields, post: post } %>
+
+    <% end %>
+  <% end %>
+<% end %>
+

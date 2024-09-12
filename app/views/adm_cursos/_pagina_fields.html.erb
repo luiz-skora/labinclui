@@ -1,0 +1,25 @@
+<% page_id = ( @pagina.id.present? ? @pagina.id : DateTime.now.to_f.to_s.sub('.', '')) %>
+<div class="row">
+  <fieldset class="col-8"></fieldset>
+  
+  <fieldset class="col-4">
+    <%= f.label :indice, 'Ordem:' %>
+    <%= f.number_field :indice, min: 1, max: @aula.aula_pagina.count + 1, step: 1 %>
+    <div class="msg">&nbsp;
+      <%= error_tag @pagina, :indice %>
+    </div>
+  </fieldset>
+</div>
+
+<fieldset class="trix-container">
+  <%= f.label :content, 'Conteúdo:' %>
+  <%#= f.rich_text_area :content, data: { template: aula_att_preview_path(), aula_id: @aula.id, controller: "attachments"}, id: 'content-aula', class: 'trix-content pagina-aula' %>
+  
+
+  <%= tinymce_assets %>
+  <%= f.text_area :content , class: 'tinymce', data: { editor_id: "content-#{page_id}", controller: 'pmtiny', action: 'connect->pmtiny#connect update-columns@window->pmtiny#updateColumns', gallery_url: tiny_show_modal_path(), components_url: show_components_dialog_path(), columns_url: show_columns_dialog_path() }, rows: 60, cols: 120 %>
+  <div class="msg" id="content">&nbsp;
+      <%= error_tag @pagina, :content %>
+    </div>
+</fieldset>
+

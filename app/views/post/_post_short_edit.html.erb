@@ -1,0 +1,83 @@
+<div class="frm post-short-edit post-edit" id="<%= "short-edit-post-#{@post.id}" %>">
+
+
+  <%= form_with model: @post, url: adm_post_short_update_path(@post.id), method: :patch, html: { autocomplete: "off"} do |f| %>
+
+    <div class="row">
+    <fieldset class="col-12">
+      <%= f.label :titulo, 'Título:' %>
+      <%= f.text_field :titulo, placeholder: 'Título' %>
+      <div class="msg">&nbsp;
+        <%= error_tag @post, :titulo %>
+      </div>
+    </fieldset>
+
+    <fieldset class='edit-resumo col-12'>
+      <%= f.label :resumo, 'Resumo:' %>
+      <%= f.text_area :resumo, data: { controller: 'postresumo', editor_id: "resumo-#{@post.id}"} %>
+      <div class="msg">&nbsp;
+        <%= error_tag @post, :resumo %>
+      </div>
+    </fieldset>
+
+    <fieldset class="col-4">
+      <%= f.label :status, 'Status:' %>
+      <%= f.select :status, post_status_for_select(f.object.status), allow_blank: false %>
+      <div class="msg">&nbsp;
+        <%= error_tag @post, :status %>
+      </div>
+    </fieldset>
+    <div class="col-8"></div>
+    </div>
+
+
+    <div class="row">
+      <fieldset class="post-category col-6">
+        <div class=" label-filtro filtro-categoria row">
+          <div class="col-6">
+            <%= f.label :category_post, 'Categorias:' %>
+          </div>
+          <div class="col-6">
+            <%= text_field_tag 'find_category', '', placeholder: '', class: 'search-field', autocomplete: "off" %>
+            <%= content_tag :span, fa_icon('search'), class: 'insideico' %>
+          </div>
+        </div>
+        <div class="post-categories-box">
+          <ul class="categorias">
+            <%= f.collection_check_boxes(:category_ids, @post.categories.order(:nome), :id, :nome) do |b| %>
+              <%= content_tag :li, class: 'categoria checkbox-label' do %>
+                <%= b.check_box id: "post_category_#{@post.id}_#{b.object_id}" %>
+                <%= b.label for: "post_category_#{@post.id}_#{b.object_id}"  %>
+              <% end %>
+            <% end %>
+            <%= f.collection_check_boxes :category_ids, Category.where.not(id: @post.categories.ids).order(:nome), :id, :nome, class: "post-category_item" do |b| %>
+              <%= content_tag :li, class: 'categoria checkbox-label' do %>
+                <%= b.check_box id: "post_category_#{@post.id}_#{b.object.id}" %>
+                <%= b.label for: "post_category_#{@post.id}_#{b.object.id}" %>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      </fieldset>
+
+      <fieldset class="post-tag col-6" data-post-id="<%= @post.id %>" id="<%= "tags-post-#{@post.id}" %>">
+        <%= render partial: 'post_tags', locals: { f: f, post_id: @post.id} %>
+      </fieldset>
+
+    </div>
+
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Salvar', data: { disable_with: 'Criando cadastro' } %>
+    </fieldset>
+
+    <% @post.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+
+    <% if flash["msg_#{@post.id}"].present? %>
+      <%= content_tag :div, flash["msg_#{@post.id}"], class: 'message' %>
+    <% end %>
+
+  <% end %>
+
+</div>

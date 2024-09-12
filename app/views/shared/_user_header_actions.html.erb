@@ -1,0 +1,35 @@
+<ul class="user-header-actions">
+  <li class="profile-action action">
+    <%= render partial: 'shared/profile_gravatar' %>
+  </li>
+  <li class="home-action action">
+    <%= link_to fa_icon('home'), root_path(), class: 'home-action' %>
+  </li>
+  <li class="nav-item menu-action action notify" data-url="<%= '#' %>">
+    <% n = current_user.notify.where(lido: false).count %>
+    <%= content_tag :div, class: 'icon-notify' do %>
+      <div class="flex">
+        <%#=  fas_icon('bell') %>
+        <%= link_to fa_icon('bell'), '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown'}, id: 'header-notify' %> 
+        <ul class="header-submenu dropdown-menu" id="submenu-action" aria-labelledby="header-notify">
+          <%= render partial: 'notify/user_notifies_menu_lista' %>
+        </ul>
+      </div>
+    <% end %>
+  </li>
+  <li class="nav-item menu-action auto action">
+    <%#= fa_icon('bars') %>
+    <%= link_to fa_icon('bars'), '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown'}, id: 'header-menu' %>
+    <!-- popup dropdown-menu -->
+    <ul class="header-submenu dropdown-menu" id="submenu-action" aria-labelledby="header-menu">
+      <%= link_to profile_path(current_user.profile.identifier)  do %>
+        <%= content_tag :li, far_icon('address-card', text: 'Meu Perfil'), data: { toggle: 'tooltip', placement: 'top'}, title: 'Meu perfil' %>
+      <% end %>
+
+      <hr />
+      <%= link_to user_sessions_path, method: :delete do %>  
+          <li class="exit">Sair</li>
+      <% end %>
+    </ul>
+  </li>
+</ul>

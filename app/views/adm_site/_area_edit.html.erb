@@ -1,0 +1,18 @@
+<div class="frm frm-area" id="form_area">
+
+  <%= content_tag :h6, 'Editar área', class: 'title' %>
+
+  <%= form_with model: @area, url: adm_site_area_update_path(@area.id), method: :patch, data: { turbo_method: :patch}, html: { autocomplete: "off"} do |f| %>
+    <%= render partial: 'area_form_fields', locals: { f: f } %>
+
+    <% @area.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+
+    <% if flash[:msg].present? %>
+      <%= content_tag :div, flash[:msg], class: 'message' %>
+    <% end %>
+
+  <% end %>
+</div>
+

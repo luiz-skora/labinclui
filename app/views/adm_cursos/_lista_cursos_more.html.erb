@@ -1,0 +1,9 @@
+<% if @more > 0 %>
+  <%= content_tag :div, class: 'next-page auto-load', id: 'more', data: { controller: 'autoload', action: 'click->autoload#click', target: '.frm-tab-lista.cursos .tb-data', more: @more, url: adm_cursos_next_page_path(), page: (@page + 1), query: @query.to_s} do %>
+    <%= fas_icon('spinner', animation: 'spin', class: 'loading-ico', style: 'display: none' ) %>
+    <%= content_tag :label, 'Carregar mais', class: 'more-label', style: 'display: block' %>
+    <%= content_tag :div, 'Não foi possivel carregar as informações', class: 'next-page-error msg', style: 'text-align: center; display: none;' %>
+
+  <% end %>
+<% end %>
+

@@ -1,0 +1,22 @@
+<div class="frm frm-lista posts"  id="adm_post_data">
+
+    <div class="frm-actions">
+      <%#= form_with url: adm_post_filter_lista_path(), method: :patch,  class: 'form-find', html: { autocomplete: "off"}, data: { turbo: false, remote: true} do |f| %>
+      <%= content_tag :div, class:"form-find", data: { url: adm_post_filter_lista_path() } do %>
+        <div class="lista-actions">
+          <fieldset class="filtro-item nome">
+            <%#= label_tag 'find[query]', 'Nome ou email:' %>
+            <%= text_field_tag 'find[query]', '', placeholder: 'localizar', class: 'search-field', autocomplete: "off" %>
+            <%= content_tag :span, fa_icon('search'), class: 'insideico' %>
+          </fieldset>
+        </div>
+      <% end %>
+    </div>
+
+
+  <div class="frm-tab-lista posts">
+    <%= render partial: 'post_tab_lista' %>
+  </div>
+
+</div>
+

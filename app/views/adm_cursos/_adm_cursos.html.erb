@@ -1,0 +1,19 @@
+<% selected ||= 'lista' %>
+<% part ||= 'lista' %>
+<div class="frm adm-cursos">
+  <%= content_tag :h3, fas_icon('school', text: 'Cursos'), class: 'title' %>
+
+  <div class='actions'>
+    <ul class="adm-menu adm-cursos-menu">
+      <%= content_tag :li, 'Cursos', data: { url: adm_cursos_lista_path(), target: '.rect'}, class: "li-lnk lista#{selected == 'lista' ? ' selected' : ''}" %>
+      <%= content_tag :li, 'Adicionar', data: { url: adm_cursos_new_curso_path(), target: '.rect'}, class: "li-lnk add#{selected == 'add' ? ' selected' : ''}" %>
+
+    </ul>
+  </div>
+
+  <div class="rect">
+    <%= render partial: part %>
+  </div>
+
+</div>
+

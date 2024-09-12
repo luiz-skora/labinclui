@@ -1,0 +1,15 @@
+<div class="frm frm-edit-question" id="frm-edit-question">
+  <%= form_with model: @question, url: adm_cursos_update_question_path(@curso.id, @modulo.id, (@aula.present? ? @aula.id : -1), @evaluation.id, @question.id), method: :post, html: { autocomplete: "off" } do |f| %>
+  
+  <%= render partial: 'question_fields', locals: { f: f } %>
+    
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Gravar Questão', data: { disable_with: 'Gravando Questão...' } %>
+    </fieldset>
+  
+    <% @question.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+  
+  <% end %>
+</div>

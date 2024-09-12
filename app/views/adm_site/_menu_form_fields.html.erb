@@ -1,0 +1,12 @@
+<fieldset>
+  <%= f.label :nome, 'Nome:' %>
+  <%= f.text_field :nome, placeholder: 'Nome' %>
+  <%= label_tag :identifier, f.object.identifier, class: 'slug-field' %>
+  <div class="msg">&nbsp;
+    <%= error_tag @menu, :nome %>
+  </div>
+</fieldset>
+
+<fieldset class="btn-form">
+  <%= f.submit value: 'Salvar', data: { disable_with: 'Gravando...' } %>
+</fieldset>

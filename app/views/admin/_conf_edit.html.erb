@@ -1,0 +1,28 @@
+<div class="frm frm-new-conf" id="configuracoes_data">
+
+  <%= content_tag :h5, "Editar Configuração", class: 'title' %>
+
+  <%= form_with model: @conf, url: conf_update_path(@conf.conf_grupo.id, @conf.id), method: :patch, html: { autocomplete: "off" } do |f| %>
+  
+    <%= render partial: 'admin/conf_fields', locals: { f: f} %>
+  
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Salvar', data: { disable_with: 'Gravando...' } %>
+    </fieldset>
+      
+      
+    <% @conf.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+    
+    <% if flash[:msg].present? %>
+      <%= content_tag :div, flash[:msg], class: 'message' %>
+    <% end %>
+    
+  <% end %>
+  <%= content_tag :div, class: 'label-lnk-confirm remove', data: { url: conf_remove_path(@conf.conf_grupo.id, @conf.id), message: "Esta ação removerá a configuração e não poderá ser desfeita\n\nDeseja continuar?" } do %>
+    <%= fas_icon('trash-can', text: ' Excluir Configuração') %>
+  <% end %>  
+  
+</div>
+ 

@@ -1,0 +1,9 @@
+<% buttons = ConfGrupo.find_by(nome: 'Publicações').conf.find_by(nome: 'share_buttons').valor rescue '' %>
+<%= content_tag :div, '', class:"pm-share-button social-share-button" do %>
+
+  <%= content_tag :label, '', class: 'ssb-icon api-share-button', data: { controller: 'sharepost', action: 'click->sharepost#sharepost', sharepost_url_value: "#{request.base_url}#{post.mount_url}", sharepost_title_value: post.titulo, sharepost_body_value: post.resumo.body.to_plain_text } %>
+
+  <% eval(buttons).collect do |k, h| %>
+    <%= content_tag :label, '', class: "share-button ssb-icon ssb-#{k.parameterize}", title: "Enviar para #{k}", data: { controller: "sharepost", sharepost_url_value: "#{request.base_url}#{post.mount_url}", sharepost_title_value: post.titulo,  action: 'click->sharepost#buttonshare', sharepost_share_value: "#{h}", sharepost_button_value: k.parameterize, sharepost_device_value: (current_visit.present? ? current_visit.device_type : 'Desktop') }  %>
+  <% end %>
+<% end %>

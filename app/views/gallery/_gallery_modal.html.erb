@@ -1,0 +1,43 @@
+<div class="frm frm-gallery">
+  <div class="actions frm-actions row">
+    <div class="frm-add-attachment col-3">
+      <fieldset class="upload">
+        <%= render partial: 'gallery/form_attachment' %>
+      </fielset>
+    </div>
+    <div class="lista-actions col-3">
+      <%= content_tag :div, class: "form-find", data:{ url: tiny_filter_path()} do %>
+        <fieldset class="filtro-item nome">
+          <%#= label_tag 'find[query]', 'Nome ou email:' %>
+          <%= text_field_tag 'find[query]', '', placeholder: 'localizar', class: 'search-field', autocomplete: "off" %>
+          <%= content_tag :span, fa_icon('search'), class: 'insideico' %>
+        </fieldset>
+      <% end %>
+    </div>
+    </div> <!-- actions -->
+  <div class="gallery" id="gallery-thumbs">
+    <div class="thumbs" id="modal-thumbs">
+      <div class="_container">
+        <%= content_tag :div, class: 'row thumbs-container', data:{ select_url: select_att_path, device: current_visit.device_type, multiple: false } do %>
+          <%= render partial: 'gallery/thumbs' %>
+        <% end %>
+      </div>
+      <div class="_more">
+        <%= render partial: 'gallery/more_thumbs' %>
+      </div>
+    </div>
+    <div class="attachment-info" style="display: none" data-simplebar>
+    
+    </div>
+  </div>
+  <div class="footer gallery-blob-selected row">
+    <div class="mini"> </div>
+    <fieldset class="btn-form ">
+      <%= hidden_field_tag :bloob_id, '', id: 'selected_blob_id' %>
+      <%= button_tag 'Selecionar', type: 'submit', data: { editor_id: params[:editor_id], url: @select_url , disable_with: 'Gravando' }, style: 'display: none', id: 'submit_blob', class: @gallery_submit_button_id %>
+    </fieldset>
+
+  </div>
+  
+  
+</div>

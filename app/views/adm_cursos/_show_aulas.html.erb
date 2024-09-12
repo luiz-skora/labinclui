@@ -1,0 +1,7 @@
+
+<% if @modulo.modulo_aula.count == 0 %>
+  <% @aula = @modulo.modulo_aula.build(nome: 'Aula #1', indice: 1) %>
+  <%= render partial: 'new_aula' %>
+<% else %>
+  <%= render partial: 'lista_aulas' %>
+<% end %>

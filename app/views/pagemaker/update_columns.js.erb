@@ -1,0 +1,37 @@
+$('.modal-main .modal-title').text()
+$('.modal-main .modal-container').html('')
+$('.modal-main').hide()
+
+
+var fields = JSON.parse('<%= raw(fields) %>')
+
+console.log('fields',fields)
+
+var cols =  tinymce.activeEditor.selection.select(tinymce.activeEditor.dom.select('div#'+'<%= params[:component_id] %>'))
+
+var h = $(cols[0])
+
+/* redesenha as colunas com jquery*/
+
+h.attr('class', "pm pm-row preview "+fields.alinhamento+' '+(fields.hasOwnProperty('classe') ? fields.classe : '' ))
+h.attr('data-fields', JSON.stringify(fields) )
+/* redimenciona e adiciona novas colunas */
+for( let i = 1; i <= fields.colunas; i++) {
+  if ( h.find('.pm-col-'+i).length > 0 ) {
+    var col = $(h.find('.pm-col-'+i))
+    col.css('width', fields['col_'+i]+'%')
+    col.attr('data-mce-style', 'width: '+fields['col_'+i]+'%')
+
+  } else {
+    h.append('<div class="pm-col pm-col-'+i+'" style="width: '+fields['col_'+i]+'%" data-mce-style="width: '+fields['col_'+i]+'%"><div class="col-preview">&nbsp;</div></div>')
+  }
+}
+/* Remove colunas excedentes */
+var num_cols = h.find('.pm-col').length
+for(let i = num_cols; i > fields.colunas; i-- ) {
+  $(h.find('.pm-col-'+i)).remove()
+}
+console.log('h',h, h.html())
+
+tinymce.activeEditor.selection.select(tinymce.activeEditor.dom.select('div#'+'<%= params[:component_id] %>'))[0] = h
+

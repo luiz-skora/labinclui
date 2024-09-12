@@ -1,0 +1,21 @@
+<div class="frm frm-lista cursos" id="adm_cursos_data">
+  <div class="frm-actions">
+    <%#= form_tag adm_cursos_filter_lista_path(), method: :patch, remote: true, class: 'form-find', html: { autocomplete: "off"} do |f| %>
+    <%= content_tag :div, class: 'form-find', data: { url: adm_cursos_filter_lista_path() } do %>
+      <div class="lista-actions">
+        <fieldset class="filtro-item nome">
+          <%= label_tag 'find[query]', 'Curso:' %>
+          <%= text_field_tag 'find[query]', '', placeholder: 'localizar', class: 'search-field', autocomplete: "off" %>
+          <%= content_tag :span, fa_icon('search'), class: 'insideico' %>
+        </fieldset>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="frm-tab-lista cursos">
+    <div id="curso-tab-lista">
+      <%= render partial: 'cursos_tab_lista' %>
+    </div>
+  </div>
+
+</div>

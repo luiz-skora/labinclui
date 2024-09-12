@@ -1,0 +1,8 @@
+<%= content_tag :div, class: "pm pm-menu #{fields[:class]} #{fields[:alignment]} #{fields[:orientation] == 'horizontal' ?  'h' : 'v'}" do %>
+  <% if fields[:menu].present? %>
+    <% menu = Menu.find(fields[:menu].to_i) %>
+    <%= content_tag :div, class: 'menu' do %>
+      <%= render partial: "pagemaker/base/menu/#{fields[:orientation]}", locals: { fields: fields, menu: menu } %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,12 @@
+<div class="frm frm-page">
+  <div class="device-select actions">
+    <ul>
+      <%= content_tag :li, fas_icon('desktop',text: 'Desktop'), class: 'device-li-lnk selected', data: { url: adm_site_page_desktop_path(@page_parent.id), target: '#form_page' } %>
+      <%= content_tag :li, fas_icon('tablet-alt',text: 'Tablet'), class: 'device-li-lnk', data: { url: adm_site_page_tablet_path(@page_parent.id), target: '#form_page' } %>
+      <%= content_tag :li, fas_icon('mobile-alt',text: 'Mobile'), class: 'device-li-lnk', data: { url: adm_site_page_mobile_path(@page_parent.id), target: '#form_page' } %>
+    </ul>
+  </div>
+  <div class="form" id="form_page">
+    <%= render partial: 'form_page' %>
+  </div>
+</div>

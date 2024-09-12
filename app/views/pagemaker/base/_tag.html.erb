@@ -1,0 +1,28 @@
+<%= content_tag :div, '', class: "pm pm-categoria" do %>
+  <% @tag ||= Tag.first %>
+
+  <% page = params[:page].to_i rescue 0 %>
+
+
+  <% posts = @tag.posts.where(status: 'publish').order(published_in: :desc).limit(fields[:num_posts].to_i).offset(page * fields[:num_posts].to_i  ) %>
+
+  <%= content_tag :h4, "Publicações arquivadas em #{@tag.nome}" %>
+
+  <% posts.each do |post| %>
+    <%= render partial: 'pagemaker/base/cat_post', locals: { post: post } %>
+  <% end %>
+
+  <div class="pagination">
+    <div class="prev-page page">
+      <% if page > 0 %>
+        <%= link_to('Página anterior', "#{@tag.mount_url}?page=#{page - 1}") %>
+      <% end %>
+    </div>
+
+    <div class="next-page page">
+      <%= link_to('Próxima página', "#{@tag.mount_url}?page=#{page + 1}") %>
+    </div>
+  </div>
+
+<% end %>
+

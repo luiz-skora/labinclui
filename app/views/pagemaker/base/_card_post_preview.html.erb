@@ -1,0 +1,44 @@
+<%= content_tag :div, class: "pm pm-card preview #{(fields[:class].present? ? fields[:class] : 'default')} #{fields[:alignment]}" do %>
+  <% posts =  fields[:category].present? ? Category.find(fields[:category].to_i).get_posts(20+fields[:offset].to_i).offset(fields[:offset]).limit(fields[:num_posts].to_i).order(published_in: :desc) : Post.offset(fields[:offset]).limit(fields[:num_posts].to_i).order(published_in: :desc) %>
+  <% if fields[:category].present? && fields[:category_show] == '1' %>
+    <%= content_tag :h6, Category.find(fields[:category].to_i).nome, class: 'category-title' %>
+  <% end %>
+  <% posts.each do |post| %>
+    <% card_height = (fields[:card_height].present? ?  "height: #{fields[:card_height]}px" : '') %>
+    <%= content_tag :div, class: "post-card #{fields[:disposition]} #{fields[:alignment]}", style: card_height do %>
+      <% if fields[:title_show] == '1' %>
+        <%= content_tag :div, class: "card-post-title #{fields[:title_alignment]}" do %>
+          <%= content_tag :h6, post.titulo, class: 'post-title', style: fields[:title_font_size].present? ? "font-size: #{fields[:title_font_size]}px" : ''  %>
+        <% end %>
+      <% end %>
+      <div class="card-image-text">
+        <% if fields[:image_show] == '1' %>
+          <%= content_tag :div, class: "image-container #{fields[:image_alignment]}", style: " width: #{(fields[:card_image_full_width] == '1' ? '100%' : fields[:card_image_width]+'px')}" do %>
+            <%= content_tag :div, class: 'card-image', style: "padding-top: #{fields[:card_image_aspect_ratio]}%;" do %>
+              <%= content_tag :div, class: 'pm_image' do %>
+                <% if post.featured_image.present? %>
+                  <%= load_blob(post.featured_image, nil, (fields[:card_image_width].present? ? fields[:card_image_width].to_i : 1024)) %>
+                <% else %>
+                  <% if post.attachment.first.present? %>
+                    <%= load_blob(post.attachment.first, nil, ( fields[:card_image_width].present? ? fields[:card_image_width].to_i : 1024)) %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <% if fields[:post_text_show] == '1' %>
+          <% text = (fields[:post_text_type] == 'resumo' ? post.resumo.body.to_plain_text : post.content.body.to_plain_text) %>
+          <%= content_tag :p, class: "post-card-text #{fields[:post_text_alignment]}", style: (fields[:post_text_font_size].present? ? "font-size: #{fields[:post_text_font_size]}px" : '') do %>
+            <% if fields[:post_text_length].present? %>
+             <%= text[0..fields[:post_text_length].to_i] %>
+            <% else %>
+              <%= text %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

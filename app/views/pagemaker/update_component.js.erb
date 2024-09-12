@@ -1,0 +1,23 @@
+$('.modal-main .modal-title').text()
+$('.modal-main .modal-container').html('')
+$('.modal-main').hide()
+
+
+var fields = JSON.parse('<%= raw(fields) %>')
+
+console.log('fields',fields)
+
+console.log('div#'+'<%= params[:pm_id] %>')
+
+var component = tinymce.activeEditor.selection.select(tinymce.activeEditor.dom.select('action-text-attachment#'+'<%= params[:pm_id] %>'))
+
+var h = $(component[0])
+
+
+h.attr('sgid', '<%= j @component_data.attachable_sgid %>')
+h.html('<%= j @html %>')
+
+
+tinymce.activeEditor.selection.select(tinymce.activeEditor.dom.select('action-text-attachment#'+'<%= params[:pm_id] %>'))[0] = h
+
+

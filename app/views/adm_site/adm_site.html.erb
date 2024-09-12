@@ -1,0 +1,30 @@
+<% selected ||= 'paginas' %>
+
+<div class="frm frm-adm-site adm-site" id="adm-site">
+
+  <%= content_tag :h3, fas_icon('globe', text: 'Aparência'), class: 'title' %>
+
+  <div class="actions">
+    <ul class="adm-menu adm-site-menu">
+      <%= content_tag :li, 'Páginas', data: { url: adm_site_paginas_path(), target: '.rect'}, class: "li-lnk paginas#{selected == 'paginas' ? ' selected' : '' }" %>
+
+      <%= content_tag :li, 'Áreas', data: { url: adm_site_areas_path(), target: '.rect'}, class: "li-lnk areas#{selected == 'areas' ? ' selected' : '' }" %>
+
+      <%= content_tag :li, 'Menus', data: { url: adm_site_menus_path(), target: '.rect'}, class: "li-lnk menus#{selected == 'menus' ? ' selected' : '' }" %>
+
+      <%= content_tag :li, 'Biblioteca', data: { url: adm_site_midias_path(), target: '.rect'}, class: "li-lnk midias#{selected == 'midias' ? ' selected' : '' }" %>
+
+      <%= content_tag :li, 'Anúncios', data: { url: adm_site_anuncios_path(), target: '.rect'}, class: "li-lnk anuncios#{selected == 'anuncios' ? ' selected' : '' }" %>
+
+      <%= content_tag :li, 'Folha de estilos', data: { url: adm_site_styles_path(), target: '.rect'}, class: "li-lnk styles#{selected == 'styles' ? ' selected' : '' }" %>
+
+      <%= content_tag :li, 'JavaScript', data: { url: adm_site_scripts_path(), target: '.rect'}, class: "li-lnk scripts#{selected == 'scripts' ? ' selected' : '' }" %>
+
+    </ul>
+  </div>
+
+  <div class="rect">
+    <%= render partial: part %>
+  </div>
+
+</div>

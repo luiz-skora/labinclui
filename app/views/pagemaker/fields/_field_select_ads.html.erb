@@ -1,0 +1,2 @@
+<%= label_tag field.label, t("pagemaker.#{field.label}") %>
+<%= select_tag field.label, options_from_collection_for_select(Ad.order(:nome), :id, :nome, field.default_value), prompt: 'selecione', class: 'field' %>

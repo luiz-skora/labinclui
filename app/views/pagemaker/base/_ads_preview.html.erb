@@ -1,0 +1,13 @@
+<%= content_tag :div, '', class: 'pm pm-ad mceItem-pm preview' do %>
+  <% ad = Ad.find(fields[:ads].to_i) rescue nil %>
+  <% if ad.present? %>
+    <% if ad.tipo == 'Codigo' %>
+      <%= raw ad.code %>
+    <% else %>
+      <%= ad.content %>
+    <% end %>
+  <% else %>
+    <p> Selecione o anúncio. </p>
+  <% end %>
+<% end %>
+

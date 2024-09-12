@@ -1,0 +1,356 @@
+# encoding: UTF-8
+# pt-BR translations for Ruby on Rails
+
+pt-BR: &pt-BR
+  # formatos de data e hora
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%d de %B"
+      long: "%d de %B de %Y"
+      weekday_long: "%A, %d de %B de %Y"
+
+    day_names:
+      - Domingo
+      - Segunda
+      - Terça
+      - Quarta
+      - Quinta
+      - Sexta
+      - Sábado
+    abbr_day_names:
+      - Dom
+      - Seg
+      - Ter
+      - Qua
+      - Qui
+      - Sex
+      - Sáb
+
+    month_names:
+      - ~
+      - Janeiro
+      - Fevereiro
+      - Março
+      - Abril
+      - Maio
+      - Junho
+      - Julho
+      - Agosto
+      - Setembro
+      - Outubro
+      - Novembro
+      - Dezembro
+    abbr_month_names:
+      - ~
+      - Jan
+      - Fev
+      - Mar
+      - Abr
+      - Mai
+      - Jun
+      - Jul
+      - Ago
+      - Set
+      - Out
+      - Nov
+      - Dez
+    order:
+      - :day
+      - :month
+      - :year
+
+  time:
+    formats:
+      default: "%A, %d de %B de %Y, %H:%M h"
+      momentjs_LLLL: "%A, %d de %B de %Y as %H:%M"
+      short: "%d/%m/%Y, %H:%M"
+      long: "%A, %d de %B de %Y, %H:%M h"
+    am: ''
+    pm: ''
+
+  # Usado no Array.to_sentence
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " e "
+      last_word_connector: " e "
+
+    select:
+      prompt: "Por favor selecione"
+
+  number:
+    format:
+      separator: ','
+      delimiter: '.'
+      precision: 3
+      significant: false
+      strip_insignificant_zeros: false
+
+    currency:
+      format:
+        format: '%u %n'
+        unit: 'R$'
+        separator: ','
+        delimiter: '.'
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+
+    percentage:
+      format:
+        delimiter: '.'
+
+    precision:
+      format:
+        delimiter: '.'
+
+    human:
+      format:
+        delimiter: '.'
+        precision: 2
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+      # number_to_human()
+      # new in rails 3: please add to other locales
+      decimal_units:
+        format: "%n %u"
+        units:
+          unit: ""
+          thousand: "mil"
+          million:
+            one: milhão
+            other: milhões
+          billion:
+            one: bilhão
+            other: bilhões
+          trillion:
+            one: trilhão
+            other: trilhões
+          quadrillion:
+            one: quatrilhão
+            other: quatrilhões
+
+  # distancia do tempo em palavras
+  datetime:
+    distance_in_words:
+      half_a_minute: 'meio minuto'
+      less_than_x_seconds:
+        one: 'menos de 1 segundo'
+        other: 'menos de %{count} segundos'
+      x_seconds:
+        one: '1 segundo'
+        other: '%{count} segundos'
+      less_than_x_minutes:
+        one: 'menos de um minuto'
+        other: 'menos de %{count} minutos'
+      x_minutes:
+        one: '1 minuto'
+        other: '%{count} minutos'
+      about_x_hours:
+        one: 'aprox. 1 hora'
+        other: 'aprox. %{count} horas'
+      x_days:
+        one: '1 dia'
+        other: '%{count} dias'
+      about_x_months:
+        one: 'aprox. 1 mês'
+        other: 'aprox. %{count} meses'
+      x_months:
+        one: '1 mês'
+        other: '%{count} meses'
+      about_x_years:
+        one: 'aprox. 1 ano'
+        other: 'aprox. %{count} anos'
+      over_x_years:
+        one: 'mais de 1 ano'
+        other: 'mais de %{count} anos'
+      almost_x_years:
+        one: 'quase 1 ano'
+        other: 'quase %{count} anos'
+    prompts:
+      year:   "Ano"
+      month:  "Mês"
+      day:    "Dia"
+      hour:   "Hora"
+      minute: "Minuto"
+      second: "Segundo"
+
+  helpers:
+    select:
+      prompt: "Por favor selecione"
+
+    submit:
+      create: 'Criar %{model}'
+      update: 'Atualizar %{model}'
+      submit: 'Salvar %{model}'
+
+  errors:
+    format: "%{attribute} %{message}"
+    messages: &errors_messages
+      inclusion: "não está incluído na lista"
+      exclusion: "não está disponível"
+      invalid: "não é válido"
+      confirmation: "não está de acordo com a confirmação"
+      accepted: "deve ser aceito"
+      empty: "não pode ficar vazio"
+      blank: "não pode ficar em branco"
+      too_long: "é muito longo (máximo: %{count} caracteres)"
+      too_short: "é muito curto (mínimo: %{count} caracteres)"
+      wrong_length: "não possui o tamanho esperado (%{count} caracteres)"
+      not_a_number: "não é um número"
+      not_an_integer: "não é um número inteiro"
+      greater_than: "deve ser maior que %{count}"
+      greater_than_or_equal_to: "deve ser maior ou igual a %{count}"
+      equal_to: "deve ser igual a %{count}"
+      less_than: "deve ser menor que %{count}"
+      less_than_or_equal_to: "deve ser menor ou igual a %{count}"
+      odd: "deve ser ímpar"
+      even: "deve ser par"
+      taken: "já está em uso"
+      record_invalid: "A validação falhou: %{errors}"
+    template: &errors_template
+      header:
+        one: "Não foi possível gravar %{model}: 1 erro"
+        other: "Não foi possível gravar %{model}: %{count} erros."
+      body: "Por favor, verifique os campos destacados"
+
+  activerecord:
+    errors:
+      messages:
+        <<: *errors_messages
+      template:
+        <<: *errors_template
+
+      full_messages:
+        format: "%{attribute} %{message}"
+
+        
+  activemodel:
+    errors:
+      models:
+        user_session:
+            attributes:
+              base:
+                invalid_login: 'email ou senha inválidos'
+                unconfirmed_user: 'confirmação de cadastro'
+                
+
+
+  draft: 'Rascunho'
+  trash: 'Removido'
+  publish: 'Publicado'
+
+  pagemaker:
+    content: 'Conteúdo'
+    disposition: 'Disposição'
+    alignment: 'Alinhamento'
+    image_show: 'Exibir imagem'
+    image_width: 'Largura da imagem'
+    image_height: 'Altura da imagem'
+    image_alignment: 'Alinhamento da imagem'
+    title_show: 'Exibir título'
+    title_alignment: 'Alinhamento do título'
+    title_font_size: 'Tanho da fonte do título'
+    title_font_color: 'Cor da fonte do título'
+    description_show: 'Exibir descrição'
+    description_alignment: 'Alinhamento da descrição'
+    description_font_size: 'Tamanho da fonte da descrição'
+    description_font_color: 'Cor da fonte da descrição'
+    locality: 'Localização'
+    locality_show: 'Exibir localização'
+    format: 'Formato'
+    font_size: 'Tamanho da fonte'
+    font_color: 'Cor da fonte'
+    background_color: 'Cor do fundo'
+    ads: 'Anúncios'
+    image: 'Imagem'
+    width: 'Largura'
+    height: 'Altura'
+    label: 'Legenda'
+    link: 'Ligação'
+    menu: 'Menu'
+    class: 'Classe'
+    orientation: 'Orientação'
+    category: 'Categoria'
+    num_posts: 'Número de publicações'
+    card_height: 'Altura do cartão px'
+    card_image_width: 'largura da imagem px'
+    card_image_height: 'altura da imagem px'
+    post_text_show: 'Exibir texto'
+    post_text_type: 'Tipo do texto'
+    post_text_length: 'Número máximo de caracteres'
+    post_text_alignment: 'Alinamento do texto'
+    post_text_font_size: 'Tamanho da fonte'
+    post_text_font_color: 'Cor da fonte'
+    category_show: 'Exibir categoria'
+    card_image_full_width: 'Largura total do container'
+    card_image_padding: 'Margem da imagem'
+    image_full_width: 'Largura total do container'
+    image_padding: 'Margem da imagem'
+    navigation_bar: 'Barra de navegação'
+    slider_delay: 'Intervalo'
+    image_full_width: 'Largura total do container'
+    image_padding: 'Margem'
+    show_navigation_bar: 'Exibir barra de navegação'
+    navigation_bar: 'Barra de navegação'
+    navigation_bar_position: 'Posição da barra de navegação'
+    navigation_bar_unselected_color: 'Cor do eslaide não selecionado'
+    navigation_bar_unselected_opacity: 'Opacidade do eslaide não selecionado'
+    navigation_bar_selected_color: 'Cor do eslaide selecionado'
+    navigation_bar_selected_opacity: 'Opacidade do eslaide selecionado'
+    navigation_arrows: 'Setas de navegação'
+    show_post_title: 'Exibir título'
+    post_title_font_size: 'Fonte do título'
+    post_title_position: 'Posição do título'
+    post_title_alignment: 'Alinhamento do título'
+    post_title_full_width: 'Largura completa da barra de título'
+    post_title_padding: 'Margem do título'
+    post_title_color: 'Cor do título'
+    post_title_opacity: 'Opacidade do título'
+    post_title_background_color: 'Cor de fundo do título'
+    post_title_background_opacity: 'Opacidade do fundo do título'
+    aspect_ratio: 'Proporção'
+    category_alignment: 'Alinhamento'
+    card_image_aspect_ratio: 'Proporção'
+    offset: 'Iniciar em'
+    layout: 'Layout'
+    show_title: 'Exibir título'
+    show_categories: 'Exibir categorias'
+    show_tags: 'Exibir tags'
+    show_datetime_publish: 'Exibir data e hora da publicação'
+    show_datetime_changed: 'Exibir data e hora da última alteração'
+    show_author: 'Exibir autor'
+    show_resumo: 'Exibir resumo'
+    show_imagem_destacada: 'Exibir imagem destacada'
+    show_content: 'Exibir conteúdo'
+    show_read_more_button: 'Exibir botão leia mais'
+    read_more_button_paragraphs: 'Parágrafos antes do botão leia mais'
+    show_share_buttons: 'Exibir botões de compartilhamento'
+    video_src: 'URL do vídeo'
+    titulo: 'Título'
+    legenda: 'Legenda'
+    full_width: 'Largura total do container'
+    file_pdf: 'Arquivo PDF'
+    document_id: 'ID do documento'
+
+  social_share_button:
+    share_to: 'Compartilhar com'
+    twitter: 'Twitter'
+pt:
+  <<: *pt-BR
+pt_BR:
+  <<: *pt-BR
+
+
+

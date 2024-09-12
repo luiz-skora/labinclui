@@ -1,0 +1,13 @@
+$('.modulos-tree ul.lnk-modulo').removeClass('selected')
+$('.modulos-tree ul.lnk-modulo .expand-ico').removeClass('expand').addClass('retract')
+
+$('<%= j ".modulos-tree ul#modulo-#{@modulo.id}.lnk-modulo" %>').addClass('selected')
+$('<%= j ".modulos-tree ul#modulo-#{@modulo.id}.lnk-modulo .expand-ico" %>').removeClass('retract').addClass('expand')
+
+$('.modulos-tree .modulo-evaluation').removeClass('selected')
+$('.modulos-tree .label-aula').removeClass('selected')
+$('.modulos-tree .label-lnk.aulas').removeClass('selected')
+
+$('.frm.adm-modulos .modulo-edit').html('<%= j render "edit_modulo" %>')
+
+$('.frm.adm-modulos .modulo-edit .tabs-area').html('<%= j render "form_edit_modulo" %>')

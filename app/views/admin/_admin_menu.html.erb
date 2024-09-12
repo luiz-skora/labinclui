@@ -1,0 +1,54 @@
+<div class="title">
+  <%= content_tag :h6, '', class: 'title' %>
+</div>
+<ul class="adm-menu">
+
+  <%= link_to adm_cursos_path(), method: :patch do %>
+    <%= content_tag :li, fas_icon('school', text: 'Cursos'), class: 'menu-item', title: 'Cursos'   %>
+  <% end %>
+
+  <li class="separador">&nbsp;</li>
+
+  <%= link_to adm_posts_path(), method: :patch do %>
+    <%= content_tag :li, fas_icon('file-lines', text: 'Publicações'), class: 'menu-item', title: 'Publicações'   %>
+  <% end %>
+  <%= link_to adm_categorias_path(), method: :patch do %>
+    <%= content_tag :li, fas_icon('sitemap', text: 'Categorias'), class: 'menu-item', title: 'Categorias'   %>
+  <% end %>
+  <%#= link_to adm_posts_path(), method: :patch do %>
+    <%#= content_tag :li, fas_icon('tags', text: 'Tags'), class: 'menu-item', title: 'Tags'   %>
+  <%# end %>
+
+  <li class="separador">&nbsp;</li>
+
+  <%= link_to adm_site_path(), method: :patch do %>
+    <%= content_tag :li, fas_icon('globe', text: 'Aparência'), class: 'menu-item', title: 'Aparência'   %>
+  <% end %>
+
+  <li class="separador">&nbsp;</li>
+
+  <%= link_to adm_users_path(), method: :patch do %>
+    <%= content_tag :li, fas_icon('users-gear', text: 'Usuários'), class: 'menu-item', title: 'Usuários'   %>
+  <% end %>
+
+  <%= link_to config_path(), method: :patch do %>
+    <%= content_tag :li, fas_icon('screwdriver-wrench', text: 'Configurações'), class: 'menu-item', title: 'Configurações'   %>
+  <% end %>
+ 
+  <li class="separador">&nbsp;</li>
+
+  <%= link_to backups_path(), method: :patch do %>
+    <%= content_tag :li, fas_icon('save', text: 'Backups'), class: 'menu-item', title: 'Backups'   %>
+  <% end %>
+
+  <li class="separador">&nbsp;</li>
+
+  <%= link_to stats_path(), method: :patch do %>
+    <%= content_tag :li, fas_icon('chart-bar', text: 'Estatísticas'), class: 'menu-item', title: 'Estatísticas'   %>
+  <% end %>
+
+  <li class="separador">&nbsp;</li>
+  
+  <%= content_tag :li, fas_icon('circle-chevron-left', text: 'Recolher'), class: 'retract menu-item' %>
+  
+</ul>

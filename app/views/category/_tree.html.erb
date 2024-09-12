@@ -1,0 +1,7 @@
+<div class="action">
+  <%= content_tag :h6, 'Categorias', class: 'ac-title' %>
+  <%= content_tag :h4, far_icon('square-plus'), class: 'ac-title add label-lnk', title: 'Adicionar Categoria', data: { url: adm_category_new_path()} %>
+</div>
+
+<%= render partial: 'category_tree_items' %>
+

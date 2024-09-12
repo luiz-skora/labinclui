@@ -1,0 +1,7 @@
+$('.modal-main .modal-title').text()
+$('.modal-main .modal-container').html('')
+$('.modal-main').hide()
+
+tinymce.activeEditor.execCommand('mceInsertContent', false, '<%= j render "pagemaker/columns_preview_editor" %>')
+
+

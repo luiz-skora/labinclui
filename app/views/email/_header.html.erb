@@ -1,0 +1,1 @@
+<%= content_tag :p, "Mensagem gerada por: #{ConfGrupo.find_by(nome: 'Aplicação').conf.find_by(nome: 'app_title').valor}", style: 'text-align: center; font-size: 12px;' %>

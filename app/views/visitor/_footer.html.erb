@@ -1,0 +1,8 @@
+ 
+<footer>
+  <% if @page.footer_area_id.present? %>
+    <div class="trix-content">
+      <%= Area.find(@page.footer_area_id).content %>
+    </div>
+  <% end %>
+</footer>

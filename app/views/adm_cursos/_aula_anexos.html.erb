@@ -1,0 +1,19 @@
+<div class="frm frm-new-aula anexos">
+
+  <%= content_tag :h6, "#{@aula.nome} - Material Complementar ( Anexos )", class: 'title' %>
+  
+  <fieldset class="upload">
+    <%= content_tag :div, '', class:"upload-lnk", data: { target: '.frm-new-aula .upload'} do %>
+      <%= fas_icon('paperclip', text: 'Enviar arquivo') %>
+    <% end %>
+  </fieldset>
+  
+  <div class="add-anexo" id="aula_add_anexo">
+    <%= render partial: 'add_anexo' %>    
+  </div>
+  
+  <div class="gallery" id="aula_anexos_gallery">
+    <%= render partial: 'aula_anexos_gallery' %>
+  </div>
+  
+</div>

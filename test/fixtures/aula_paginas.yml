@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  modulo_aula: one
+  indice: 1
+  google_doc: MyString
+
+two:
+  modulo_aula: two
+  indice: 1
+  google_doc: MyString

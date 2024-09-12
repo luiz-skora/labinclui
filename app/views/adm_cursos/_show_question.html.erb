@@ -1,0 +1,53 @@
+<% k ||= @question %>
+
+<div class="show-question" id="<%= "show-question-#{k.id}"%>">
+
+  <div class="q-row">
+    <div class="question-info">
+      <ul class="qi">
+        <li class="li-question">
+          <%= content_tag :h6, "Questão - #{k.indice}", class: 'title' %>
+        </li>
+        <li class="li-tipo">
+          <%= content_tag :h7, "Tipo: #{k.tipo}", class: 'title' %>
+        </li>
+        <li class="li-peso">
+          <%= content_tag :h7, "Peso: #{k.peso}", class: 'title' %>
+        </li>
+      </ul>
+    </div>
+    <div class="question-actions">
+      <ul class="qa">
+        <%= content_tag :li, fas_icon('pen-to-square', text: 'Editar'), data: { url: adm_cursos_edit_question_path(@curso.id, @modulo.id, (@aula.present? ? @aula.id : -1), @evaluation.id, k.id)}, class: 'label-lnk' %>
+        <%= content_tag :li, fas_icon('trash-can', text: 'Excluir'), data: { url: adm_cursos_remove_question_path(@curso.id, @modulo.id, (@aula.present? ? @aula.id : -1), @evaluation.id, k.id), message: 'Essa ação removerá a questão e não poderá ser desfeita!  Deseja continuar?'}, class: 'label-lnk-confirm-script' %>
+      </ul>
+    </div>
+  </div>
+  
+  <fieldset>
+    <%#= content_tag :label, 'Enunciado' %>
+    <div class="trix-content question-enunciado">
+      <%= k.enunciado %>
+    </div>
+  </fieldset>
+  
+  
+  
+  <div class="question-alternatives">
+    <div class="alternative-action" id="<%= "alt-question-#{k.id}" %>">
+      
+      <%= render partial: 'question_alternatives_action', locals: { k: k } %>
+    </div>
+    
+    <div class="frm-new-alternative" id="<%= "form-new-alternative-#{k.id}" %>"></div>
+    
+    <% if !(k.tipo == 'Discursiva') %>
+      <div class="alternatives" id="<%= "show-alternativas-#{k.id}" %>">
+        <%= render partial: 'show_alternatives', locals: { k: k } %>
+      </div>
+    <% end %>
+    
+  </div>
+
+</div>
+

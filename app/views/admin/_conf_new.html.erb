@@ -1,0 +1,18 @@
+<div class="frm frm-new-conf" id="configuracoes_data">
+
+  <%= content_tag :h5, 'Nova configuração', class: 'title' %>
+
+  <%= form_with model: @conf, url: conf_create_path(@conf.conf_grupo.id), method: :patch, html: { autocomplete: "off" } do |f| %>
+  
+    <%= render partial: 'admin/conf_fields', locals: { f: f }  %>
+    
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Criar Configuração', data: { disable_with: 'Gravando...' } %>
+    </fieldset>
+      
+    <% @conf.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+  <% end %>
+  
+</div>

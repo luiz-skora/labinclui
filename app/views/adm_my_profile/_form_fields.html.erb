@@ -1,0 +1,40 @@
+<div id="my-profile-form">
+<%= form_with model: @profile, url: adm_my_profile_update_path(@profile.identifier), method: :patch do |f| %>
+
+  &nbsp;
+  
+  <fieldset>
+    <%= f.label :nickname, 'Como prefere ser chamado:' %>
+    <%= f.text_field :nickname %>
+    <div class="msg" id="nome">&nbsp;
+      <%= error_tag @profile, :nickname %>
+    </div>
+  </fieldset>
+        
+  <fieldset>
+    <%= f.label :bio, 'Bio:' %>
+    <%= f.text_area :bio, class: 'edit' %>
+    <div class="msg" id="bio">&nbsp;
+      <%= error_tag @profile, :bio %>
+    </div>
+  </fieldset>
+  
+  
+  <fieldset>
+    <%= f.label :site, 'Site:' %>
+    <%= f.text_field :site %>
+    <div class="msg" id="nome">&nbsp;
+      <%= error_tag @profile, :site %>
+    </div>
+  </fieldset>
+  
+  
+        
+  <fieldset class="btn-form">
+    <%= f.submit value: 'Salvar', data: { disable_with: 'Gravando' } %>
+  </fieldset>
+
+  <div class="message"><%= flash[:msg] %></div>
+<% end %>        
+      
+</div>

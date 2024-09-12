@@ -1,0 +1,7 @@
+<div class="frm frm-category" id="form_category">
+  <%= content_tag :h3, 'Nova categoria', class: 'title' %>
+
+  <%= form_with model: @cat, url: adm_category_create_path(), method: :patch, data: { turbo_method: :patch}, html: { autocomplete: "off"} do |f| %>
+    <%= render partial: 'category_fields', locals: { f: f} %>
+  <% end %>
+</div>

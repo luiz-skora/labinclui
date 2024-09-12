@@ -1,0 +1,8 @@
+
+  <% @ads.each do |ad| %>
+    <%= content_tag :ul, class: 'ul-lnk ads', id: "area-#{ad.id}", data: { url: adm_site_ads_edit_path(ad.id) } do %>
+      <li class="space"></li>
+      <%= content_tag :li, ad.nome, class: 'ads-nome' %>
+    <% end %>
+  <% end %>
+

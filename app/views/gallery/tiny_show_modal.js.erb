@@ -1,0 +1,25 @@
+$('.modal-main .modal-title').text('Galeria')
+$('.modal-main .modal-container').html('<%= j render "gallery/gallery_modal" %>')
+$('.modal-main').show()
+
+
+function resizeModal() {
+  var height = $(window).height() - 40
+  var width = $(window).width() - 40
+
+  $('.modal-window').height(height)
+  $('.modal-window').width(width)
+
+  var h = $('.modal-window .modal-header').height()
+
+
+  $('.modal-window .modal-container').height(height - ( h + 10) )
+
+}
+
+$(window).on('resize', function() {
+  resizeModal()
+})
+
+resizeModal()
+

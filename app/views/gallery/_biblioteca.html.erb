@@ -1,0 +1,37 @@
+<div class="frm-show-gallery frm-gallery">
+  <%# if @uploads %>
+    <div class="actions frm-actions row">
+      <div class="frm-add-attachment col">
+        <%= render partial: 'gallery/form_attachment' %>
+      </div>
+      <div class="frm-find-att col">
+        <%#= render partial: 'gallery/form_find_attachment' %>
+      </div>
+    </div> <!-- actions -->
+  <%# end %>
+  <div class="gallery">
+    <div class="thumbs row" id="modal-thumbs" >
+      <div class="gallery-container">
+        <%= content_tag :div, class: 'col-12 row thumbs-container', data:{ select_url: select_att_path(), device: "current_visit.device_type, show_url: full_embed_app_path(), att_info: att_info_app_path()", multiple: multiple ||= false } do %>
+          <%= render partial: 'gallery/thumbs' %>
+        <% end %>
+        <div class="more-thumbs col-12">
+          <% if @more > 0 %>
+            <%= content_tag :div, class: 'thumb more col-fixed next-page auto-load', id: "more", data: { controller: 'autoload', action: 'click->autoload#click', target: '.frm-gallery .thumbs-container', viewport: '.gallery .thumbs', url: @next_page, page: @page + 1, dt: @last, query: @query.to_s, more: @more } do %>
+              <div class="interna">
+                <%= content_tag :label, 'Carregar Mais', class: 'more-label', style: 'display: block;' %>
+                <%= fas_icon('spinner', animation: 'spin', class: 'loading-ico', style: 'text-align: center; display: none;') %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="attachment-info" style="display: none" data-simplebar>
+    
+    </div>
+  </div>
+
+  <%# formulário da seleção no chamador %>
+
+</div>

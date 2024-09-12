@@ -1,0 +1,8 @@
+<% @components.each do |k| %>
+  <%= content_tag :div, class: 'widget widget-lnk', data: { widget: k.id, setup_url: pagemaker_setup_component_path(k.id), editor_id: params[:editor_id] } do %>
+    <figure>
+      <%= image_tag(k.ico, width: 84, height: 84, title: k.description ) %>
+      <figcaption><%= k.component %></figcaption>
+    </figure>
+  <% end %>
+<% end %>

@@ -1,0 +1,14 @@
+<% k ||= @post %>
+<%= content_tag :li, class: 'li-actions no-parent-lnk' do %>
+  <%= link_to(far_icon('edit'), adm_post_post_edit_path(k.id), title: 'Editar', data: { turbo: false}, target: "_top") %>
+  <%= link_to(fas_icon('pencil-alt'), adm_post_post_edit_path(k.id), title: 'Edição Rápida', data: { turbo: false}, target: "_top") %>
+  <%= link_to(fas_icon('eye'), adm_post_post_edit_path(k.id), title: 'Visualizar', data: { turbo: false}, target: "_top") %>
+<% end %>
+<%= content_tag :li, k.titulo, class: 'titulo', title: k.titulo, id: "post-titulo-#{k.id}" %>
+<%= content_tag :li, k.identifier, class: 'identifier', title: k.identifier %>
+<%= content_tag :li, k.published_in.present? ? l( k.published_in, format: :short) : '', class: 'published_in', title: k.published_in.present? ? l( k.published_in, format: :short) : '' %>
+<%= content_tag :li, k.changed_in.present? ? l(k.changed_in, format: :short ) : '', class: 'changed_in', title: k.changed_in.present? ?  l(k.changed_in, format: :short ) : '' %>
+<%= content_tag :li, t(k.status), class: 'status', title: k.status, id: "post-status-#{k.id}" %>
+<%= content_tag :li, k.autor, class: "autor", title: k.autor %>
+
+

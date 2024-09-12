@@ -1,0 +1,4 @@
+<% component ||= pagemaker_component %>
+<% pm = Pagemaker.find_by(identifier: component.pagemaker_identifier) %>
+
+<%= render partial: "#{pm.html_base}", locals: { fields: component.fields.symbolize_keys } %>

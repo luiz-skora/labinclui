@@ -1,0 +1,19 @@
+<%= content_tag :nav, class: 'v-menu' do %>
+  <%= content_tag :ul, class: 'v-menu' do %>
+    <% menu.menu_item.where(parent_id: nil).order(:indice, :nome, :id).each do |k| %>
+      <%= content_tag :li, class: 'v-item' do %>
+        <%#= content_tag :a, k.nome, href: k.mount_url, id: "menu_item-#{k.id}", class: 'nav-link', title: k.nome, aria: { label: k.nome } %>
+        <%= link_to("#{k.nome} ver subitem", k.mount_url, id: "menu_item-#{k.id}", class: 'nav-link', title: k.nome, aria: { label: k.nome } ) %>
+        <% if k.has_childrens? %>
+          <%= content_tag :ul, class: 'submenu' do %>
+            <% k.get_childrens.order(:indice, :nome, :id).each do |h| %>
+              <%= content_tag :li, class: 'v-item' do %>
+                <%= content_tag :a, h.nome, href: h.mount_url, class: 'nav-link', title: h.nome, aria: { label: k.nome } %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

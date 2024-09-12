@@ -1,0 +1,7 @@
+<header class="visitor">
+  <% if @page.present? && @page.header_area_id.present? %>
+    <div class="trix-content">
+      <%= Area.find(@page.header_area_id).content %>
+    </div>
+  <% end %>
+</header>

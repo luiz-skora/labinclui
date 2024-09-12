@@ -1,0 +1,17 @@
+
+<% k ||= @question %>
+<% is_discursiva = true %>
+<% if k.tipo != 'Discursiva' %>   
+  <% is_discursiva = false %>
+  <% if k.question_alternative.where(correta: true).count == 0 %>
+    <%= content_tag :div, 'Nenhuma alternativa correta nas opções.', class: 'msg' %>
+  <% elsif k.tipo == 'Múltipla Escolha' && k.question_alternative.where(correta: true).count > 1 %>
+    <%= content_tag :div, 'Mais de uma alternativa correta nas opções de múltipla escolha.', class: 'msg' %>
+  <% end %>
+<% end %>
+
+<% k.question_alternative.where(is_discursiva: is_discursiva).order(:indice, :id).each do |h| %>
+  <%= render partial: 'show_alternative', locals: { k: h } %>
+<% end %>
+
+

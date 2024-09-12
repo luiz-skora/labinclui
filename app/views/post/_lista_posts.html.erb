@@ -1,0 +1,14 @@
+<% @posts.each do |k| %>
+  <%= content_tag :div, class: "ul-item" do %>
+    <%= content_tag :ul, data: { url:  adm_post_item_actions_path(k.id) }, id: k.id, class: 'ul-exp-post' do %>
+      <%= render partial: 'lista_post', locals: { k: k } %>
+    <% end %>
+    <div class="post-data">
+      <div class="post-details" id="<%= "post-#{k.id}" %>">
+        <%= content_tag :div, fas_icon('spin', animation: 'spinner'), style: 'text-align: center' %>
+      </div>
+    </div>
+  <% end %>
+
+<% end %>
+

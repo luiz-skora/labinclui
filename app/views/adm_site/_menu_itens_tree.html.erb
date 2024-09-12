@@ -1,0 +1,7 @@
+<div class="action">
+  <%= content_tag :h6, 'Itens', class: 'ac-title' %>
+    <%= content_tag :h4, far_icon('square-plus'), class: 'ac-title add label-lnk', title: 'Adicionar item do menu', data: { url: adm_site_menu_item_new_path(@menu.id)} %>
+  </div>
+  <div class="tree-itens" id="adm_menu_itens_tree_itens">
+    <%= render partial: 'menu_itens_tree_items' %>
+</div>

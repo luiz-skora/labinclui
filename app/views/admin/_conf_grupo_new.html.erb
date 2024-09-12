@@ -1,0 +1,24 @@
+<div class="frm frm-new-conf-grupo" id="configuracoes_data">
+
+  <%= content_tag :h5, 'Novo Grupo', class: 'title' %>
+
+  <%= form_with model: @grupo, url: conf_grupo_create_path(), method: :patch, html: { autocomplete: "off" } do |f| %>
+    <fieldset>
+      <%= f.label :nome, 'Nome do Grupo:' %>
+      <%= f.text_field :nome, placeholder: 'Nome do Grupo' %>
+      <div class="msg">&nbsp;
+        <%= error_tag @grupo, :nome %>
+      </div>
+    </fieldset>
+    
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Criar Grupo', data: { disable_with: 'Gravando...' } %>
+    </fieldset>
+      
+      
+    <% @grupo.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+  <% end %>
+  
+</div>

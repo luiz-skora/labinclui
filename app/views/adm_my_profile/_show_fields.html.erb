@@ -1,0 +1,19 @@
+  &nbsp;
+  
+  <fieldset>
+    <%= label_tag :nickname, 'Nome do Perfil:' %>
+    <%= label_tag :nickname, @profile.nickname, class: 'label-box' %>
+  </fieldset>
+  &nbsp;
+  <fieldset>
+    <%= label_tag :bio, 'Bio:' %>
+    <%= content_tag :div, @profile.bio, class: 'label-box', data: { simplebar: 'init'} %>
+  </fieldset>
+  &nbsp;
+  
+  <fieldset>
+    <%= label_tag :site, 'Site:' %>
+    <%= label_tag :site, @profile.site, class: 'label-box' %>
+  </fieldset>
+
+  &nbsp;

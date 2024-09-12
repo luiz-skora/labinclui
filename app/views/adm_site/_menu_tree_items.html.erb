@@ -1,0 +1,7 @@
+<% @menus.each do |menu| %>
+  <%= content_tag :ul, class: 'ul-lnk menu', id: "menu-#{menu.id}", data: { url: adm_site_menu_edit_path(menu.id) } do %>
+    <li class="space"></li>
+    <%= content_tag :li, menu.nome, class: 'menu-nome' %>
+  <% end %>
+<% end %>
+

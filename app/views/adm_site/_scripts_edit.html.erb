@@ -1,0 +1,33 @@
+<div id="form_scripts">
+  <%= form_with model: @script, url: adm_site_scripts_update_path(@app.id), method: :patch, data: { turbo_method: :patch }, html: { autocomplete: "off "} do |f| %>
+
+    <fieldset>
+      <%= f.label :header_scripts, 'Scripts de cabeçalho:' %>
+      <%= f.text_area :header_scripts, class: 'textarea' %>
+      <div class="msg">&nbsp;
+        <%= error_tag @script, :header_scripts %>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <%= f.label :footer_scripts, 'Scripts de rodapé:' %>
+      <%= f.text_area :footer_scripts, class: 'textarea' %>
+      <div class="msg">&nbsp;
+        <%= error_tag @script, :header_scripts %>
+      </div>
+    </fieldset>
+
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Salvar', data: { disable_with: 'Gravando...' } %>
+    </fieldset>
+
+    <% @script.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+
+    <% if flash[:msg].present? %>
+      <%= content_tag :div, flash[:msg], class: 'message' %>
+    <% end %>
+
+  <% end %>
+</div>

@@ -1,0 +1,31 @@
+<div class="row">
+  <fieldset class="col-4">
+    <%= f.label :indice, 'Ordem:' %>
+    <%= f.number_field :indice, min: 1, max: @indice + 1, step: 1 %>
+    <div class="msg">&nbsp;
+      <%= error_tag @question, :indice %>
+    </div>
+  </fieldset>
+  
+  <fieldset class="col-4">
+    <%= f.label :tipo, 'Tipo de resposta:' %>
+    <%= f.select :tipo, question_tipo_for_select(f.object.tipo), prompt: 'Selecione', include_blank: false %>
+    <div class="msg" id="tipo">&nbsp;
+      <%= error_tag @question, :tipo %>
+    </div>
+  </fieldset>
+  <fieldset class="col-4">
+    <%= f.label :peso, 'Peso da Questão:' %>
+    <%= f.number_field :peso, min: 1, max: 100, step: 1 %>
+    <div class="msg">&nbsp;
+      <%= error_tag @question, :peso %>
+    </div>
+  </fieldset>
+</div>
+
+<div class="row">
+  <fieldset class="col-12">
+    <%= f.label :enunciado, 'Enunciado da Questão:' %>
+    <%= f.rich_text_area :enunciado, class: 'trix-content evaluation-question' %>
+  </fieldset>
+</div>

@@ -1,0 +1,9 @@
+<div class="action">
+  <%= content_tag :h6, 'Configurações', class: 'ac-title' %>
+  <%= content_tag :h4, far_icon('square-plus'), class: 'ac-title add label-lnk', title: 'Adicionar Grupo', data: { url: conf_grupo_new_path()} %>
+
+</div>
+
+<div class="tree-itens">
+  <%= render partial: 'admin/conf_grupo_tree_itens', locals: { grupo_selected: 0, conf_selected: 0} %>
+</div>

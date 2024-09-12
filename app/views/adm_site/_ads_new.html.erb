@@ -1,0 +1,18 @@
+<div class="frm frm-ad" id="form_ad">
+
+  <%= content_tag :h6, 'Novo anúncio', class: 'title' %>
+
+  <%= form_with model: @ad, url: adm_site_ads_create_path(), method: :patch, data: { turbo_method: :patch}, html: { autocomplete: "off"} do |f| %>
+    <%= render partial: 'ads_form_fields', locals: { f: f } %>
+
+    <% @ad.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+
+    <% if flash[:msg].present? %>
+      <%= content_tag :div, flash[:msg], class: 'message' %>
+    <% end %>
+
+  <% end %>
+</div>
+

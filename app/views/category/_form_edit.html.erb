@@ -1,0 +1,16 @@
+<div class="frm frm-category" id="form_category">
+  <%= content_tag :h3, 'Edição de categoria', class: 'title' %>
+
+  <%= form_with model: @cat, url: adm_category_update_path(@cat.id), method: :patch, data: { turbo_method: :patch}, html: { autocomplete: "off"} do |f| %>
+    <%= render partial: 'category_fields', locals: { f: f} %>
+  <% end %>
+
+
+
+  <% if @cat.posts.count > 0 %>
+    <%= content_tag :label, fas_icon('trash', text: 'Remover categoria'), class: 'alert-lnk remove-category-lnk', data: { message: "Não é possivel remover categoria com publicações relacionadas."} %>
+  <% else %>
+    <%= content_tag :label, fas_icon('trash', text: 'Remover categoria'), class: 'remove-lnk-confirm remove-category-lnk', data: { message: "Confirma a remoção permanente da categoria, #{@cat.nome}?\nEssa operação não poderá ser desfeita.", url: adm_category_remove_category_path(@cat.id) } %>
+  <% end %>
+
+</div>

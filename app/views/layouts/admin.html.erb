@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= "#{ConfGrupo.find_by(nome: 'Aplicação').conf.find_by( nome: 'app_title').valor rescue 'Não Definido' }" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= favicon_link_tag asset_path('ico.png', :rel => 'icon', :type =>  'image/png') %>
+    
+    
+    <%= stylesheet_link_tag 'application' %> <%#, media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'default' %>
+    <%= stylesheet_link_tag 'main' %>
+    <%= stylesheet_link_tag 'forms' %>
+    <%= stylesheet_link_tag 'admin' %>
+
+    <%= stylesheet_link_tag 'tiny' %>
+    <%= stylesheet_link_tag 'pagemaker_adm' %>
+    <%= stylesheet_link_tag 'pm' %>
+    <%= javascript_importmap_tags %>
+    <%= javascript_import_module_tag "main" %>
+    <%= javascript_import_module_tag "admin" %>
+    <%= javascript_import_module_tag "pagemaker" %>
+    
+  </head>
+    
+  <body class="admin">
+    <%= render partial: 'shared/modal' %>
+    <header class="admim">
+      <% if user_signed_in? %>
+        <%= render partial: 'shared/signed_header' %>
+      <% end %> 
+    </header>
+
+    <div class="adm-main" id="<%= user_signed_in? ? current_user.profile.id.to_s(32) : '0'  %>">
+      <% if user_signed_in? %>
+        <div class="left-menu">
+          <%= render partial: 'admin/admin_menu' %>
+        </div>
+        <div class="work-area" id="adm-work-area">
+          <%= yield %>
+        </div>
+      <% else %>
+        <%= yield %>
+      <% end %> 
+    </div>
+    
+    <footer>
+      <div class="unsigned-footer">
+        <div class="trix-editor">
+          <%= @layout.layout_section.find_by(identifier: 'footer').content rescue 'undefined footer' %>
+        </div>
+      </div>
+    </footer>
+    <% if Rails.env.development? %>
+      <%= console %>
+    <% end %>    
+  </body>
+</html>
+ 
+
+ 

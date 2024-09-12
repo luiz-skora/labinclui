@@ -1,0 +1,17 @@
+
+<div class="row">
+  <fieldset class="col-6">
+    <%= f.label :min_words, 'MÍNIMO de palavras:' %>
+    <%= f.number_field :min_words, min: -1, step: 1 %>
+    <div class="msg">&nbsp;
+      <%= error_tag @alternative, :min_words %>
+    </div>
+  </fieldset>
+  <fieldset class="col-6">
+    <%= f.label :max_words, 'MÁXIMO de palavras:' %>
+    <%= f.number_field :max_words, min: -1, step: 1 %>
+    <div class="msg">&nbsp;
+      <%= error_tag @alternative, :max_words %>
+    </div>
+  </fieldset>
+</div>

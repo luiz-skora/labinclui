@@ -1,0 +1,31 @@
+<%= content_tag :h5, @component.component, class: 'title' %>
+
+<%= content_tag :div, class: "frm setup-component row", data: { preview_url: pagemaker_preview_component_path(@component.id)} do %>
+  <div class="setup-widget-col form">
+
+    <div class="frm setup-form">
+      <% @component.pagemaker_field.order(:created_at).each do |field| %>
+        <fieldset>
+          <% field.default_value = @fields.stringify_keys[field.label] %>
+          <%= render partial: "pagemaker/fields/field_#{field.field_type}", locals: { field: field } %>
+          <%#= field.default_value %>
+        </fieldset>
+
+      <% end %>
+      <%= hidden_field_tag @component.identifier, '', class: 'fields-values' %>
+    </div>
+
+  </div>
+  <div class="setup-widget-col preview">
+    <%= content_tag :div, @component.builder_info, class: 'builder_info' %>
+    <div class="frm setup-preview">
+      <%= render partial: "#{@component.html_base}_preview", locals: { fields: @fields} %>
+    </div>
+    <fieldset class="btn-form">
+      <%= hidden_field_tag :fields, @fields.to_json, id: 'selected_blob_id', class: 'component_data' %>
+      <%= hidden_field_tag :component_id,  @component.id, class: 'component_id' %>
+      <%= hidden_field_tag :pm_id, (params.has_key?(:pm_id) ? params[:pm_id] : '' ), class: 'pm_id' %>
+      <%= button_tag 'Aplicar', type: 'submit', data: { editor_id: params[:editor_id], url: (params.has_key?(:sgid) ? pagemaker_update_component_path(@element.id) : pagemaker_insert_component_path()), disable_with: 'Aplicando' },  id: 'submit_pm', class: 'builder-button' %>
+    </fieldset>
+  <div>
+<% end %>

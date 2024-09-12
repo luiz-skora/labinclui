@@ -1,0 +1,45 @@
+<% ad_id = (@ad.id.present? ? @ad.id : DateTime.now.to_f.to_s.sub('.', '')) %>
+
+<fieldset>
+  <%= f.label :nome, 'Nome:' %>
+  <%= f.text_field :nome, placeholder: 'Nome' %>
+  <%= label_tag :identifier, f.object.identifier, class: 'slug-field' %>
+  <div class="msg">&nbsp;
+    <%= error_tag @ad, :nome %>
+  </div>
+</fieldset>
+
+<fieldset class="inline-label">
+  <%= f.label 'tipo_componente', '', class: 'chk-label' do %>
+    <%= f.radio_button :tipo, 'Componente', class: 'component' %>
+    <%= 'Componente' %>
+  <% end %>
+  <%= f.label 'tipo_codigo', '', class: 'chk-label' do %>
+    <%= f.radio_button :tipo, 'Codigo', class: 'code' %>
+    <%= 'Código' %>
+  <% end %>
+</fieldset>
+
+<%= content_tag :fieldset, class: 'component code-component', style: "display: #{f.object.tipo == 'Componente' ? 'block' : 'none'}" do %>
+  <%= f.label :content, 'Conteúdo:' %>
+  <%= tinymce_assets %>
+  <%= f.text_area :content , class: 'tinymce', data: { editor_id: "content-#{ad_id}", controller: 'pmtiny', action: 'connect->pmtiny#connect update-columns@window->pmtiny#updateColumns', gallery_url: tiny_show_modal_path(), components_url: show_components_dialog_path(), columns_url: show_columns_dialog_path() }, rows: 60, cols: 120 %>
+
+  <div class="msg">&nbsp;
+    <%= error_tag @ad, :content %>
+  </div>
+<% end %>
+
+<%= content_tag :fieldset, class: 'code code-component', style: "display: #{f.object.tipo == 'Codigo' ? 'block' : 'none' }" do %>
+  <%= f.label :code, 'Código:' %>
+  <p>Atenção!!! Para atender ao prazo, foi liberada a permissão para a tag script no action_text ( config/initializers/action_text.rb#47,48). </p>
+  <p>Essa configuração abre brexas de segurança!!!</p>
+  <%= f.text_area :code, class: 'code-editor' %>
+  <div class="msg">&nbsp;
+    <%= error_tag @ad, :code %>
+  </div>
+<% end %>
+
+<fieldset class="btn-form">
+  <%= f.submit value: 'Salvar', data: { disable_with: 'Gravando...' } %>
+</fieldset>

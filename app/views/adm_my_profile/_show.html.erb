@@ -1,0 +1,59 @@
+<div class="frm frm-user-profile">
+
+  <%= content_tag :h3, 'Perfil do usuário', class: 'title' %>
+
+  <div class="frm user-data">
+    <%= content_tag :h6, 'Dados do Usuário', class: 'title' %>
+
+    <div class="row">
+      <fieldset class="col-6">
+        <%= content_tag :label, 'Nome do usuário:' %>
+        <%= text_field_tag 'nome', @user.nome %>
+      </fieldset>
+      <fieldset class="col-6">
+        <%= content_tag :label, 'e-mail do usuário:' %>
+        <%= text_field_tag 'nome', @user.email %>
+      </fieldset>
+      <fieldset class="col-6">
+        <%= content_tag :label, 'Data de Nascimento:' %>
+        <%= text_field_tag 'nome', l( @user.nascimento, format: :default) %>
+      </fieldset>
+      <fieldset class="col-6">
+        <%= content_tag :label, 'Função:' %>
+        <%= text_field_tag 'nome', user_level_to_text(@user.user_level) %>
+      </fieldset>
+    </div>
+  </div>
+
+  <div class="frm frm-person">
+    <%= content_tag :h3, class: 'title' do %>
+      <%= 'informações do perfil' %>
+
+      <% if @current_profile %>
+        <%= content_tag :spam, fas_icon('pen'), title: 'Editar Perfil', class: 'ico-btn label-lnk', data: { url: adm_my_profile_edit_path(@profile.identifier), target: '.profile-form' } %>
+      <% end %>
+    <% end %>
+
+    <div class="row profile-form">
+      <div class="picture column col">
+        <fieldset>
+          <%= label_tag 'Imagem do perfil', 'Imagem do Perfil' %>
+        </fieldset>
+        <%= content_tag :fieldset, class: 'picture-show' do  %>
+
+          <div class="profile-picture">
+            <div class="picture">
+              <%= show_profile_picture(@profile, 250) %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="column col fields">
+        <%= render partial: 'show_fields' %>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

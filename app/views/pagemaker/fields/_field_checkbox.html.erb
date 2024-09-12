@@ -1,0 +1,4 @@
+<%= label_tag field.label, class: 'chk-label' do %>
+  <%= check_box_tag field.label, field.default_value, field.default_value == '1' ? true : false, class: 'field' %>
+  <%= t"pagemaker.#{field.label}" %>
+<% end %>

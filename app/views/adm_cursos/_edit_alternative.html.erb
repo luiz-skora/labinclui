@@ -1,0 +1,35 @@
+<div class="frm" id="<%= "form-edit-alternative-#{@alternative.id}" %>">
+  <div class="question">
+    
+  </div>
+  
+  <div class="frm-edit-alternative">
+    <div class="trix-content question-enunciado">
+      <%= @question.enunciado %>
+    </div>
+
+    <%= form_with model: @alternative, url: adm_cursos_update_alternative_path(@curso.id, @modulo.id, (@aula.present? ? @aula.id : -1), @evaluation.id, @question.id, @alternative.id ), method: :post, html: { autocomplete: "off" } do |f| %>
+    
+      <% case @question.tipo %>
+      <% when 'Múltipla Escolha' %>
+        <%= content_tag :h6, 'Alternativa', class: 'title' %>
+        <%= render partial: 'multipla_escolha_fields', locals: { f: f } %>
+      <% when 'Somatória' %>
+        <%= content_tag :h6, 'Alternativa', class: 'title' %>
+        <%= render partial: 'somatoria_fields', locals: { f: f } %>
+      <% when 'Discursiva' %>
+        <%= content_tag :h6, 'Parâmetros', class: 'title' %>
+        <%= render partial: 'discursiva_fields', locals: { f: f } %>
+      <% end %> 
+  
+      <fieldset class="btn-form">
+        <%= f.submit value: 'Gravar', data: { disable_with: 'Gravando...' } %>
+      </fieldset>
+  
+    <% @alternative.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+    
+    <% end %>
+  </div>
+</div>

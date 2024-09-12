@@ -1,0 +1,6 @@
+<%= content_tag :div, class: 'thumb col-fixed', id: "#{Time.now.to_f}" do %>
+  <div class="msg" style="color: red">
+    <%= "#{error_tag @app, :attachment}. #{flash[:error] if present?}" %>
+  </div>
+
+<% end %>

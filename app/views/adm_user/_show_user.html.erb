@@ -1,0 +1,38 @@
+<div class="frm frm-user" id="adm_user_data">
+  <%= content_tag :h6, @user.nome, class: 'title' %>
+
+  <%= form_with model: @user, url: adm_user_modal_update_user_path(@user.id), method: :patch, html: { autocomplete: "off" } do |f| %>
+
+    <%= render partial: 'user_fields', locals: { f: f } %>
+
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Salvar', data: { disable_with: 'Gravando...' } %>
+    </fieldset>
+
+    <% @user.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+
+    <% if flash[:msg].present? %>
+      <%= content_tag :div, flash[:msg], class: 'message' %>
+    <% end %>
+
+  <% end %>
+
+  <% if @user.confirmation_at.nil? %>
+    <div class="not-confirmed">
+      <div class="alert-msg">
+        <%= fas_icon('triangle-exclamation', text: 'Usuário ainda não confirmou o cadastro') %>
+      </div>
+      <%= content_tag :label, 'Reenviar email de confirmação', class: 'label-lnk flex', data: { url: adm_user_send_confirm_mail_user_path(@user.id), target: '#email_enviado' } do %>
+        <%= "Reenviar email de confirmação" %>
+        <%= content_tag :spam, '', id: 'email_enviado', class: 'inline-loading' %>
+      <% end %>
+      &nbsp;
+      <fieldset>
+        <%= text_field_tag 'url', url_for(controller: :users, action: :confirmation, host: "#{ConfGrupo.find_by(nome: 'Aplicação').conf.find_by(nome: 'site_url').valor}", params: { email: @user.email, token: @user.token} ) %>
+      </fieldset>
+    </div>
+  <% end %>
+
+</div>

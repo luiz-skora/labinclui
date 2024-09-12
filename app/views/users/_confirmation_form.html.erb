@@ -1,0 +1,71 @@
+<%= form_with model: @user, url: user_user_confirmation_path(@user.id), method: :patch, remote: false do |f| %>
+  
+  <fieldset class="user-info">
+    <%= content_tag :h7, 'Informações do usuário' %>
+    <ul>
+      <li class="label">Nome: </li>
+      <li class="data"><%= "#{@user.nome}" %></li>
+    </ul>
+    <ul>
+      <li class="label">Email:</li>
+      <li class="data"><%="#{@user.email}" %></li>
+    </ul>
+    <ul>
+      <li class="label">Nascimento:</li>
+      <li class="data"><%= "#{l(@user.nascimento)}" %></li>
+    </ul>
+    <hr class="user-info">
+  </fieldset>
+    
+    
+  <div class="row">
+    <fieldset class="col-sm-6">
+      <%= f.label :password, 'Defina uma senha' %>
+      <%= f.password_field :password, placeholder: 'senha' %>
+      <div class="msg" id="password">&nbsp;
+        <%= error_tag @user, :password %>
+      </div>
+    </fieldset>
+  
+    <fieldset class="col-sm-6">
+      <%= f.label :password_confirmation, 'Repita a senha' %>
+      <%= f.password_field :password_confirmation, placeholder: 'repita a senha' %>
+      <div class="msg" id="password_confirmation">&nbsp;
+        <%= error_tag @user, :password_confirmation %>
+      </div>
+    </fieldset>
+  </div>
+    
+  
+  <%= f.fields_for :profile do |ff| %>
+    <fieldset>
+      <%= ff.label :nickname, 'Como prefere ser chamado:' %>
+      <%= ff.text_field :nickname, placeholder: 'Como prefere ser chamado' %>
+      <div class="msg" id="nickname">&nbsp;
+        <%= error_tag @user.profile, :nickname %>
+      </div>
+    </fieldset>
+    <fieldset>
+      <%= ff.label :bio, 'Bio:' %>
+      <%= ff.text_area :bio %>
+      <div class="msg" id="nickname">&nbsp;
+        <%= error_tag @user.profile, :bio %>
+      </div>
+    </fieldset>
+  <% end %>
+  
+    
+  <fieldset class="btn-form">
+    <%= f.submit value: 'Confirmar Cadastro', data: { disable_with: 'Criando confirmação' } %>
+  </fieldset>
+    
+    
+<% end %>
+  
+<div class="form-upload" style="display: none;">
+  <%= form_with model: @profile, url: user_set_user_profile_picture_path(@user.id, target: "picture-#{@user.id}"), method: :patch, remote: true, data: { remote: true  } do |f| %>
+    <fieldset>
+      <%= f.file_field :profile_picture, multiple: false, accept: 'image/png,image/gif,image/jpeg', class: 'input-profile-picture', data: { target: "picture-#{@user.id}" } %>     
+    </fieldset>
+  <% end %>
+</div> 

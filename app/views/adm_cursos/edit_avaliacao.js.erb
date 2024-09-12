@@ -1,0 +1,9 @@
+
+$('.frm-modulo .tabs-title li').removeClass('selected')
+$('.frm-modulo .tabs-title li.aula').addClass('selected')
+
+$('.frm-modulo .adm-aula-menu li.menu').removeClass('selected')
+$('.frm-modulo .adm-aula-menu li.menu.exercicios').addClass('selected')
+
+
+$('.frm-modulo .tabs-area .adm-aula').html('<%= j render "edit_avaliacao" %>')

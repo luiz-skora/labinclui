@@ -1,0 +1,46 @@
+<%= content_tag :div, class: "pm pm-slider preview #{(fields[:class].present? ? fields[:class] : 'default')}", data: { controller: 'pmslider', pmslider_refresh_interval_value: fields[:slider_delay].to_i * 1000 } do %>
+  <% posts =  fields[:category].present? ? Category.find(fields[:category].to_i).get_posts(50).limit(fields[:num_posts].to_i) : Post.limit(fields[:num_posts].to_i).order(published_in: :desc) %>
+
+
+  <% image_width = (fields[:image_width].present? ? " width: #{fields[:image_width]}px" : '') %>
+
+  <%= content_tag :div, class: "slider-container nav-#{fields[:navigation_bar_position]} #{fields[:navigation_arrows] == '1' ? ' arows' : ''} #{fields[:image_full_width] == '1' ? ' full' : '' }", style: "#{image_width}"   do %>
+
+
+    <%= content_tag :div, class: "slides-container", style: "padding-top: #{fields[:aspect_ratio]}%;"   do %>
+      <div class="slides">
+        <div class="slide-container">
+          <% posts.each_with_index do |post, i| %>
+            <%= content_tag :div, class: "slide #{i == 0 ? ' active' : ''}", id: "post-#{post.id}", data: { index: i, } do %>
+              <% if post.featured_image.present?  %>
+                <%= load_blob(post.featured_image, nil,  (fields[:image_width].present? ? fields[:image_width].to_i : 1024)) %>
+              <% else %>
+                <%= load_blob(post.attachment.first, nil,  (fields[:image_width].present? ? fields[:image_width].to_i : 1024)) %>
+              <% end %>
+
+              <% if fields[:show_post_title] == '1' %>
+                <%= content_tag :div, class: "slide-title #{fields[:post_title_position]}  #{fields[:post_title_alignment]} #{fields[:post_title_full_width] == '1' ? 'block' : '' }", style: "color: #{fields[:post_title_color]}; background-color: #{fields[:post_title_background_color]}; opacity: #{fields[:post_title_background_opacity].to_i * 0.01}; padding: #{fields[:post_title_padding]}px;" do %>
+                  <%= content_tag :h6, post.titulo %>
+                <% end %>
+              <% end %>
+
+            <% end %>
+          <% end %>
+        </div>
+        <% if fields[:navigation_arrows] == '1' %>
+          <%= content_tag :div, class: 'slider-arrow left-arrow' do %>
+            <%= fas_icon('angle-left', class: 'arrow-ico', data: {direction: 'l'}) %>
+          <% end %>
+          <%= content_tag :div, class: 'slider-arrow right-arrow' do %>
+            <%= fas_icon('angle-right', class: 'arrow-ico', data: { direction: 'r'}) %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+
+
+
+    <%= render partial: 'pagemaker/base/parts/slider_navbar_preview', locals: { posts: posts, fields: fields } %>
+
+  <% end %>
+<% end %>

@@ -1,0 +1,4 @@
+<%= content_tag :h6, 'Confirmação de Cadastro', class: 'title' %>
+<%= content_tag :p, 'O usuário relacionado ao email informado ainda não confirmou o cadastro' %>
+<br/>
+<%= content_tag :p, link_to( "Clique aqui para reenviar o email de confirmação para o endereço #{@user.email} e siga as instruções para confirmar sua inscrição.", user_send_confirm_mail_path(@user.id), remote: true, method: :patch) %>

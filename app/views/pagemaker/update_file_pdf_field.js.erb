@@ -1,0 +1,11 @@
+$('.over-modal-window').remove()
+
+$('<%= j "##{@file_pdf_field}.select-image"%>').attr('data-blob', '<%= @blob.id %>')
+$('<%= j "##{@file_pdf_field}.select-image .field"%>').val( '<%= @blob.id %>')
+
+$('<%= j "##{@file_pdf_field}.select-image .add-img-lnk"%>').addClass('present')
+
+$('<%= j "##{@file_pdf_field}.select-image .image"%>').html('<%= load_thumb(@blob, 170, 300) %>')
+
+$('<%= j "##{@file_pdf_field}.select-image"%>').closest('.setup-form').trigger('change')
+

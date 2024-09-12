@@ -1,0 +1,11 @@
+<div class="frm frm-post post-edit">
+  <%= content_tag :h3, "Publicação: #{@post.titulo}", class: 'title' %>
+
+  <%= form_with model: @post, url: adm_post_create_path(), data: { turbo_method: :patch }, html: { autocomplete: "off" } do |f| %>
+
+
+    <%= render partial: 'post_edit_fields', locals: { f: f} %>
+
+
+  <% end %>
+</div>

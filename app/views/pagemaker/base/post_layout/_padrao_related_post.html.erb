@@ -1,0 +1,21 @@
+<%= content_tag :div, '', class: 'related-post padrao' do %>
+  <%= link_to related.mount_url do %>
+    <div class="related-content">
+    <%= content_tag :div, '', class: 'image-container', style: 'width: 100%' do %>
+      <%= content_tag :div, '', class: 'card-image', style: 'padding-top: 56.25%' do %>
+        <%= content_tag :div, '', class: 'pm_image', data: { controller: 'images', images_url_value: load_image_post_path(related.id)}, id: ("pm_image_#{related.id}_#{'%.16f' % DateTime.now.to_f}").sub('.', '')%>
+      <% end %>
+    <% end %>
+
+    <%= content_tag :div, '', class: 'card-post-title' do %>
+      <%= content_tag :h6, related.titulo, class: 'post-title' %>
+    <% end %>
+
+    <%= content_tag :div, '', class: 'card-post-text' do %>
+      <%= related.resumo %>
+    <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+

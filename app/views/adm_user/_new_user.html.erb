@@ -1,0 +1,19 @@
+<div class="frm frm-user"  id="adm_user_data">
+  <%= content_tag :h6, fas_icon('user', text: 'Novo usuário'), class: 'title' %>
+  
+  <%= form_with model: @user, url: adm_user_create_user_path(), method: :patch, html: { autocomplete: "off" } do |f| %>
+    
+    <%= render partial: 'user_fields', locals: { f: f } %>
+  
+  
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Criar usuário', data: { disable_with: 'Gravando...' } %>
+    </fieldset>
+      
+    <% @user.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+  
+  <% end %>
+  
+</div>

@@ -1,0 +1,38 @@
+<%= content_tag :h5, 'Colunas', class: 'title' %>
+
+<%= content_tag :div, class: "frm setup-columns columns row", data: { preview_url: pagemaker_preview_columns_path(0)} do %>
+  <div class="setup-widget-col form">
+    <div class="frm setup-form">
+      <fieldset>
+        <%= label_tag :colunas, 'Colunas:' %>
+        <%= select_tag :colunas, options_for_select([1, 2, 3, 4, 5, 6], @fields[:colunas]), class: 'number_columns', data: { change_url: pagemaker_change_number_columns_path(0)} %>
+      </fieldset>
+      <fieldset>
+        <%= label_tag :alinhamento, 'Alinhamento:' %>
+        <%= select_tag :alinhamento, options_for_select({'esquerda' => 'esquerda', 'centro' => 'centro', 'direita' => 'direita'}, @fields[:alinhamento]), class: 'field' %>
+      </fieldset>
+      <fieldset>
+        <%= label_tag :classe, 'classe:' %>
+        <%= text_field_tag :classe, @fields[:classe], class: 'field', autocomplete: "off" %>
+      </fieldset>
+      <hr/>
+      <div class="columns_fields">
+        <%= render partial: 'columns_fields' %>
+      </div>
+      <%= hidden_field_tag 'columns', '', class: 'fields-values' %>
+    </div>
+  </div>
+
+  <div class="setup-widget-col preview">
+    <div class="frm setup-preview">
+      preview
+      <%= render partial: "columns_preview" %>
+    </div>
+    <fieldset class="btn-form">
+      <%= hidden_field_tag :columns_id, params[:columns_id], class: 'component_id' %>
+      <%= hidden_field_tag :columns_content, params[:editor_content] %>
+      <%= hidden_field_tag :fields, @fields.to_json, id: 'selected_blob_id', class: 'component_data' %>
+      <%= button_tag 'Aplicar', type: 'submit', data: { editor_id: params[:editor_id], url: pagemaker_insert_columns_path(0), disable_with: 'Aplicando' },  id: 'submit_pm', class: 'builder-button' %>
+    </fieldset>
+  </div>
+<% end %>

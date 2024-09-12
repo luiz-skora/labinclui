@@ -1,0 +1,4 @@
+$('.gallery .thumbs .thumbs-container').html('<%= j render "gallery/thumbs" %>')
+
+$('.gallery .thumbs .thumb-next-page').attr('data-page', 1 ).attr('data-query', '<%= j "#{@query}" %>').attr('data-more', <%= @more %>).trigger('click')
+

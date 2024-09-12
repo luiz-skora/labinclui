@@ -1,0 +1,14 @@
+<div class="home">
+  <%= render partial: 'visitor/header', cached: true %>
+
+  <div class="Desktop" style="display: none;">
+    <%= render partial: 'visitor/body_desktop', cached: true %>
+
+    <%= render partial: 'visitor/footer_desktop', cached: true %>
+  </div>
+  <div class="Mobile" style="display: none;">
+    <%= render partial: 'visitor/body_mobile', cached: true %>
+
+    <%= render partial: 'visitor/footer_mobile', cached: true %>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="frm new-question" id="frm-new-question">
+  <%= content_tag :h7, 'Nova Questão', class: 'title' %>
+  <%= form_with model: @question, url: adm_cursos_create_question_path(@curso.id, @modulo.id, @evaluation.modulo_aula_id, @evaluation.id) , method: :post, html: { autocomplete: "off" } do |f| %>
+  
+    <%= render partial: 'question_fields', locals: { f: f } %>
+    
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Criar Questão', data: { disable_with: 'Gravando Questão...' } %>
+    </fieldset>
+  
+    <% @question.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+  
+  <% end %>
+</div>

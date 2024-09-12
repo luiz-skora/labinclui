@@ -1,0 +1,17 @@
+<%= content_tag :label, "#{@count} cursos na consulta.", class: 'data-count' %>
+<div class="tb-header">
+  <ul>
+    <li class="nome">Nome</li>
+    <li class="identifier">Identificação</li>
+    <li class="coordenador">Coordenador</li>
+    <li class="tipo">Tipo</li>
+    <li class="horas">Horas</li>
+    <li class="ativo">Ativo</li>
+  </ul>
+</div>
+<div class="tb-data">
+  <%= render partial: 'lista_cursos' %>
+</div>
+<div class="more-itens">
+  <%= render partial: 'lista_cursos_more' %>
+</div>

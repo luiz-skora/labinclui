@@ -1,0 +1,17 @@
+<% has_pdf = !field.default_value.blank? %>
+<% target = "pm-pdf-#{DateTime.now.to_f.to_s.sub('.', '')}" %>
+<%= label_tag field.label, t("pagemaker.#{field.label}") %>
+<%= content_tag :div, '', class: 'select-image pdf', id: target, data: { blob: field.default_value} do %>
+  <%= hidden_field_tag :file_pdf, field.default_value, class: 'field' %>
+  <div class="image pdf">
+    <% if has_pdf %>
+      <%= load_pdf_thumb(ActiveStorage::Blob.find(field.default_value.to_i), 170, 300) %>
+    <% end %>
+  </div>
+  <%= content_tag :div, class: "add-img-lnk pdf#{has_pdf ? ' present' : ''}", data: { url: pagemaker_pdf_path(), pdf: field.default_value, target: target } do %>
+    <div>
+      <%= content_tag :h6, fas_icon('file-pdf') %>
+      <%= content_tag :h6, "Clique para #{has_pdf ? 'alterar' : 'escolher'} o arquivo PDF" %>
+    </div>
+  <% end %>
+<% end %>

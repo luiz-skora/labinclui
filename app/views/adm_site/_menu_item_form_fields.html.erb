@@ -1,0 +1,69 @@
+ <% if f.object.id == nil || !f.object.has_childrens? %>
+  <div class="row">
+    <fieldset class="col-8">
+      <%= f.label :parent_id, 'Aninhar no item:' %>
+      <%= f.select :parent_id, @menu_itens.where.not(id: f.object.id).collect{|u| [u.nome, u.id]}, {prompt: '', include_blank: true}, {class: 'parent_item'} %>
+      <div class="msg" id="nome">&nbsp;
+        <%= error_tag @menu_item, :parent_id %>
+      </div>
+    </fieldset>
+    <fieldset class="col-4"></fieldset>
+  </div>
+<% end %>
+
+<div class="row">
+  <fieldset class="col-8">
+    <%= f.label :nome, 'Texto do item' %>
+    <%= f.text_field :nome, placeholder: 'texto do item' %>
+    <div class="msg" id="nome">&nbsp;
+      <%= error_tag @menu_item, :nome %>
+    </div>
+  </fieldset>
+
+  <fieldset class="col-4">
+
+    <%= f.label :indice, 'Ordem:' %>
+    <%= f.number_field :indice, min: 1, max: @menu.menu_item.where(parent_id: @menu_item.parent_id).count + 1, step: 1, class: 'indice-item' %>
+    <div class="msg" id="indice">&nbsp;
+      <%= error_tag @menu_item, :indice %>
+    </div>
+  </fieldset>
+</div>
+
+<div class="row link-route"  id="<%= @menu_item.tipo %>">
+  <fieldset class="set-tipo-link col-4">
+    <%= f.label :tipo, 'Tipo de ligação:' %>
+    <%= f.select :tipo, item_menu_tipo_for_select(f.object.tipo), include_blank: false  %>
+
+    <div class="msg" id="tipo">&nbsp;
+      <%= error_tag @menu_item, :tipo %>
+    </div>
+  </fieldset>
+
+  <fieldset class="col-8 tipo">
+    <div class="url">
+      <%= f.label :link, 'URL do link:' %>
+      <%= f.text_field :link, placeholder: 'URL do link' %>
+      <div class="msg" id="link">&nbsp;
+        <%= error_tag @menu_item, :link %>
+      </div>
+    </div>
+    <div class="pagina tipo-page">
+      <div class="filtro-pos">
+        <div class="filtro-item item-menu">
+          <%= text_field_tag :tipo_filtro, '', placeholder: 'filtrar', autocomlete: 'off', data: { url: adm_site_filter_pages_path(@menu.id) } %>
+          <%= content_tag :span, fa_icon('search'), class: 'insideico' %>
+        </div>
+      </div>
+      <%= f.label :rota, 'Página do sistema:' %>
+      <%= f.select :rota, @app.page.where(parent_id: nil).order(:identifier).collect{|u| [u.nome, u.identifier]}, prompt: 'selecione', include_blank: false, class: 'link-rota-select' %>
+      <div class="msg" id="rota">&nbsp;
+        <%= error_tag @menu_item, :rota %>
+      </div>
+    </div>
+  </fieldset>
+</div>
+
+<fieldset class="btn-form">
+  <%= f.submit value: 'Salvar', data: { disable_with: 'Gravando...' } %>
+</fieldset>

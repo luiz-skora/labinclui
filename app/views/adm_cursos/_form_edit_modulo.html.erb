@@ -1,0 +1,30 @@
+<div class="frm frm-edit-modulo">
+  <%= form_with model: @modulo, url: adm_cursos_update_modulo_path(@curso.id, @modulo.id), method: :post, html: { autocomplete: "off" } do |f| %>
+    <%= render partial: 'modulo_fields', locals: {f: f} %>
+
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Gravar', data: { disable_with: 'Gravando Módulo...' } %>
+      <div class="message">
+        <%= flash[:msg].present? ? "#{flash[:msg]}" : '' %>
+      </end>
+    </fieldset>
+
+    <% @modulo.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+
+
+  <% end %>
+  <% if current_user.user_level <= 2 || @modulo.coordenador == current_user.id %>
+    <% if  @modulo.modulo_aula.count == 0 && @modulo.modulo_evaluation.count == 0 %>
+      <%= content_tag :div, fas_icon('trash-can', text: 'Remover Módulo'), class: 'remove-data label-lnk-confirm-script', data: { url: adm_cursos_remove_modulo_path(@curso.id, @modulo.id), message: "Tem certeza que deseja remover o módulo atual?\nEsta operação não poderá ser desfeita", type: 'script'} %>
+    <% else %>
+      <% if @modulo.ativo %>
+        <%= content_tag :div, fas_icon('circle-xmark', text: 'Desativar Módulo'), class: 'activation-data label-lnk', data: { url: adm_cursos_disable_modulo_path(@curso.id, @modulo.id)} %>
+      <% else %>
+        <%= content_tag :div, fas_icon('circle-xmark', text: 'Reativar Módulo'), class: 'activation-data label-lnk', data: { url: adm_cursos_enable_modulo_path(@curso.id, @modulo.id)} %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+

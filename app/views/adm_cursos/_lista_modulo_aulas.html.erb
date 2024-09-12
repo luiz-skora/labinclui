@@ -1,0 +1,8 @@
+<% selected_aula ||= nil %>
+<% aulas ||= @aulas %>
+<% aulas.each do |a| %>
+  <%= content_tag :ul, class: "aula#{selected_aula == a ? ' selected' : '' }" do %>
+    <%= content_tag :li, '-', class: 'marca' %>
+    <%= content_tag :li, a.nome, class: 'label-aula label-lnk', id: "aula-#{a.id}", data: { url: adm_cursos_show_aula_path(a.curso_modulo.curso.id, a.curso_modulo.id, a.id) } %>
+  <% end %>
+<% end %>

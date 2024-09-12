@@ -1,0 +1,14 @@
+menubar: false
+paste_merge_formats: true
+
+toolbar:
+  - blocks | bold italic underline strikethrough | alignleft  aligncenter alignjustify alignright | image link
+
+plugins:
+  - link
+  - importcss
+  - lists
+  - wordcount
+  - image
+
+setup: 'tinyFunctions'

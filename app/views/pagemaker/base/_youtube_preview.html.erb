@@ -1,0 +1,12 @@
+<div class="pm pm-youtube preview">
+  <%= content_tag :div, class: "youtube" do %>
+    <%= content_tag :div, class: "iframe-container #{fields[:alignment]}", style: "width: #{fields[:full_width] == '1' ? '100%' : fields[:width]+'px'}" do %>
+      <%= content_tag :h3, fields[:titulo] %>
+      <%= content_tag :div, class: 'ic', style: "padding-top: #{fields[:aspect_ratio]}%" do %>
+        <%= get_video_iframe(fields[:video_src]) %>
+      <% end %>
+      <%= content_tag :p, fields[:legenda], class: 'legenda' %>
+    <% end %>
+  <% end %>
+
+</div>

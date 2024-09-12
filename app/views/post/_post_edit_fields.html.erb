@@ -1,0 +1,146 @@
+<% post_id = ( @post.id.present? ? @post.id : DateTime.now.to_f.to_s.sub('.', '')) %>
+<div class="row">
+  <div class="col-9">
+    <fieldset>
+      <%= f.label :titulo, 'Título:' %>
+      <%= f.text_field :titulo, placeholder: 'Título' %>
+      <div class="msg">&nbsp;
+        <%= error_tag @post, :titulo %>
+      </div>
+    </fieldset>
+
+    <fieldset class='edit-resumo'>
+      <%= f.label :resumo, 'Resumo:' %>
+      <%= f.text_area :resumo, data: { controller: 'postresumo', editor_id: "resumo-#{post_id}", action: "postresumo#connect"} %>
+      <div class="msg">&nbsp;
+        <%= error_tag @post, :resumo %>
+      </div>
+    </fieldset>
+
+    <fieldset class="edit-content">
+      <%= f.label :content, 'Conteúdo:' %>
+      <%= tinymce_assets %>
+      <%= f.text_area :content , class: 'tinymce', data: { editor_id: "content-#{post_id}", controller: 'tiny', action: 'tiny#connect', gallery_url: tiny_show_modal_path() }, rows: 60, cols: 120 %>
+      <%#= tinymce %>
+      <div class="msg">&nbsp;
+        <%= error_tag @post, :content %>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="col-3 right-panel">
+
+    <fieldset>
+      <%= f.label :status, 'Status:' %>
+      <%= f.select :status, post_status_for_select(f.object.status), allow_blank: false %>
+      <div class="msg">&nbsp;
+        <%= error_tag @post, :status %>
+      </div>
+    </fieldset>
+
+    <% if @post.status == 'publish' %>
+      <fieldset>
+        <%= f.label :published_in, 'Data Publicalção:' %>
+        <%= f.datetime_field :published_in %>
+        <div class="msg">&nbsp;
+          <%= error_tag @post, :published_in %>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <%= f.label :changed_in, 'Data Alteração:' %>
+        <%= f.datetime_field :changed_in %>
+        <div class="msg">&nbsp;
+          <%= error_tag @post, :changed_in %>
+        </div>
+      </fieldset>
+    <% end %>
+
+    <fieldset>
+        <%= f.label :autor, 'Autor:' %>
+        <%= f.select :autor, User.where(user_level: [0, 1, 2,3,4]).order(:nome).collect{|p| [p.nome, p.nome]}, include_blank: true %>
+        <div class="msg">&nbsp;
+          <%= error_tag @post, :autor %>
+        </div>
+      </fieldset>
+
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Gravar', data: { disable_with: 'Gravando...' } %>
+    </fieldset>
+
+    <% @post.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+
+    <% if flash["msg_#{@post.id}"].present? %>
+      <%= content_tag :div, flash["msg_#{@post.id}"], class: 'message' %>
+    <% end %>
+
+    <% if flash["msg_post_new"].present? %>
+      <%= content_tag :div, flash["msg_post_new"], class: 'message' %>
+    <% end %>
+
+    <hr>
+
+    <fieldset class="post-category">
+        <div class=" label-filtro filtro-categoria row">
+          <div class="col-5">
+            <%= f.label :category_post, 'Categorias:' %>
+          </div>
+          <div class="col-7">
+            <%= text_field_tag 'find_category', '', placeholder: '', class: 'search-field', autocomplete: "off" %>
+            <%= content_tag :span, fa_icon('search'), class: 'insideico' %>
+          </div>
+        </div>
+        <div class="post-categories-box">
+          <ul class="categorias">
+            <%= f.collection_check_boxes(:category_ids, @post.categories.order(:nome), :id, :nome) do |b| %>
+              <%= content_tag :li, class: 'categoria checkbox-label' do %>
+                <%= b.check_box id: "post_category_#{post_id}_#{b.object_id}" %>
+                <%= b.label for: "post_category_#{post_id}_#{b.object_id}"  %>
+              <% end %>
+            <% end %>
+            <%= f.collection_check_boxes :category_ids, Category.where.not(id: @post.categories.ids).order(:nome), :id, :nome, class: "post-category_item" do |b| %>
+              <%= content_tag :li, class: 'categoria checkbox-label' do %>
+                <%= b.check_box id: "post_category_#{post_id}_#{b.object.id}" %>
+                <%= b.label for: "post_category_#{post_id}_#{b.object.id}" %>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      </fieldset>
+
+      &nbsp;
+
+
+      <fieldset class="post-tag" data-post-id="<%= post_id %>" id="<%= "tags-post-#{post_id}" %>">
+        <%= render partial: 'post_tags', locals: { f: f, post_id: post_id} %>
+      </fieldset>
+
+      &nbsp;
+
+      <fieldset>
+        <%= label_tag :images, 'Imagens Anexadas:' %>
+        <div class="anexed_images">
+          <% featured = @post.featured_image %>
+          <ul class="images">
+            <% @post_atts.each_with_index do |img, i| %>
+              <%= content_tag :li, id: "image_#{i}", class: 'anexed-image', title: 'Imagem destacada' do %>
+                <div class="featured">
+                  <% if img.blob_id == featured.blob_id %>
+                    <%= fas_icon('check') %>
+                  <% end %>
+                </div>
+                <div class="image">
+                  <%= load_blob(img, 300, 300) %>
+                </div>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+
+      </fieldset>
+  </div>
+</div>
+
+

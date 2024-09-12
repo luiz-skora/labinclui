@@ -1,0 +1,12 @@
+
+<div class="frm frm-questionario">
+  <%= content_tag :h6, "Questionário", class: 'title' %> 
+  
+  <div class="questions">
+    <%= render partial: 'show_questions' %>
+  </div>
+  <div class="frm-new-question"></div>
+  <div class="action">
+    <%= content_tag :label, 'Adicionar questão', class: 'label-lnk new-question-link', data:{ url: adm_cursos_new_question_path(@curso.id, @modulo.id, (@aula.present? ? @aula.id : -1), @evaluation.id) } %>
+  </div>
+</div> 

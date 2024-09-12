@@ -1,0 +1,127 @@
+@import 'font_awesome5_webfont';
+
+trix-toolbar {
+
+  .trix-button-row {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    .trix-button-group {
+      margin-bottom: 3px;
+      margin-left: 0;
+      margin-right: 6px;
+    }
+
+    .trix-button-group--block-tools {
+      position: relative;
+      .paragraph {
+        padding: 0 8px;
+        cursor: pointer;
+        width: 68px;
+
+        .buttons {
+          position: absolute;
+          left: 0;
+          top: 25px;
+          width: 68px;
+          background-color: #fff;
+          box-shadow: 0 0 3px #000;
+          z-index: 9999;
+          padding: 4px;
+          border-radius: 3px;
+          display: none;
+          .trix-button {
+            display: block;
+            float: none;
+            border: none;
+            border-left: none;
+            font-size: 1em;
+            text-align: right;
+            padding: 2px 4px;
+
+          }
+        }
+      }
+      .alignment {
+        margin: 0 3px;
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+      }
+      .trix-button--icon-align {
+        font-size: 1em;
+      }
+    }
+
+  }
+}
+.trix-dialog {
+  &.paragraph-dialog {
+    padding: 8px;
+    font-size: 1em;
+    width: 200px;
+    .trix-dialog__fields {
+      input[type=button] {
+        width: 100%;
+        padding: 3px;
+        border: none;
+        font-size: 1.1em;
+        font-weight: 400;
+        &:hover {
+          background-color: #eee;
+        }
+      }
+    }
+  }
+}
+
+.trix-editor, .trix-content, .pm, .pm-component {
+  h1, .h1 { font-size: calc(1.375rem + 1.5vw); }
+  h2, .h2 { font-size: calc(1.325rem + 0.9vw); }
+  h3, .h3 { font-size: calc(1.3rem + 0.6vw); }
+  h4, .h4 { font-size: calc(1.275rem + 0.3vw); }
+  h5, .h5 { font-size: 1.25rem; }
+  h6, .h6 { font-size: 1rem; }
+  h7, .h7 { font-size: .9em; }
+}
+
+
+
+
+.trix-content {
+  .attachment {
+    position: relative;
+    width: 100%;
+    &[data-trix-mutable] {
+      box-shadow: 0 0 0 2px highlight;
+      img { box-shadow: none; }
+      .pm-component-edit { display: block; }
+    }
+    ///*
+    .pm-component-edit {
+      position: absolute;
+      top: 3px;
+      right: -3px;
+      display: none;
+      .pm-edit-buttons {
+        .pm-edit-lnk {
+          display: inline;
+          border-radius: 4px;
+          box-shadow: 0 0 6px #333;
+          margin: 3px;
+          padding: 6px;
+          background-color: #ffffff90;
+          font-size: 1.5em;
+          color: #666;
+          cursor: pointer;
+          &:hover {
+            color: #fff;
+            background-color: #00000050;
+          }
+        }
+      }
+    }
+    //*/
+  }
+  .trix-component {
+    width: 100%;
+  }
+}

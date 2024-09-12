@@ -1,0 +1,7 @@
+$('.frm.adm-modulos .modulo-edit').html('<%= j render "edit_modulo" %>')
+
+$('.frm.adm-modulos .modulo-edit .tabs-area').html('<%= j render "form_edit_modulo" %>')
+ 
+$('.frm-modulo .tabs-title li').removeClass('selected')
+$('.frm-modulo .tabs-title li.aula').addClass('selected')
+$('.frm-modulo .tabs-area').html('<%= j render "new_aula" %>')

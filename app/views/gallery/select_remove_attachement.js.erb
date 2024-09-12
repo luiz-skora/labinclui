@@ -1,0 +1,15 @@
+console.log('select_remove_attachement')
+
+var images = $('.frm-gallery .gallery-blob-selected input#selected_blob_id').val().split(',')
+
+var index = images.indexOf('<%= j "#{@blob.id}" %>')
+
+console.log(images, index)
+if ( index > -1 ) {
+  images.splice(index, 1)
+}
+$('.frm-gallery .gallery-blob-selected input#selected_blob_id').val(images.join(', ')).trigger('change')
+
+console.log($('.frm-gallery .gallery-blob-selected input#selected_blob_id').val())
+
+$('<%= j ".frm-gallery .gallery-blob-selected .mini ##{@blob.id}.thumb" %>').remove()

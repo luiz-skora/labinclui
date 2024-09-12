@@ -1,0 +1,35 @@
+<%= link_to post.mount_url do %>
+  <% if fields[:title_show] == '1' %>
+    <%= content_tag :div, class: "card-post-title #{fields[:title_alignment]}" do %>
+      <%= content_tag :h6, post.titulo, class: 'post-title', style: fields[:title_font_size].present? ? "font-size: #{fields[:title_font_size]}px" : ''  %>
+    <% end %>
+  <% end %>
+  <div class="card-image-text">
+    <% if fields[:image_show] == '1' %>
+      <%= content_tag :div, class: "image-container #{fields[:image_alignment]}", style: " width: #{(fields[:card_image_full_width] == '1' ? '100%' : fields[:card_image_width]+'px')}" do %>
+        <%= content_tag :div, class: 'card-image', style: "padding-top: #{fields[:card_image_aspect_ratio]}%;" do %>
+          <%= content_tag :div, class: 'pm_image', data: {controller: 'images', images_url_value: load_image_post_path(post.id)  }, id: ("pm_image_#{post.id}_#{'%.16f' % DateTime.now.to_f}").sub('.', '')  do %>
+            <% if post.featured_image.present? %>
+              <% blob = post.featured_image %>
+            <% elsif post.attachment.present? %>
+              <% blob = post.attachment.first %>
+            <% else %>
+              <% blob = nil %>
+            <% end %>
+            <%= render partial: 'active_storage/image', locals: { blob: blob, w: 32, h: 32 } %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% if fields[:post_text_show] == '1' %>
+      <% text = (fields[:post_text_type] == 'resumo' ? post.resumo.body.to_plain_text : post.content.body.to_plain_text) %>
+      <%= content_tag :p, class: "post-card-text #{fields[:post_text_alignment]}", style: (fields[:post_text_font_size].present? ? "font-size: #{fields[:post_text_font_size]}px" : '') do %>
+        <% if fields[:post_text_length].present? %>
+          <%= text[0..fields[:post_text_length].to_i] %>
+        <% else %>
+        <%= text %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+<% end %> <!-- link_to -->

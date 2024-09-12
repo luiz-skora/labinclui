@@ -1,0 +1,38 @@
+<fieldset>
+  <%= content_tag :h6, "Grupo: #{@conf.conf_grupo.nome}", class: 'subtitle title' %>
+</fieldset>
+    
+<fieldset>
+  <%= f.label :nome, 'Nome do parâmetro:' %>
+  <%= f.text_field :nome, placeholder: 'Nome do parâmetro' %>
+  <div class="msg">&nbsp;
+    <%= error_tag @conf, :nome %>
+  </div>
+</fieldset>
+    
+<fieldset>
+  <%= f.label :valor, 'Valor:' %>
+  <%= f.text_field :valor, placeholder: 'Valor' %>
+  <div class="msg">&nbsp;
+    <%= error_tag @conf, :valor %>
+  </div>
+</fieldset>
+    
+<fieldset>
+  <%= f.label :as_attachment, 'anexo', class: 'chk-label' do %>
+    <%= f.check_box :as_attachment %>
+    <%=  'anexo' %>
+  <% end %>
+  &nbsp;
+</fieldset>
+
+<% if f.object.as_attachment %>
+  <div class="attachment">
+    <%= show_attachment(f.object) %>
+  </div>
+  
+<% end %>
+<div class="change-attachment" style="<%= "#{(f.object.as_attachment ? 'display: block' : 'display: none')}" %>">
+  <%= change_attachment(f.object, f) %>
+  &nbsp;
+</div>

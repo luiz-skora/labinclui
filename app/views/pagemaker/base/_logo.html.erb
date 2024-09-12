@@ -1,0 +1,31 @@
+<%#= fields %>
+
+<% grupo = ConfGrupo.find_by(nome: 'Aplicação') %>
+<% if grupo.present?
+  app_logo = grupo.conf.find_by(nome: 'app_logo') rescue nil
+  app_title = grupo.conf.find_by(nome: 'app_title') rescue nil
+  app_description = grupo.conf.find_by(nome: 'app_description') rescue nil
+end %>
+
+  <%= content_tag :a, href: root_path, class: "site-logo #{fields[:disposition]} #{fields[:alignment]}"  do %>
+    <% if fields[:image_show] == '1' %>
+      <div class="logo-image">
+        <%= load_site_logo(app_logo, fields[:image_height], fields[:image_width]) %>
+      </div>
+    <% end %>
+    <% if fields[:title_show] == '1' || fields[:description_show] == '1' %>
+      <div class="logo-title-description">
+        <% if fields[:title_show] == '1' %>
+          <div class="logo-title">
+            <%= content_tag( :h1, app_title.valor, class: "#{fields[:title_alignment]}", style: "#{fields[:title_font_size].blank? ? '': 'font-size:' +fields[:title_font_size] + 'px'}; color: #{fields[:title_font_color]}" ) rescue '' %>
+          </div>
+        <% end %>
+        <% if fields[:description_show] == '1' %>
+          <div class="logo-description">
+            <%= content_tag(:h4, app_description.valor, class: "#{fields[:description_alignment]}", style: "#{fields[:description_font_size].blank? ? '' :  'font-size' + fields[:description_font_size] + 'px'}; color: #{fields[:description_font_color]}") rescue '' %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+

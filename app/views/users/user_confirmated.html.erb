@@ -1,0 +1,8 @@
+<div class="frm frm-confirmation-user">
+
+  <%= content_tag :h3, ConfGrupo.find_by(nome: 'Aplicação').conf.find_by(nome: 'app_title').valor, class: 'title centralize' %>
+
+  
+  <%= render partial: 'first_login' %>
+</div>
+

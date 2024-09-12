@@ -1,0 +1,19 @@
+<div class="frm frm-modulo">
+  <%= content_tag :h6, "Módulo - #{@modulo.nome}#{(@modulo.ativo ? '' : ' (Inativo)')}", class: 'title' %>
+  <div class="tabs">
+    <div class="tabs-title">
+      <ul>
+        <%= content_tag :li, 'Módulo', data: { url: adm_cursos_edit_modulo_path(@curso.id, @modulo.id), target: '#modulo-tab-area'}, class: 'modulo li-lnk selected' %>
+        <%= content_tag :li, 'Aulas', data: { url: adm_cursos_show_aulas_path(@curso.id, @modulo.id), target: '#modulo-tab-area' }, class: 'aula li-lnk not-block' %>
+        <%= content_tag :li, 'Avaliação do Módulo', data: { url: adm_cursos_modulo_evaluation_path(@curso.id, @modulo.id), target: '#modulo-tab-area' } , class: 'avaliacao li-lnk' %>
+        <%= content_tag :li, 'Trabalhos', data: { url: adm_cursos_trabalhos_path(@curso.id) }, class: 'trabalhos li-lnk' %>
+      </ul>
+    </div>
+  
+    <div class="tabs-area" id="modulo-tab-area">
+      <%= render partial: 'form_edit_modulo' %>
+    </div>
+    
+  </div>
+</div>
+ 

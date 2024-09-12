@@ -1,0 +1,10 @@
+$('.frm-modulo .tabs-title li').removeClass('selected')
+$('.frm-modulo .tabs-title li.avaliacao').addClass('selected') 
+
+$('.modulos-tree .label-lnk.aulas').removeClass('selected')
+
+$('<%= j ".modulos-tree .lista #modulo-#{@modulo.id} .label-aula" %>').removeClass('selected')
+
+$('<%= j ".modulos-tree .lista #modulo-#{@modulo.id} .avaliacao .modulo-evaluation" %>').addClass('selected')
+
+$('.frm-modulo .tabs-area').html('<%= j render "modulo_evaluation" %>')

@@ -1,0 +1,30 @@
+$('.modal-main .modal-title').text('Construtor')
+$('.modal-main .modal-container').html('<%= j render "pagemaker/main" %>')
+$('.modal-main').show()
+
+$('.main-pagemaker .pagemaker .setup').html('<%= j render "setup_component" %>').show()
+$('.main-pagemaker .pagemaker .widgets').hide()
+
+
+$('.main-pagemaker .titles li').removeClass('selected')
+$('.main-pagemaker .titles li.title-setup').addClass('selected')
+
+function resizeModal() {
+  var height = $(window).height() - 40
+  var width = $(window).width() - 40
+
+  $('.modal-window').height(height)
+  $('.modal-window').width(width)
+
+  var h = $('.modal-window .modal-header').height()
+
+
+  $('.modal-window .modal-container').height(height - ( h + 10) )
+
+}
+
+$(window).on('resize', function() {
+  resizeModal()
+})
+
+resizeModal()

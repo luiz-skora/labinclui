@@ -1,0 +1,93 @@
+<% id = ("stats_real_time-#{'%.16f' % DateTime.now.to_f}").sub('.', '') %>
+<%= content_tag :div,  class: "real-time stats", data: {controller: "stats", stats_id_value: id, stats_refresh_value: 10, stats_url_value: stats_refresh_path(id: id) } do %>
+  <div class="action">
+    <%= label_tag 'refresh_timing', 'Frequência de atualização:' %>
+    <%= select_tag 'refresh_timing', options_for_select([1, 5, 10, 30, 60], 10 ), {data: { action: 'stats#refreshTiming' }} %>
+    <%= fas_icon(:spin, animation: :spinner, class: 'srt-refresh', style: 'display: none') %>
+    <%= 'segundos' %>
+  </div>
+
+  <%= content_tag :div, class: "stats-real-time", id: id, data: { stats_id_value: id, stats_refresh_value: 5} do %>
+    <%= content_tag :div, class: 'real-time-charts', id: 'real_time_charts', data: {   time_ini: @time_ini.to_f} do %>
+      <div class="chart-hour">
+        <%= column_chart(@chart_min, library: { scales: {x: {ticks: { display: false, allowDecimals: false}}, y: { ticks: {allowDecimals: false} } } }, height: '200px', discrete: true, id: 'chart-minutes') %>
+      </div>
+      <div class="chart-min">
+        <%= column_chart(@chart_sec, library: { scales: {x: {ticks: { display: false}} }, y: {ticks: {display: false, allowDecimals: false}}}, height: '100px', scale: 1, id: 'chart-seconds') %>
+      </div>
+
+    <% end %>
+  <% end %>
+
+  <div class="stats-data">
+    <div class="data-container container-urls">
+    <%= content_tag :h6, 'Páginas' %>
+    <div class="urls">
+        <% @urls.each do |u| %>
+          <ul class="url l">
+            <%= content_tag :li, u[0], class: 'name', title: u[0] %>
+            <%= content_tag :li, u[1], class: 'count' %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+    <div class="visit-data">
+      <div class="device flex-25">
+        <div class="data-container">
+        <%= content_tag :h6, 'Dispositivo' %>
+        <div class="data">
+          <% @visit_data[:device].each do |k| %>
+            <ul class="device l">
+              <%= content_tag :li, k[0], class: 'name', title: k[0] %>
+              <%= content_tag :li, k[1], class: 'count' %>
+            </ul>
+          <% end %>
+        </div>
+        </div>
+      </div>
+      <div class="browser flex-25">
+
+        <div class="data-container">
+        <%= content_tag :h6, 'Navegador' %>
+        <div class="data">
+          <% @visit_data[:browser].each do |k| %>
+            <ul class="browser l">
+              <%= content_tag :li, k[0], class: 'name', title: k[0] %>
+              <%= content_tag :li, k[1], class: 'count' %>
+            </ul>
+          <% end %>
+        </div>
+        </div>
+      </div>
+      <div class="os flex-25">
+        <div class="data-container">
+        <%= content_tag :h6, 'Sistema Operacional' %>
+        <div class="data">
+          <% @visit_data[:os].each do |k| %>
+            <ul class="os l">
+              <%= content_tag :li, k[0], class: 'name', title: k[0] %>
+              <%= content_tag :li, k[1], class: 'count' %>
+            </ul>
+          <% end %>
+        </div>
+        </div>
+      </div>
+      <div class="city flex-25">
+        <div class="data-container">
+        <%= content_tag :h6, 'Cidade' %>
+        <div class="data">
+          <% @visit_data[:city].each do |k| %>
+            <ul class="city l">
+              <%= content_tag :li, k[0], class: 'name', title: k[0] %>
+              <%= content_tag :li, k[1], class: 'count' %>
+            </ul>
+          <% end %>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<% end %>

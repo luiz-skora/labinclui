@@ -1,0 +1,7 @@
+<%= content_tag "action-text-attachment", class: "pm-component pm", id: ("pm-component-#{'%.16f' % DateTime.now.to_f}").sub('.', ''), sgid: @component_data.attachable_sgid do %>
+  <%= render partial: "#{@component.html_base}", locals: { fields: @fields} %>
+<% end %>
+
+<%# , sgid: @component_data.attachable_sgid %>
+
+<%# , content: 'minha rola', data: { controller: '_pm', visitor_target: 'component', action: 'visitor-view@window->pm#show', view_url: show_component_path(@component_data.attachable_sgid), sgid: @component_data.attachable_sgid  }, %>

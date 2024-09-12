@@ -1,0 +1,45 @@
+    <div class="row"> 
+      <fieldset class="col-12">
+        <%= f.label :nome, 'Nome do curso:' %>
+        <%= f.text_field :nome, placeholder: 'Nome do curso' %>
+        <div class="msg" id="nome">&nbsp;
+          <%= error_tag @curso, :nome %>
+        </div>
+      </fieldset>
+    </div>
+    
+    <div class="row">
+      <fieldset class="col-6">
+        <%= f.label :cooredenador_id, 'Coordenador:' %>
+        <%= f.select :coordenador_id, User.where('user_level <= ?', 3).where.not(confirmation_at: nil).order(:nome).collect{|u| [u.nome, u.id]}, include_blank: false, prompt: 'selecione' %>
+        <div class="msg" id="coordenador">&nbsp;
+          <%= error_tag @curso, :coordenador %>
+        </div>
+      </fieldset>
+      
+      <fieldset class="col-3">
+        <%= f.label :horas, 'Total de Horas:' %>
+        <%= f.number_field :horas, placeholder: 'horas', in: 1...3601 %>
+        <div class="msg" id="horas">&nbsp;
+          <%= error_tag @curso, :horas %>
+        </div>
+      </fieldset>
+      
+      <fieldset class="col-3">
+        <%= f.label :tipo, 'Tipo:' %>
+        <%= f.select :tipo, curso_tipo_for_select(@curso.tipo), include_blank: false, prompt: 'selecione' %>
+        <div class="msg" id="tipo">&nbsp;
+          <%= error_tag @curso, :tipo %>
+        </div>
+      </fieldset>
+    <div>
+    
+    <fieldset class="trix-container">
+      <%= f.label :content, 'Descrição do curso:' %>
+      <%= f.rich_text_area :content, data: { controller: "attachments", app_editor_id: "curso-#{@curso.id}"} %>
+      <div class="msg" id="content">&nbsp;
+        <%= error_tag @curso, :content %>
+      </div>
+    </fieldset>
+    
+    </div>

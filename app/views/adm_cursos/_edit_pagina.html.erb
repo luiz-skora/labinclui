@@ -1,0 +1,25 @@
+<div class="frm frm-new-aula">
+  <%= content_tag :h6, "Conteúdo da aula: #{@aula.nome}", class: 'title' %>
+  
+  <%= form_with model: @pagina, url: adm_cursos_update_pagina_path(@curso.id, @modulo.id, @aula.id, @pagina.id), method: :post, html: { autocomplete: "off" } do |f| %>
+  
+    <%= render partial: 'pagina_fields', locals: { f: f} %>
+
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Salvar Página', data: { disable_with: 'Gravando Página...' } %>
+      <div class="message">
+        <%= flash[:msg].present? ? "#{flash[:msg]}" : '' %>
+      </end>
+    </fieldset>
+
+    <% @pagina.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+    
+    <br />
+    <%= content_tag :div, class: "label-lnk-confirm-script remove", data: { url: adm_cursos_remove_pagina_path(@curso.id, @modulo.id, @aula.id, @pagina.id), message: 'Esta ação removerá a página e não poderá ser desfeita. Deseja continuar?' } do %>
+      <%= fas_icon('trash-can', text: 'Remover Página') %>
+    <% end %>
+  <% end %>
+</div>
+ 

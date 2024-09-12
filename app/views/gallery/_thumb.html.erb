@@ -1,0 +1,17 @@
+<% att ||= @att %>
+<%= content_tag :div, class: 'thumb col-fixed', id: "#{att.blob.id}" do %>
+  <figure class="gallery-thumb" id="<%= att.blob.id %>" title="<%= att.filename.to_s %>" >
+    <div class="chk" style="">
+      <%= fas_icon('check') %>
+    </div>
+    <div class="i" style="">
+      <%#= att.blob.id %>
+    </div>
+    <div>
+    <%= load_thumb(att, 200, 200) %>
+    <figcaption>
+      <%= "#{att.filename}" %>
+    </figcaption>
+    </div>
+  </figure>
+ <% end %>

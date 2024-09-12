@@ -1,0 +1,30 @@
+$('.modal-window').append('<%= j render "shared/over_modal" %>')
+
+$('<%= j "##{@modal_id}.over-modal-window .modal-title" %>').text('Galeria')
+$('<%= j "##{@modal_id}.over-modal-window .over-modal-container" %>').html('<%= j render "gallery/gallery_modal" %>')
+$('<%= j "##{@modal_id}.over-modal-window" %>').show()
+
+
+function resizeOverModal() {
+  var height = $(window).height() - 60
+  var width = $(window).width() - 60
+
+  $('.over-modal-window').height(height)
+  $('.over-modal-window').width(width)
+
+  var h = $('.over-modal-window .over-modal-header').height()
+
+
+  $('.over-modal-window .over-modal-container').height(height - ( h + 15) )
+
+  console.log(height)
+
+}
+
+$(window).on('resize', function() {
+  resizeOverModal()
+})
+
+resizeOverModal()
+
+

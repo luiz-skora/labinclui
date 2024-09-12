@@ -1,0 +1,32 @@
+<%= content_tag :nav, class: 'navbar navbar-expand retract' do %>
+  <div class="navbar-toggler" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Alterna navegação">
+    <%= image_tag 'icons/bars', class: 'toggler-ico', width: 32, height: 32 %>
+  </div>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <% menu.menu_item.where(parent_id: nil).order(:indice, :nome, :id).each do |k| %>
+        <%= content_tag :li, class: "nav-item#{k.has_childrens? ? ' dropdown' : ''}" do %>
+          <%#= content_tag :a, k.nome, class: "nav-link#{k.has_childrens? ? ' dropdown-toggle': ''}", href:   k.mount_url, id: "menu-item-#{k.id}", title: k.nome, aria: { label: k.nome } %>
+          <%= link_to(k.nome, k.mount_url, class: "nav-link#{k.has_childrens? ? ' dropdown-toggle': ''}", href:   k.mount_url, id: "menu-item-#{k.id}", title: k.nome, aria: { label: k.nome }) %>
+          <% if k.has_childrens? %>
+            <%= content_tag :ul, class: 'dropdown-menu', aria: { labelledby: "menu-item-#{k.id}" } do %>
+              <% k.get_childrens.order(:indice, :nome, :id).each do |h| %>
+                <%= content_tag :li, class: 'nav-item' do %>
+                  <%= content_tag :a, h.nome, href: h.mount_url, class: 'nav-link', title: h.nome, aria: { label: k.nome } %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <% if fields[:embed_search_form] == '1' %>
+        <%= content_tag :li,  class: 'nav-item embed-search' do  %>
+          <%= link_to visitor_find_posts_path() do %>
+            <%= image_tag('icons/search', class: 'search-ico', width: 32, height: 32) %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+

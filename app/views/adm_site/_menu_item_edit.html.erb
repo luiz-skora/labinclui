@@ -1,0 +1,17 @@
+<div class="frm frm-menu-item" id="form_menu_item">
+  <%= content_tag :h6, "Editar item: #{@menu_item.nome}", class: 'title' %>
+
+  <%= form_with model: @menu_item, url: adm_site_menu_item_update_path(@menu.id, @menu_item.id), method: :patch, data: { turbo_method: :patch }, html: { autocomplete: "off" } do |f| %>
+    <%= render partial: 'menu_item_form_fields', locals: { f: f } %>
+
+    <% @menu_item.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+
+    <% if flash[:msg].present? %>
+      <%= content_tag :div, flash[:msg], class: 'message' %>
+    <% end %>
+
+    <%= content_tag :label, fas_icon('trash', text: 'Remover item'), class: 'remove-lnk-confirm remove-item-lnk', data: { message: "Confirma a remoção permanente do item de menu, #{@menu_item.nome}?\nEssa operação não poderá ser desfeita.", url: adm_site_menu_item_remove_path(@menu.id, @menu_item.id) } %>
+  <% end %>
+</div>

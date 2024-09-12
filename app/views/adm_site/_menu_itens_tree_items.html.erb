@@ -1,0 +1,13 @@
+<% @menu_itens.each do |menu_item| %>
+  <%= content_tag :ul, class: 'ul-lnk menu-item', id: "menu_item-#{menu_item.id}", data: { url: adm_site_menu_item_edit_path(@menu.id, menu_item.id) } do %>
+    <li class="space"></li>
+    <%= content_tag :li, menu_item.nome, class: "menu-item-nome#{@menu_item.present? && @menu_item.id == menu_item.id ? ' selected' : ''} " %>
+  <% end %>
+  <% menu_item.get_childrens.order(:indice, :nome, :id).each do |sub_menu| %>
+    <%= content_tag :ul, class: 'ul-lnk menu-item', id: "menu-item-#{sub_menu.id}", data: { url: adm_site_menu_item_edit_path(@menu.id, sub_menu.id) } do %>
+      <li class="space"></li>
+      <li class="space">-</li>
+      <%= content_tag :li, sub_menu.nome, class: "menu-item-nome#{@menu_item.present? && @menu_item.id == sub_menu.id ? ' selected' : ''}" %>
+    <% end %>
+  <% end %>
+<% end %>

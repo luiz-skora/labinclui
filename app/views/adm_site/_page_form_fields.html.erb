@@ -1,0 +1,42 @@
+<% page_id = ( @page.id.present? ? @page.id : DateTime.now.to_f.to_s.sub('.', '')) %>
+
+
+<fieldset>
+  <%= f.label :nome, 'Nome da página:' %>
+  <%= f.text_field :nome, placeholder: 'Nome da página' %>
+  <%= label_tag :identifier, f.object.identifier, class: 'slug-field' %>
+  <div class="msg">&nbsp;
+    <%= error_tag @page, :nome %>
+  </div>
+</dieldset>
+
+<div class="row">
+  <fieldset class="col-6">
+    <%= f.label :header_area_id, 'Área do cabeçalho:' %>
+    <%= f.select :header_area_id, App.first.area.order(:nome).collect{|k| [k.nome, k.id]}, prompt: 'Selecione', include_blank: true %>
+    <div class="msg">&nbsp;
+      <%= error_tag @page, :header_area_id %>
+    </div>
+  </fieldset>
+
+  <fieldset class="col-6">
+    <%= f.label :footer_area_id, 'Área do rodapé:' %>
+    <%= f.select :footer_area_id, App.first.area.order(:nome).collect{|k| [k.nome, k.id]}, prompt: 'Selecione', include_blank: true %>
+    <div class="msg">&nbsp;
+      <%= error_tag @page, :footer_area_id %>
+    </div>
+  </fieldset>
+</div>
+
+<fieldset>
+  <%= f.label :content, 'Conteúdo:' %>
+  <%= tinymce_assets %>
+  <%= f.text_area :content , class: 'tinymce', data: { editor_id: "content-#{page_id}", controller: 'pmtiny', action: 'connect->pmtiny#connect update-columns@window->pmtiny#updateColumns', gallery_url: tiny_show_modal_path(), components_url: show_components_dialog_path(), columns_url: show_columns_dialog_path() }, rows: 60, cols: 120 %>
+  <div class="msg">&nbsp;
+    <%= error_tag @page, :nome %>
+  </div>
+</fieldset>
+
+<fieldset class="btn-form">
+  <%= f.submit value: 'Salvar', data: { disable_with: 'Gravando...' } %>
+</fieldset>

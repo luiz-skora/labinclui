@@ -1,0 +1,49 @@
+
+<%= content_tag :div, class: "pm pm-slider #{(fields[:class].present? ? fields[:class] : 'default')}", data: { controller: 'pmslider', pmslider_refresh_interval_value: fields[:slider_delay].to_i * 1000,  action: "load->pmslider#load" } do %>
+  <% posts =  fields[:category].present? ? Category.find(fields[:category].to_i).get_posts(50).limit(fields[:num_posts].to_i) : Post.limit(fields[:num_posts].to_i).order(published_in: :desc) %>
+
+
+
+  <% image_width = (fields[:image_width].present? ? " width: #{fields[:image_width]}px" : '') %>
+
+  <%= content_tag :div, class: "slider-container nav-#{fields[:navigation_bar_position]} #{fields[:navigation_arrows] == '1' ? ' arows' : ''} #{fields[:image_full_width] == '1' ? ' full' : '' }", style: "#{fields[:image_full_width] == '0' ? image_width : '' }"   do %>
+    <%= content_tag :div, class: "slides-container", style: "padding-top: #{fields[:aspect_ratio]}%;"   do %>
+      <div class="slides">
+        <div class="slide-container">
+          <% posts.each_with_index do |post, i| %>
+            <%= link_to post.mount_url do %>
+              <%= content_tag :div, class: "slide #{i == 0 ? ' active' : ''} empty", id: "post-#{post.id}", data: { index: i, pmslider_url_value: featured_image_post_path(post.id), id: "post-#{post.id}", pmslider_target: 'slide' }  do %>
+                <%= content_tag :div, '', id: "slide-post-#{post.id}" %>
+
+                <% if fields[:show_post_title] == '1' %>
+                  <%= content_tag :div, class: "slide-title #{fields[:post_title_position]}  #{fields[:post_title_alignment]} #{fields[:post_title_full_width] == '1' ? 'block' : '' }", style: "color: #{fields[:post_title_color]}; background-color: #{fields[:post_title_background_color]}#{fields[:post_title_background_opacity]};  padding: #{fields[:post_title_padding]}px;" do %>
+                    <%= content_tag :h6, "#{post.titulo}" %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %> <!-- link-to -->
+          <% end %>
+        </div>
+        <% if fields[:navigation_arrows] == '1' %>
+          <%= content_tag :div, class: 'slider-arrow left-arrow'  do %>
+            <%#= fas_icon('angle-left', class: 'arrow-ico', data: {direction: 'l', action: "click->pmslider#preview"}) %>
+
+            <svg class="svg-inline--fa fa-angle-left arrow-ico" data-direction="l" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"></path></svg>
+
+
+          <% end %>
+          <%= content_tag :div, class: 'slider-arrow right-arrow' do %>
+            <%#= fas_icon('angle-right', class: 'arrow-ico', data: { direction: 'r', action: "click->pmslider#next"}) %>
+
+            <svg class="svg-inline--fa fa-angle-right arrow-ico" data-direction="r" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M64 448c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L178.8 256L41.38 118.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25l-160 160C80.38 444.9 72.19 448 64 448z"></path></svg>
+
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= render partial: 'pagemaker/base/parts/slider_navbar', locals: { posts: posts, fields: fields } %>
+
+  <% end %>
+
+<% end %>

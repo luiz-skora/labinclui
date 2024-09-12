@@ -1,0 +1,6 @@
+<% @cursos.each do |k| %>
+  <%= content_tag :ul, data: { url: adm_cursos_show_curso_path(k.id)}, class: 'ul-lnk' do %>
+    <%= render partial: 'lista_curso', locals: { k: k} %>
+  <% end %>
+<% end %>
+

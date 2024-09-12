@@ -1,0 +1,34 @@
+<div class="frm frm-new-conf-grupo" id="configuracoes_data">
+
+  <%= content_tag :h5, "Grupo: #{ @grupo.nome }", class: 'title' %>
+
+  <%= form_with model: @grupo, url: conf_grupo_update_path(@grupo.id), method: :patch, html: { autocomplete: "off" } do |f| %>
+    <fieldset>
+      <%= f.label :nome, 'Nome do Grupo:' %>
+      <%= f.text_field :nome, placeholder: 'Nome do Grupo' %>
+      <div class="msg">&nbsp;
+        <%= error_tag @grupo, :nome %>
+      </div>
+    </fieldset>
+    
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Salvar', data: { disable_with: 'Gravando...' } %>
+    </fieldset>
+      
+      
+    <% @grupo.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+    
+    <% if flash[:msg].present? %>
+      <%= content_tag :div, flash[:msg], class: 'message' %>
+    <% end %>
+  <% end %>
+  
+  
+  <%= content_tag :div, class: 'label-lnk-confirm remove', data: { url: conf_grupo_remove_path(@grupo.id), message: "Esta ação removerá o grupo e não poderá ser desfeita\n\nDeseja continuar?" } do %>
+    <%= fas_icon('trash-can', text: ' Excluir Grupo') %>
+  <% end %>  
+  
+</div>
+ 

@@ -1,0 +1,5 @@
+$('#post-tab-lista .data-count').text('<%= j "#{@count} publicações na consulta." %>')
+
+$('#post-tab-lista-data').html('<%= j render "lista_posts" %>')
+
+$('#more.next-page.auto-load').attr('data-page', 1 ).attr('data-query', '<%= j @query %>').attr('data-more', <%= @more %>).trigger('click')

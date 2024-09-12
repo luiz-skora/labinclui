@@ -1,0 +1,19 @@
+<% selected ||= 'lista' %>
+<div class="frm adm-posts">
+  <%= content_tag :h3, fas_icon('file-lines', text: 'Publicações'), class: 'title' %>
+
+  <div class='actions'>
+    <ul class="adm-menu adm-posts-menu">
+      <%= content_tag :li, 'Lista', data: { url: adm_post_list_path(), target: '.rect'}, class: "li-lnk lista#{selected == 'lista' ? ' selected' : ''}" %>
+      <%= content_tag :li, link_to('Adicionar',  adm_post_new_path(), data: { turbo_method: :get} ), class: 'li-lnk' %>
+
+    </ul>
+  </div>
+  <%= tinymce_assets %>
+  <%= tinymce %>
+  <div class="rect">
+
+    <%= render partial: part %>
+  </div>
+
+</div>

@@ -1,0 +1,6 @@
+<% title ||= '' %>
+<% progress ||= 0 %>
+<%= content_tag :div, class: 'progress', style: 'display: block' do %> 
+  <%= content_tag :div, title, class: 'progress-bar', aria: { valuenow: progress, valuemin: 0, valuemax: 100 }, style: "width: #{progress}%", role: 'progressbar' %>
+<% end %> 
+ 

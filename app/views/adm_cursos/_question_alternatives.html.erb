@@ -1,0 +1,11 @@
+<div class="question-view">
+  <%= render partial: 'show_question' %>
+</div>
+
+<% if @question.question_alternatives.present? %>
+  <% @question.questions_alternatives.order(:indice, :id).each do |k| %>
+    <%= render partial: 'show_alternative' %>
+  <% end %>
+<% end %>
+
+<%#= render partial: 'new_alternative' %>

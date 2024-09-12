@@ -1,0 +1,21 @@
+<div id="post-tab-lista">
+<%= content_tag :label, "#{@count} publicações na consulta.", class: 'data-count' %>
+<div class="tb-header">
+  <ul>
+    <li class="li-actions"></li>
+    <li class="titulo">Titulo</li>
+    <li class="identifier">Identificação</li>
+    <li class="published_in">Publicação</li>
+    <li class="changed_in">Alteração</li>
+    <li class="status">Status</li>
+    <li class="autor">Autor</li>
+  </ul>
+</div>
+<%= render partial: 'post_tab_lista_data' %>
+
+<div class="more-itens">
+  <%= render partial: 'lista_posts_more' %>
+</div>
+
+</div>
+

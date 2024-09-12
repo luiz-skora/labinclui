@@ -1,0 +1,22 @@
+<div class="frm frm-paginas" id="adm_paginas">
+  <%= content_tag :h6, far_icon('file', text: 'Páginas'), class: 'title' %>
+  &nbsp;
+  <div class="paginas">
+    <div class="tree-data">
+      <div class="tree">
+        <%= content_tag :div, class: "tree-filter", data: { url: adm_site_pages_tree_filter_path() } do |f| %>
+          <fieldset class="filtro-item nome">
+            <%= text_field_tag 'find[query]', '', placeholder: 'localizar', class: 'search-field', autocomplete: "off" %>
+            <%= content_tag :span, fa_icon('search'), class: 'insideico' %>
+          </fieldset>
+        <% end %>
+        <div id="paginas_tree">
+          <%= render partial: 'paginas_tree' %>
+        </div>
+      </div>
+      <div class="data" id="page-form-container">
+
+      </div>
+    </div>
+  </div>
+</div>

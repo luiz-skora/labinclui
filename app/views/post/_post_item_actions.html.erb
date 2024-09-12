@@ -1,0 +1,13 @@
+<div class="post-short-edit">
+  <div class="actions">
+    <%= content_tag :li, link_to('Editar', adm_post_post_edit_path(@post.id), data: { turbo: false}, target: "_top") %>
+    <%#= ,  data: { turbo_method: :patch} %>
+    <%= content_tag :li, link_to('Visualizar', adm_post_post_view_path(@post.id), target: "_blank" ) %>
+  </div>
+
+  <div class="form">
+    <%= render 'post_short_edit' %>
+  </div>
+
+
+</div>

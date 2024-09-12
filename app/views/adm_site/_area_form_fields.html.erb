@@ -1,0 +1,24 @@
+<% area_id = ( @area.id.present? ? @area.id : DateTime.now.to_f.to_s.sub('.', '')) %>
+<fieldset>
+  <%= f.label :nome, 'Nome da área:' %>
+  <%= f.text_field :nome, placeholder: 'Nome da área' %>
+  <%= label_tag :identifier, f.object.identifier, class: 'slug-field' %>
+  <div class="msg">&nbsp;
+    <%= error_tag @area, :nome %>
+  </div>
+</dieldset>
+
+<fieldset>
+  <%= f.label :content, 'Conteúdo:' %>
+  <%= tinymce_assets %>
+  <%= f.text_area :content , class: 'tinymce', data: { editor_id: "content-#{area_id}", controller: 'pmtiny', action: 'connect->pmtiny#connect update-columns@window->pmtiny#updateColumns', gallery_url: tiny_show_modal_path(), components_url: show_components_dialog_path(), columns_url: show_columns_dialog_path() }, rows: 60, cols: 120 %>
+
+  <div class="msg">&nbsp;
+    <%= error_tag @area, :content %>
+  </div>
+</fieldset>
+
+<fieldset class="btn-form">
+  <%= f.submit value: 'Salvar', data: { disable_with: 'Gravando...' } %>
+</fieldset>
+

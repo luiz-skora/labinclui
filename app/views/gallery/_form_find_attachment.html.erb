@@ -1,0 +1,9 @@
+<%= form_with model: @app, url: find_attachment_app_path(), remote: true, method: :patch, data: { remote: true }, class: 'form-find', html: { autocomplete: "off"} do |f| %>
+  <div class="lista-actions">
+    <fieldset class="filtro-item nome">
+      <%= label_tag 'find[query]', '&nbsp;'.html_safe %>
+      <%= text_field_tag 'find[query]', '', placeholder: 'localizar', class: 'search-field', autocomplete: "off" %>
+      <%= content_tag :span, fa_icon('search'), class: 'insideico' %>
+    </fieldset>
+  </div>
+<% end %>

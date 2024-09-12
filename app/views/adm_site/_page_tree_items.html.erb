@@ -1,0 +1,7 @@
+<% @pages.each do |page| %>
+  <%= content_tag :ul, class: 'ul-lnk page', id: "page-#{page.id}", data: { url: adm_site_page_edit_path(page.id) } do %>
+    <li class="space"></li>
+    <%= content_tag :li, page.nome, class: 'page-nome' %>
+  <% end %>
+<% end %>
+

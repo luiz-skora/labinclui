@@ -1,0 +1,17 @@
+<% selected ||= 'lista' %>
+<div class="frm adm-users">
+  <%= content_tag :h3, fas_icon('users-gear', text: 'Usuários'), class: 'title' %>
+  
+  <div class='actions'>
+    <ul class="adm-menu adm-users-menu">
+      <%= content_tag :li, 'Lista', data: { url: adm_user_list_path(), target: '.rect'}, class: "li-lnk lista#{selected == 'lista' ? ' selected' : ''}" %>
+      <%= content_tag :li, 'Adicionar', data: { url: adm_user_new_user_path(), target: '.rect'}, class: "li-lnk add#{selected == 'add' ? ' selected' : ''}" %>
+      
+    </ul>
+  </div>
+  
+  <div class="rect">
+    <%= render partial: part %>
+  </div>
+
+</div>

@@ -1,0 +1,26 @@
+<div class="frm frm-lista users"  id="adm_user_data">
+  
+  <p> Rever filtro e paginação. Usar frm-actions e action filter_lista de Posts como modelo </p>
+
+    <div class="frm-actions">
+      <%= form_tag adm_user_filter_lista_path(), method: :patch, remote: true, class: 'form-find', html: { autocomplete: "off"} do |f| %>
+        <div class="lista-actions">
+          <fieldset class="filtro-item nome">
+            <%= label_tag 'find[query]', 'Nome ou email:' %>
+            <%= text_field_tag 'find[query]', '', placeholder: 'localizar', class: 'search-field', autocomplete: "off" %>
+            <%= content_tag :span, fa_icon('search'), class: 'insideico' %>
+          </fieldset>
+          <fieldset class="filtro-item tipo">
+            <%= label_tag 'find[tipo]', 'Tipo' %>
+            <%= select_tag 'find[tipo]', user_level_for_select(nil), include_blank: true %>
+          </fieldset>
+        </div>
+      <% end %>
+    </div>
+  
+  
+  <div class="frm-tab-lista users">    
+    <%= render partial: 'user_tab_lista' %>
+  </div>
+  
+</div> 

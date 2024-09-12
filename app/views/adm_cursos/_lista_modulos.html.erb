@@ -1,0 +1,33 @@
+<% selected_modulo ||= nil %>
+<% selected_aula ||= nil %>
+<% @modulos.each do |k| %>
+  <%= content_tag :ul, class: "lnk-modulo#{selected_modulo == k.id ? ' selected' : ''}", id: "modulo-#{k.id}" do %>
+    <li class="expand-ico retract">
+      <%= far_icon('square-plus', class: 'retract') %>
+      <%= far_icon('square-minus', class: 'expand') %>
+    </li>
+    <%= content_tag :li, "#{k.nome}#{(k.ativo ? '' : ' (Inativo)')}", data: { url: adm_cursos_edit_modulo_path(k.curso.id, k.id)}, class: "modulo-nome tree-lnk #{k.ativo ? 'ativo' : 'inativo' }" %>
+    <ul class="aulas">
+      <li class='marca'>&#8627;</li>
+      
+      <li class="aula"> 
+        <%= content_tag :label do %>
+          <%= content_tag :span, 'Aulas', data: { url: adm_cursos_show_aulas_path(k.curso.id, k.id) }, class: 'label-lnk aulas' %>
+          <%= fas_icon('plus-circle', title: 'Adicionar Aula', class: 'add-aula label-lnk', data: { url: adm_cursos_new_aula_path(k.curso.id, k.id) }) %>
+        <% end %>
+      </li>
+      <li class="lista-aulas">
+        <%= render partial: 'lista_modulo_aulas', locals: {aulas: k.modulo_aula.order(:indice, :id), selected_aula: selected_aula } %>
+      </li>
+    <% end %> <%# ul modulo %>
+    <ul class="avaliacao">
+      <li class='marca'>&#8627;</li>
+      
+      <li>
+        <%= content_tag :label do %>
+          <%= content_tag :span, 'Avaliação do módulo', class: 'label-lnk modulo-evaluation', data: { url: adm_cursos_modulo_evaluation_path(@curso.id, k.id)} %>
+        <% end %>
+      </li>
+    </ul>
+  </ul>
+<% end %> 

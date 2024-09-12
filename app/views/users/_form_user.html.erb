@@ -1,0 +1,46 @@
+<%= form_with model: @user, url: { controller: :users, action: :create}, method: :patch, remote: true, data: { remote: true } do |f|%>
+  
+  
+  <%= invisible_captcha :subtitle %>
+  
+  <fieldset>
+    <%= f.label :nome, 'Seu nome:' %>
+    <%= f.text_field :nome, placeholder: 'Nome' %>
+    <div class="msg" id="nome">&nbsp;
+      <%= error_tag @user, :nome %>
+    </div>
+  </fieldset>
+  
+  <fieldset>
+    <%= f.label :email, 'email:' %>
+    <%= f.email_field :email, placeholder: 'email' %>
+    <div class="msg" id="email">&nbsp;
+      <%= error_tag @user, :email %>
+    </div>
+  </fieldset>
+    
+  <fieldset>
+    <%= f.label :nascimento, 'Data de nascimento:' %>
+    <%= f.date_field :nascimento %>
+    <div class="msg" id="email">&nbsp;
+      <%= error_tag @user, :nascimento %>
+    </div>
+  </fieldset>
+  
+  <fieldset class="checkbox-label">
+    <%= f.label :terms_acpetd do %>
+    <%= f.check_box :terms_acpetd %>
+      <%= 'Li e aceito os termos de uso' %>
+    <% end %>
+    <div class="msg" id="terms_acpetd">&nbsp;
+      <%= error_tag @user, :terms_acpetd %>
+    </div>
+  </fieldset>
+  
+  <fieldset class="btn-form">
+    <%= f.submit value: 'Cadastrar', data: { disable_with: 'Criando cadastro' } %>
+  </fieldset>
+  
+  
+  
+<% end %>  

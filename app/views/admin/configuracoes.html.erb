@@ -1,0 +1,19 @@
+<div class="frm frm-configuracoes">
+  <%= content_tag :h3, fas_icon('screwdriver-wrench', text: 'Configurações'), class: 'title' %>
+  &nbsp;
+  <div class="info">
+    Comando para importar xml do wordpress:<br/>
+    $ [caminho da applicação] rake wordpress:import'[arquivo-de-importação.xml]'
+
+  </div>
+  <div class="configuracoes">
+    <div class="tree-data">
+      <div class="tree">
+        <%= render partial: 'confs_tree' %>
+      </div>
+      <div class="data">
+      
+      </div>
+    </div>
+  </div>
+</div>

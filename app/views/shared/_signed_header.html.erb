@@ -1,0 +1,8 @@
+<div class="header-bar signed  row">
+  <div class="sn-title col-6"> 
+    <h6> <%= ConfGrupo.find_by(nome: 'Aplicação').conf.find_by( nome: 'app_title').valor rescue 'Não Definido' %> </h6>
+  </div>
+  <div class="sn-h-menu col-6">
+    <%= render partial: 'shared/user_header_actions' %>    
+  </div>
+</div>

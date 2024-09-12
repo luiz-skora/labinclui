@@ -1,0 +1,23 @@
+<% has_image = !fields[:image].blank? %>
+
+<%= content_tag :div, '', class: 'pm pm-image' do %>
+  <%# fields %>
+  <figure>
+    <%= content_tag (fields[:link].present? ? :a : :div), href: fields[:link], target: '_blank' do %>
+      <% if has_image %>
+        <% blob = ActiveStorage::Blob.find(fields[:image].to_i) %>
+        <%= content_tag :div, class: "image-container", style: "width: #{fields[:card_image_full_width] == '1' ? '100%' : fields[:width]+'px'}" do %>
+          <%= content_tag :div, class: 'card-image', style: "padding-top: #{fields[:aspect_ratio]}%;" do %>
+            <%= content_tag :div, '', class: 'pm_image', data: {controller: 'images', images_url_value: load_image_blob_path(blob.id) }, id: ("pm_image_#{blob.id}_#{'%.16f' % DateTime.now.to_f}").sub('.', '') do %>
+              <%= load_thumb(blob, (fields[:width].present? ? fields[:width] : blob.metadata['width']), nil) %>
+            <% end %> <!-- card-image -->
+          <% end %> <!-- image container -->
+        <% end %> <!-- if -->
+      <% end %> <!-- link -->
+    <% end %>
+    <figcaption>
+      <%= fields[:label] %>
+    </figcaption>
+  </figure>
+<% end %> <!-- pm-image -->
+

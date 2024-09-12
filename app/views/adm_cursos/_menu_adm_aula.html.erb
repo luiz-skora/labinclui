@@ -1,0 +1,19 @@
+<ul class="aula-menu">
+  <%= content_tag :li, "#{@aula.nome}", class: 'menu label-lnk aula', data: {url: adm_cursos_edit_aula_path(@curso.id, @modulo.id, @aula.id)}  do %>
+    <%= content_tag :div, "#{@aula.nome}", title: @aula.nome, class: 'aula-nome' %>
+  <% end %>
+  <%= content_tag :li, 'Anexos', class: 'menu label-lnk anexos', data: { url: adm_cursos_aula_anexos_path(@curso.id, @modulo.id, @aula.id)} %>
+
+  <%= content_tag :li, 'Conteúdo', class: 'menu nav-item menu-action auto action paginas' do %>
+    <%= link_to 'Conteúdo', '#', class: 'nav-link dropdown-toggle', id: 'paginas-menu', data: { bs_toggle: 'dropdown'}  %>
+    <ul class="paginas-menu dropdown-menu" id="submenu-action" aria-labelledby="paginas-menu">
+      <%= content_tag :li, 'Nova Página', class: 'label-lnk', data: { url: adm_cursos_new_pagina_path(@curso.id, @modulo.id, @aula.id)} %>
+      <% if @paginas.present? && @paginas.count > 0 %>
+        <% @paginas.each_with_index do |k, i| %>
+          <%= content_tag :li, "Página - #{i + 1}", class: 'label-lnk', data: { url: adm_cursos_show_pagina_path(@curso.id, @modulo.id, @aula.id, k.id)} %>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= content_tag :li, 'Exercícios', class: 'menu label-lnk exercicios', data: { url: adm_cursos_aula_evaluation_path(@curso.id, @modulo.id, @aula.id) } %>
+</ul>

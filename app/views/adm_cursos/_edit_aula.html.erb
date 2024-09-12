@@ -1,0 +1,27 @@
+<div class="frm frm-new-aula">
+  <%= content_tag :h6, "#{@aula.nome}", class: 'title' %>
+  
+  <%= form_with model: @aula, url: adm_cursos_update_aula_path(@curso.id, @modulo.id, @aula.id), method: :post, html: { autocomplete: "off" } do |f| %>
+  
+    <%= render partial: 'aula_fields', locals: { f: f } %>
+
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Salvar', data: { disable_with: 'Gravando Aula...' } %>
+      <div class="message">
+        <%= flash[:msg].present? ? "#{flash[:msg]}" : '' %>
+      </end>
+    </fieldset>
+    <% @aula.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+    
+    <%= content_tag :div, class: "label-lnk-confirm remove", data: { url: adm_cursos_remove_aula_path(@curso.id, @modulo.id, @aula.id), message: 'Esta ação removerá a aula e não poderá ser desfeita. Deseja continuar?' } do %>
+      <%= fas_icon('trash-can', text: 'Remover Aula') %>
+    <% end %>
+  
+    
+  <% end %>
+  
+  
+  
+</div>

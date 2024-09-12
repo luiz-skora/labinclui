@@ -1,0 +1,26 @@
+<%= content_tag :div, class:"navigation-bar #{fields[:navigation_bar_position] == 'abaixo_interno' ? 'inside bottom' : '' } #{fields[:navigation_bar_position]  == 'acima_interno' ? 'inside top' : ''}" do %>
+  <div class="nav-items">
+    <% if fields[:navigation_bar] == 'pontos' %>
+      <% posts.each_with_index do |dot, i| %>
+        <div class="dot-container">
+          <%= content_tag :div, class: "nav-dot #{i == 0 ? ' active' : ''}", id: "item-#{dot.id}", data: { index: i} do %>
+            <%#= fas_icon('circle') %>
+
+            <svg class="svg-inline--fa fa-circle" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256z"></path></svg>
+
+
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+    <% if fields[:navigation_bar] == 'miniaturas' %>
+      <% posts.each_with_index do |mini, i| %>
+        <%= content_tag :div, '', class: "nav-dot #{i == 0 ? ' active' : ''}", id: "item-#{mini.id}", data: { index: i} do %>
+          <%= content_tag :div, class: "item-container#{i == 0 ? ' f' : ''} #{i == posts.count - 1 ? ' l' : ''}", data: { url: featured_image_post_path(mini.id)}  do %>
+            <%# 'miniatura' %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

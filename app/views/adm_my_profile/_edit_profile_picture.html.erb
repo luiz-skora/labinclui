@@ -1,0 +1,15 @@
+<div id="edit-profile-picture">
+  <%= content_tag :fieldset, class: 'picture', data: { url: adm_my_profile_gallery_modal_path(@profile.identifier), target: adm_my_profile_change_profile_picture_path(@profile.identifier), att_type: 'image', device: current_visit.device_type } do  %>
+    <div class="profile-picture edit">
+      <div class="picture">
+        <%= show_profile_picture(@profile, 250) %>
+      </div>
+      <div class="panel-edit">
+        <div class="info">
+          <%= fas_icon('camera-retro') %>
+          <%= content_tag :h6, "Clique para editar" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

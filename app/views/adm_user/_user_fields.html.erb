@@ -1,0 +1,39 @@
+    <div class="row">
+      <fieldset class="col-6">
+        <%= f.label :nome, 'Nome do usuário:' %>
+        <%= f.text_field :nome, placeholder: 'Nome' %>
+        <div class="msg" id="nome">&nbsp;
+          <%= error_tag @user, :nome %>
+        </div>
+      </fieldset>
+  
+      <fieldset class="col-6">
+        <%= f.label :email, 'email:' %>
+        <%= f.email_field :email, placeholder: 'email' %>
+        <div class="msg" id="email">&nbsp;
+          <%= error_tag @user, :email %>
+        </div>
+      </fieldset>
+    </div>
+    
+    <div class="row">
+      <fieldset class="col-4">
+        <%= f.label :nascimento, 'Data de nascimento:' %>
+        <%= f.date_field :nascimento %>
+        <div class="msg" id="email">&nbsp;
+          <%= error_tag @user, :nascimento %>
+        </div>
+      </fieldset>
+    
+      <fieldset class="col-4">
+        <%= f.label :user_level, 'Nível de acesso' %>
+        <%= f.select :user_level, user_level_for_select(@user.user_level), prompt: 'Selecione', include_blank: false %>
+        <div class="msg" id="user_level">&nbsp;
+          <%= error_tag @user, :user_level %>
+        </div>
+      </fieldset>
+      
+      <fieldset class="col-4"></fieldeset>
+      
+    </div>
+ 

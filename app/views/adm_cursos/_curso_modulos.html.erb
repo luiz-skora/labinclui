@@ -1,0 +1,28 @@
+<div class="frm curso-modulos">
+  <%= content_tag :h7, fas_icon('angles-left', text: 'Dados do Curso'), class: 'label-lnk subtitle', data: { url: adm_cursos_edit_curso_path(@curso.id)} %>
+  <div class="row">
+    <div class="col-9">
+      <%= content_tag :h6, "#{@curso.nome} - Módulos", class: 'title' %>
+    </div>
+    <div class="col-3 curso-status">
+
+    </div>
+  
+  <div class="frm adm-modulos row">
+    <div class="modulos-tree col-3">
+      <div class="modulos-action">
+        <%= content_tag :h6, 'Módulos', class: 'ac-title' %>
+        <%= content_tag :h4, far_icon('square-plus'), class: 'ac-title add label-lnk', title: 'Adicionar Módulo', data: { url: adm_cursos_add_modulo_path(@curso.id)} %>
+      </div>
+      <div class="lista" id="lista_modulos">
+        <%= render partial: 'lista_modulos' %>
+      </div>
+    </div>
+    <div class="modulo-edit col-9" id="modulo_edit">
+      <% if @curso.curso_modulo.count == 0 %>
+        <% @modulo = @curso.curso_modulo.build %>
+        <%= render partial: 'new_modulo' %>
+      <% end %>
+    </div>
+  </div>
+</div>

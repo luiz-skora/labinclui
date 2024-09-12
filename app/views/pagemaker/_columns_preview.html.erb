@@ -1,0 +1,15 @@
+<% fields ||= @fields %>
+
+<%= fields %>
+
+<% cols = fields[:colunas].to_i %>
+
+<%= content_tag :div, class: "pm-row row #{fields[:classe]} #{fields[:alinhamento]}" do %>
+  <% for col in 1..cols do %>
+    <% k = "col_#{col}" %>
+    <% w = fields.stringify_keys.key?(k) ? fields.stringify_keys[k] : 100 / cols %>
+    <%= content_tag :div, class: "pm-col pm-col-#{col}", style: "width: #{w}%" do %>
+      <div class="col-preview"><%= "#{w}%" %></div>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,28 @@
+
+<div class="row">
+  <fieldset class="col-4">
+    <%= f.label :indice, 'Ordem:' %>
+    <%= f.number_field :indice, min: 1, max: @question.question_alternative.count + 1, step: 1 %>
+    <div class="msg">&nbsp;
+      <%= error_tag @alternative, :indice %>
+    </div>
+  </fieldset>
+  
+  <fieldset class="col-6">
+    <label>&nbsp;</label>
+    <%= f.label :correta, 'Alternativa verdadeira', class: 'checkbox-label' do %>
+      <%= 'Alternativa verdadeira' %>
+      <%= f.check_box :correta %>
+    <% end %>
+      <div class="msg">&nbsp;
+      <%= error_tag @alternative, :correta %>
+    </div>
+  </fieldset>
+</div>
+
+<div class="row">
+<fieldset class="col-12">
+  <%= f.label :alternative, 'Alternativa' %>
+  <%= f.rich_text_area :alternative, class: 'trix-content question-alternative' %>
+</fieldset>
+</div>

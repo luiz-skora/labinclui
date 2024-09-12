@@ -1,0 +1,46 @@
+ 
+<% indice = 0 %>
+          <% @categories_post.each_with_index do |cp, i | %>
+            <%= label_tag "post[category_post][#{f.object.id}][#{i}]", '', class: 'checkbox-label' do %>
+              <%= check_box_tag "post[category_post][#{f.object.id}][#{i}]", cp.id, true %>
+              <%= cp.nome %>
+              <% indice = i %>
+            <% end %>
+          <% end %>
+
+          <% @other_categories.each_with_index do |c, ni| %>
+            <%= label_tag "post[category_post][#{f.object.id}][#{indice + 1 + ni}]", '', class: 'checkbox-label' do %>
+              <%= check_box_tag "post[category_post][#{f.object.id}][#{indice + 1 + ni}]", c.id, false %>
+              <%= c.nome %>
+            <% end %>
+          <% end %>
+
+
+*********
+
+<fieldset class="post-tags col-6" data-post-id="<%= @post.id %>">
+        <%= f.label :tag_post, 'Tags:' %>
+        <%= content_tag :div, class: 'filtro-tags', data: { create_url: adm_post_create_tag_path(), post_id: @post.id } do %>
+          <%= text_field_tag 'find_tag', '', placeholder: 'localizar', class: 'search-field', autocomplete: "off", data: { post_id: @post.id } %>
+          <%= content_tag :span, fa_icon('search'), class: 'insideico' %>
+          <%= fas_icon('spin', animation: 'spinner', class: 'loading') %>
+          <div class="tags" style="display: none;">
+            <ul class="all-tags" style="display: block">
+
+            </ul>
+          </div>
+        <% end %>
+        <div class="post-tags-box" id="tags-post-<%= "#{@post.id}" %>">
+          <ul class="post-tags">
+            <% @tags_post.each_with_index do |tp, i| %>
+              <%= content_tag :li, class: 'post-tag' do %>
+                <%= label_tag "post[tag_post][#{f.object.id}][#{i}]", '', class: 'checkbox-label' do %>
+                  <%= check_box_tag "post[tag_post][#{f.object.id}][#{i}]", tp.id, true %>
+                  <%= "#{tp.nome}" %>
+                  <%= far_icon('circle-xmark', class: 'remove-tag') %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      </fieldset>

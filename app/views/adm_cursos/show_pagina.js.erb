@@ -1,0 +1,32 @@
+
+$('.frm-modulo .tabs-title li').removeClass('selected')
+$('.frm-modulo .tabs-title li.aula').addClass('selected')
+
+$('.frm-modulo .tabs-area').html('<%= j render "show_aula" %>')
+
+$('.frm-modulo .adm-aula-menu li.menu').removeClass('selected')
+$('.frm-modulo .adm-aula-menu li.menu.paginas').addClass('selected')
+
+$('.modulos-tree .modulo-evaluation').removeClass('selected')
+
+$('.modulos-tree .label-aula').removeClass('selected')
+$('<%= j ".modulos-tree #aula-#{@aula.id}.label-aula" %>').addClass('selected')
+
+
+$('.frm-modulo .tabs-area .adm-aula').html('<%= j render "show_pagina" %>') 
+ 
+$(document).find('.trix-content .doc-container').each(function(){
+  
+  if($(this).hasClass('retrato') ) {
+    $(this).height($(this).width() * 1.36 )
+  }
+  if($(this).hasClass('paisagem') ) {
+    $(this).height($(this).width() * .72 )
+  }
+
+  
+  
+})
+
+
+

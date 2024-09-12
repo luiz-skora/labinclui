@@ -1,0 +1,17 @@
+$('.login frm-login .mask').show()
+
+  $('.login .frm-login .mask').css('display', 'flex')
+  setTimeout(function(){
+    $('.login').html('<%= j render "user_sessions/login" %>')  
+    $('.login .frm-login .mask').css('display', 'flex')
+    setTimeout(function(){
+      $('.login .frm-login .mask').hide()
+    }, 2000)
+  }, 2000)
+
+
+
+
+/*
+$('.login .frm-login .mask').append('<div class="mask">)
+*/

@@ -1,0 +1,7 @@
+<% k ||= @user %>
+<%= content_tag :li, k.nome, class: 'nome', title: k.nome %>
+<%= content_tag :li, k.identifier, class: 'identifier', title: k.identifier %>
+<%= content_tag :li, k.coordenador.nome, class: 'coordenador', title: k.coordenador.nome %>
+<%= content_tag :li, k.tipo, class: 'tipo', title: k.tipo %>
+<%= content_tag :li, k.horas, class: 'horas', tittle: k.horas %>
+<%= content_tag :li, (k.ativo ? far_icon('square-check') : far_icon('square')), class: "ativo #{k.ativo ? 'green' : 'red' }" %>

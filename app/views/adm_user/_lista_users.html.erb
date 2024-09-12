@@ -1,0 +1,5 @@
+<% @users.each do |k| %>
+  <%= content_tag :ul, data: { url:  adm_user_show_path(k.id) }, id: k.id, class: 'ul-lnk' do %>
+    <%= render partial: 'lista_user', locals: { k: k } %>
+  <% end %>
+<% end %>

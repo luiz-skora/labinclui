@@ -1,0 +1,12 @@
+<% cols = @fields[:colunas].to_i %>
+<% for col in 1..cols do %>
+  <%= content_tag :div,  class: "frm column-data", data: { column: "column-#{col}" } do %>
+    <fieldset>
+      <%= label_tag "col_#{col}", "Coluna #{col} largura (%):" %>
+      <% col_n = ("col_#{col}").to_sym %>
+      <%= "#{col_n} = #{@fields[col_n]}" %>
+      <%= number_field_tag "col_#{col}", "#{@fields[col_n].present? ? @fields[col_n] : 100 / cols}", within: 1..100, class: 'field' %>
+
+    </fieldset>
+  <% end %>
+<% end %>

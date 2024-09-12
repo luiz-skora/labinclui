@@ -1,0 +1,10 @@
+$('.over-modal-window').remove()
+
+$('<%= j "##{@image_field}.select-image"%>').attr('data-blob', '<%= @blob.id %>')
+$('<%= j "##{@image_field}.select-image .field"%>').val( '<%= @blob.id %>')
+
+$('<%= j "##{@image_field}.select-image .add-img-lnk"%>').addClass('present')
+
+$('<%= j "##{@image_field}.select-image .image"%>').html('<%= load_thumb(@blob, 170, 300) %>')
+
+$('<%= j "##{@image_field}.select-image"%>').closest('.setup-form').trigger('change')

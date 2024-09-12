@@ -1,0 +1,9 @@
+<div class="lgpd-message" >
+  <% msg = ConfGrupo.find_by(nome: 'lgpd').conf.find_by(nome: 'message').valor rescue '<p>Utilizamos cookies e outras tecnologias. Ao continuar navegando você concorda com nossos termos</a>.</p>' %>
+  <div class="lgpd-container">
+    <%= content_tag :div, raw(msg), class: 'msg' %>
+    <%= content_tag :div, class: 'btn' do %>
+      <%= content_tag :div, 'Concordo', class: 'label-lgpd-btn', data: { url: lgpd_message_accept_path() } %>
+    <% end %>
+  </div>
+</div>

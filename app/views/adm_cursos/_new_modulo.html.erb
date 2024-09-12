@@ -1,0 +1,17 @@
+<div class="frm frm-modulo">
+  <%= content_tag :h6, 'Novo Módulo', class: 'title' %>
+  
+  <%= form_with model: @modulo, url: adm_cursos_create_modulo_path(@curso), method: :post, html: { autocomplete: "off" } do |f| %>
+    <%= render partial: 'modulo_fields', locals: {f: f} %>
+    
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Criar Módulo', data: { disable_with: 'Gravando Módulo...' } %>
+    </fieldset>
+    
+    <% @modulo.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+
+
+  <% end %>  
+</div>

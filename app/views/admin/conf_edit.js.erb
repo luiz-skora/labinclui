@@ -1,0 +1,5 @@
+$('.frm-configuracoes .tree-data .data').html('<%= j render "admin/conf_edit" %>')
+
+$('#configuracoes_tree .tree-item, #configuracoes_tree .sub-item').removeClass('selected')
+$('<%= j "#configuracoes_tree #grupo-#{@grupo.id}.tree-item" %>').addClass('selected')
+$('<%= j "#configuracoes_tree #conf-#{@conf.id}.sub-item" %>').addClass('selected')

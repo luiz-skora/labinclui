@@ -1,0 +1,4 @@
+<%= content_tag :div, '', class: "pm pm-data mceItem-pm preview #{fields[:alignment]}", style: "font-size: #{fields[:font_size]}px; color: #{fields[:font_color]}; background-color: #{fields[:background_color]}" do %>
+  <% locality = fields[:locality_show] == '1' ? "#{fields[:locality]}, " : '' %>
+  <%= "#{locality} #{l(Date.today, format: fields[:format].to_sym)}" %>
+<% end %>

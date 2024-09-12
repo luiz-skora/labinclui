@@ -1,0 +1,16 @@
+<div class="frm frm-menu" id="form_menu">
+  <%= content_tag :h6, 'Novo menu', class: 'title' %>
+
+  <%= form_with model: @menu, url: adm_site_menu_create_path(), method: :patch, data: { turbo_method: :patch }, html: { autocomplete: "off" } do |f| %>
+    <%= render partial: 'menu_form_fields', locals: { f: f } %>
+
+    <% @menu.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+
+    <% if flash[:msg].present? %>
+      <%= content_tag :div, flash[:msg], class: 'message' %>
+    <% end %>
+
+  <% end %>
+</div>

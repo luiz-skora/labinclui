@@ -1,0 +1,13 @@
+<%= content_tag :div, '', class: 'pm pm-ad ' do %>
+  <% ad = Ad.find(fields[:ads].to_i) rescue nil %>
+  <% if ad.present? %>
+    <% if ad.tipo == 'Codigo' %>
+      <%= raw ad.code %>
+    <% else %>
+      <%= ad.content %>
+    <% end %>
+  <% else %>
+    <p style="text-align: center;"> ads </p>
+  <% end %>
+<% end %>
+

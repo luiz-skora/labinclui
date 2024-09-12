@@ -1,0 +1,37 @@
+<% k ||= @question %>
+<% case k.tipo %>
+<% when 'Múltipla Escolha' %>
+  <div class="row">
+  <%= content_tag :h7, 'Alternativas:', class: 'title-no-margin col-6' %>
+  <%= content_tag :div, 'Adicionar Alternativa', data: { url: adm_cursos_new_alternative_path(@curso.id, @modulo.id, (@aula.present? ? @aula.id : -1), @evaluation.id, k.id) }, class: 'label-lnk new-alternative col-6', style: "display: flex; justify-content: flex-end;" %>
+  </div>
+<% when 'Somatória' %>
+  <div class="row">
+  <%= content_tag :h7, 'Somatórias:', class: 'title-no-margin col-6' %>
+  <%= content_tag :div, 'Adicionar Alternativa', data: { url:adm_cursos_new_alternative_path(@curso.id, @modulo.id, (@aula.present? ? @aula.id : -1), @evaluation.id, k.id) }, class: 'label-lnk new-alternative col-6', style: "display: flex; justify-content: flex-end;" %>
+  </div>
+<% when 'Discursiva' %>
+  <div class="row discursiva">
+    <% if k.question_alternative.where(is_discursiva: true).present? %>
+      <% alt = k.question_alternative.where(is_discursiva: true).first %>
+      <% question_params =  adm_cursos_edit_alternative_path(@curso.id, @modulo.id, (@aula.present? ? @aula.id : -1), @evaluation.id, k.id, alt.id) %>
+    <% else %>
+      <% question_params =  adm_cursos_new_alternative_path(@curso.id, @modulo.id, (@aula.present? ? @aula.id : -1), @evaluation.id, k.id, )  %>
+    <% end %>
+
+    <div class="parametros col-6" id="<%= "show-alternativas-#{k.id}" %>">
+      <%= render partial: 'show_alternative', locals: { k:  alt } %>
+    </div>
+
+    <div class="col-6 discursiva-actions">
+      <%= content_tag :label, fas_icon('pen-to-square', text: 'Editar Parâmetros'), data: {  url: question_params }, class: 'label-lnk new-alternative' %>
+    </div>
+  </div>
+
+
+  
+
+  
+  
+
+<% end %> 

@@ -1,0 +1,10 @@
+<% @aula.attachments.order(:created_at).each do |k| %>
+  <ul class="anexos" id="<%= "attachment-#{k.id}"%>">
+    <li class="aula-anexo">
+      <%= link_to(k.blob.filename.to_s, rails_blob_path(k), target: "_blank", title: k.blob.filename.to_s ) %>
+    </li>
+    <%= content_tag :li, class: 'remove-attachment', data: { url: adm_cursos_remove_attachment_path(@curso.id, @modulo.id, @aula.id, k.id)} do %>
+      <%= fas_icon('circle-xmark', title: 'Remover anexo') %>
+    <% end %>
+  </ul>
+<% end %>

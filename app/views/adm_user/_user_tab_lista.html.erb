@@ -1,0 +1,17 @@
+<%= content_tag :label, "#{@count} usuários na consulta.", class: 'data-count' %>
+<div class="tb-header">
+  <ul>
+    <li class="nome">Nome</li>
+    <li class="identifier">Identificação</li>
+    <li class="email">Email</li>
+    <li class="nasc">Nascimento</li>
+    <li class="tipo">Tipo</li>
+    <li class="confirm">Ativo</li>
+  </ul>
+</div>
+<div class="tb-data">
+  <%= render partial: 'lista_users' %>
+</div>
+<div class="more-itens">
+  <%= render partial: 'lista_users_more' %>
+</div> 

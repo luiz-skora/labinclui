@@ -1,0 +1,9 @@
+<% Category.where(parent_id: cat.id).order(:nome).each do |child| %>
+  <%= content_tag :ul, class: "ul-cat level-1 label-lnk", data: {url: adm_category_edit_path(child.id)}, id: "category-#{child.id}" do %>
+    <%= content_tag :li, '', class: 'space' %>
+    <%= content_tag :li, "- #{child.nome}", class: 'cat-nome', title: cat.nome %>
+    <% publicacoes = child.posts.count %>
+    <%= content_tag :li, "#{publicacoes}", class: 'cat-posts', title: "Publicações #{publicacoes}" %>
+  <% end %>
+  <%= render partial: 'category_tree_items_child', locals: { cat: child } %>
+<% end %>

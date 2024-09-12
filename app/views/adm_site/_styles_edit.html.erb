@@ -1,0 +1,25 @@
+<div id="form_styles">
+<%= form_with model: @style, url: adm_site_styles_update_path(@app.id), method: :patch, data: { turbo_method: :patch }, html: { autocomplete: "off "} do |f| %>
+
+  <fieldset>
+    <%= f.label :styles, 'Folha de Estilos:' %>
+    <%= f.text_area :styles, class: 'textarea' %>
+    <div class="msg">&nbsp;
+      <%= error_tag @style, :styles %>
+    </div>
+  </fieldset>
+
+  <fieldset class="btn-form">
+    <%= f.submit value: 'Salvar', data: { disable_with: 'Gravando...' } %>
+  </fieldset>
+
+  <% @style.errors.messages.each do |error| %>
+    <%= content_tag :div, "#{error}", class: 'msg' %>
+  <% end %>
+
+  <% if flash[:msg].present? %>
+    <%= content_tag :div, flash[:msg], class: 'message' %>
+  <% end %>
+
+<% end %>
+</div>

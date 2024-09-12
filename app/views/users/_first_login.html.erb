@@ -1,0 +1,11 @@
+<div>
+  <%= content_tag :h6, 'Você completou seu cadastro!', class: 'title' %>
+  <fieldset>
+    <%= content_tag :label, 'Preencha suas credenciais para entrar.' %>
+  </fieldset>
+  <div class="login">
+    <%= render partial: 'user_sessions/login' %>
+  </div>
+</div>
+
+

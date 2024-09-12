@@ -1,0 +1,15 @@
+<% selected ||= 'real_time' %>
+<div class="frm frm-stats adm-site">
+  <%= content_tag :h3, fas_icon('chart-bar', text: 'Estatísticas'), class: 'title'%>
+
+  <div class="actions">
+    <ul class="adm-menu stats-menu">
+      <%= content_tag :li, 'Tempo real', data: { url: stats_real_time_path(), target: '.rect'}, class: "li-lnk real_time#{selected == 'real_time' ? ' selected' : ''}" %>
+      <%= content_tag :li, 'Histórico', data: { url: stats_history_path(), target: '.rect'}, class: "li-lnk history#{selected == 'history' ? ' selected' : ''}" %>
+    </ul>
+  </div>
+
+  <div class="rect">
+    <%= render partial: 'stats_real_time' %>
+  </div>
+</div>

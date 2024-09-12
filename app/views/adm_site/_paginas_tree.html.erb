@@ -1,0 +1,8 @@
+
+  <div class="action">
+    <%= content_tag :h6, 'Páginas', class: 'ac-title' %>
+    <%= content_tag :h4, far_icon('square-plus'), class: 'ac-title add label-lnk', title: 'Adicionar Página', data: { url: adm_site_page_new_path()} %>
+  </div>
+  <div class="tree-itens" id="adm_pages_tree_itens">
+    <%= render partial: 'page_tree_items' %>
+  </div>

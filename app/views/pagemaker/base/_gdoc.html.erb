@@ -1,0 +1,14 @@
+<% has_gdoc = !fields[:document_id].blank? %>
+<%= content_tag :div, '', class: 'pm pm-gdoc' do %>
+  <%= content_tag :div, class: 'gdoc' do %>
+    <%= content_tag :div, class: 'gdoc-container' do %>
+      <%= content_tag :div,  class: 'ic', style: "padding-top: #{fields[:aspect_ratio]}%" do %>
+        <% if has_gdoc %>
+          <%= content_tag :iframe, '', src: google_doc_view_path(fields[:document_id]), class: 'gdoc-viewer', width: '100%', height: '100%'  %>
+        <% end %>
+        <div class="preview-mask"></div>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+

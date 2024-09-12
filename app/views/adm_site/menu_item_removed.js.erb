@@ -1,0 +1,9 @@
+var msg = '<%= @msg %>'
+
+if (msg.length > 0 ) {
+  alert(msg)
+} else {
+  $('.frm-menu-items .data').html('<%= j render "menu_item_edit" %>')
+  $('.frm-menu-items .tree .tree-itens').html('<%= j render "menu_itens_tree_items" %>')
+}
+

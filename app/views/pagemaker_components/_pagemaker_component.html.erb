@@ -1,0 +1,15 @@
+<% component ||= pagemaker_component ||= @component_data %>
+<% pm = Pagemaker.find_by(identifier: component.pagemaker_identifier) %>
+
+<%= 'Aqui deve aparecer um edit_pagemaker_component' %>
+
+<%= content_tag :div, class: 'trix-component' do %>
+  <%= render partial: "#{pm.html_base}_preview", locals: { fields: component.fields.symbolize_keys } %>
+
+  <%= content_tag :div, class: 'pm-component-edit' do %>
+    <ul class="pm-edit-buttons">
+      <%= content_tag :li, icon_svg_edit, title: 'Editar', class: 'pm-edit-lnk', data: { url: pagemaker_edit_setup_component_path(pm.id), fields: component.fields.to_json, component: pm.identifier} %>
+    </ul>
+  <% end %>
+<% end %>
+

@@ -1,0 +1,25 @@
+<div class="label-filtro filtro-tag row">
+  <%= content_tag :div, class: 'label-filtro filtro-tag row', data: { 'create_url': adm_post_create_tag_path(), filter_url: adm_post_filter_tags_path() } do %>
+    <div class="col-5">
+      <%= f.label :tag_post, 'Tags:' %>
+    </div>
+    <div class="col-7 tags">
+      <%= text_field_tag 'find_tag', '', placegolder: '', class: 'search-field', autocomplete: "off" %>
+      <%= content_tag :span, fa_icon('search'), class: 'insideico' %>
+      <%= fas_icon('spinner', animation: 'spin', class: 'loading') %>
+      <div class="find-tags-popup" style="display: none;">
+        <ul class="all-tags"></ul>
+      </div>
+    </div>
+  <% end %>
+  <div class="post-tags-box">
+    <ul class="tags">
+      <%= f.collection_check_boxes(:tag_ids, @post.tags.order(:nome), :id, :nome) do |b| %>
+        <%= content_tag :li, class: 'tag checkbox-label' do %>
+          <%= b.check_box id: "post_tag_#{post_id}_#{b.object.id}" %>
+          <%= label_tag '', b.object.nome  %>
+          <%= label_tag "post_tag_#{post_id}_#{b.object.id}",  far_icon('times-circle', class: 'remove-tag', id: "remove-tag-#{post_id}-#{b.object.id}")   %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>

@@ -1,0 +1,4 @@
+<%= content_tag :figure, data: { controller: 'loadatt',  att: @blob.signed_id} do %>
+  <%= image_tag(@blob, alt: @blob.filename.to_s, width: @blob.metadata[:width], height: @blob.metadata[:height]) %>
+  <%= content_tag :figcaption, @blob.filename.to_s %>
+<% end %>

@@ -1,0 +1,72 @@
+.main-pagemaker {
+  height: 100%;
+  .pagemaker {
+    height: calc(100% - 30px);
+    .setup {
+      height: 100%;
+      .setup-component {
+        height: calc(100% - 40px);
+      }
+    }
+  }
+}
+.setup-component, .setup-columns {
+  padding: 0 8px;
+  .setup-widget-col {
+    max-height: 100%;
+    flex: 0 0 auto;
+    padding: 8px;
+    &.form { width: 350px; }
+    &.preview { width: calc(100% - 350px); }
+    .builder_info {
+      margin: 10px;
+      border-radius: 6px;
+      color: #666;
+      box-shadow: 0 0 3px #ccc;
+      padding: 6px;
+    }
+  }
+  .setup-form {
+    height: 100%;
+    overflow-y: auto;
+    fieldset {
+      padding: 6px 0;
+    }
+    .frm.column-data {
+      width: calc(100% - 24px)
+    }
+  }
+  .setup-preview {
+    padding: 8px;
+    height: calc(100% - 100px);
+    overflow: auto;
+
+    .pm-row {
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      .pm-col .col-preview {
+        border: 1px dashed #ddd;
+      }
+    }
+  }
+}
+
+trix-component {
+  .site-logo {
+    overflow: hidden;
+  }
+}
+
+.pm-row.preview {
+  border: 1px dashed teal;
+  padding: 6px 3px;
+
+  .pm-col {
+    padding: 0 3px;
+    .col-preview {
+      padding: 6px;
+      border: 1px dashed navy;
+      text-align: center;
+    }
+  }
+}

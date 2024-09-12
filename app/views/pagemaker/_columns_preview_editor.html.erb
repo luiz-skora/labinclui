@@ -1,0 +1,16 @@
+<% fields ||= @fields %>
+
+<% cols = fields[:colunas].to_i %>
+
+
+<%= content_tag :div, class: "pm-row preview #{fields[:classe]} #{fields[:alinhamento]}", id: "pm-row-#{DateTime.now.to_f.to_s.tr('.', '')}", data: { fields: fields.to_json} do %>
+  <% for col in 1..cols do %>
+    <% k = "col_#{col}" %>
+    <% w = fields.stringify_keys.key?(k) ? fields.stringify_keys[k] : 100 / cols %>
+    <%= content_tag :div, class: "pm-col pm-col-#{col}", style: "width: #{w}%", data: { mce_style: "width: #{w}%"} do %>
+      <div class="col-preview e-pm"><p><br data-mce-bogus="1"></p></div>
+    <% end %>
+  <% end %>
+<% end %>
+
+

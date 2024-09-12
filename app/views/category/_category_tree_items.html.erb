@@ -1,0 +1,11 @@
+<div class="tree-itens" id="adm_categories_itens">
+  <% @cats.each do |cat| %>
+    <%= content_tag :ul, class: "ul-cat level-0 label-lnk", data: {url: adm_category_edit_path(cat.id)}, id: "category-#{cat.id}" do %>
+      <%= content_tag :li, '', class: 'space' %>
+      <%= content_tag :li, cat.nome, class: 'cat-nome', title: cat.nome %>
+      <% publicacoes = cat.posts.count %>
+      <%= content_tag :li, "#{publicacoes}", class: 'cat-posts', title: "Publicações #{publicacoes}" %>
+    <% end %>
+    <%= render partial: 'category_tree_items_child', locals: { cat: cat } %>
+  <% end %>
+</div>

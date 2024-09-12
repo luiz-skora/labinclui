@@ -1,0 +1,8 @@
+<% @areas.each do |area| %>
+  <%= content_tag :ul, class: 'ul-lnk area', id: "area-#{area.id}", data: { url: adm_site_area_edit_path(area.id) } do %>
+    <li class="space"></li>
+    <%= content_tag :li, area.nome, class: 'area-nome' %>
+  <% end %>
+<% end %>
+
+

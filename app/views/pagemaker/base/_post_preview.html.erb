@@ -1,0 +1,6 @@
+<% @post ||= Post.order(published_in: :desc).first %>
+<%= content_tag :div, class: "pm pm-post preview #{fields[:class].present? ? fields[:class] : ''}" do %>
+  <%= content_tag :div, id: "article post-#{@post.id}", class: "show-post" do %>
+    <%= render partial: "pagemaker/base/post_layout/#{fields[:layout]}_preview", locals: { fields: fields,  post: @post} %>
+  <% end %>
+<% end %>

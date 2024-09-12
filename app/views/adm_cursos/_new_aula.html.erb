@@ -1,0 +1,17 @@
+<div class="frm frm-new-aula">
+  <%= content_tag :h6, 'Nova Aula', class: 'title' %>
+  
+  <%= form_with model: @aula, url: adm_cursos_create_aula_path(@curso.id, @modulo.id), method: :post, html: { autocomplete: "off" } do |f| %>
+  
+    <%= render partial: 'aula_fields', locals: { f: f } %>
+        
+    <fieldset class="btn-form">
+      <%= f.submit value: 'Criar Aula', data: { disable_with: 'Gravando Aula...' } %>
+    </fieldset>
+  
+    <% @aula.errors.messages.each do |error| %>
+      <%= content_tag :div, "#{error}", class: 'msg' %>
+    <% end %>
+  
+  <% end %>
+</div>

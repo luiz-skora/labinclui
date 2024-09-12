@@ -1,0 +1,24 @@
+<div class="frm frm-menu-items" id="adm_menus">
+  <%= content_tag :h6, class: 'title' do %>
+    <%= "Menu: #{@menu.nome} " %>
+    <%= fas_icon('pen', title: 'Editar nome do menu', class: 'label-lnk', data: { url: adm_site_menu_change_path(@menu.id)}) %>
+  <% end %>
+
+  <div class="menu">
+    <div class="tree-data">
+      <div class="tree">
+        <%#= content_tag :div, class: 'tree-filter', data: { url: adm_site_menu_itens_tree_filter_path(@menu.id) } do |f| %>
+          <fieldset class="filtro-item nome">
+            <%#= text_field_tag 'find[query]', '', placeholder: 'localizar', class: 'search-field', autocomplete: "off" %>
+            <%#= content_tag :span, fa_icon('search'), class: 'insideico' %>
+          </fieldset>
+        <%# end %>
+        <div id="menu_itens_tree">
+          <%= render partial: 'menu_itens_tree' %>
+        </div>
+      </div>
+      <div class="data" id="menu-item-form-container">
+      </div>
+    </div>
+  </div>
+</div>

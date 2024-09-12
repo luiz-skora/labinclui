@@ -1,0 +1,24 @@
+<%= content_tag :div, class: "post-card imagem_esquerda esquerda" do %>
+  <%= link_to post.mount_url do %>
+    <%= content_tag :div, '', class: 'card-image-text' do %>
+      <%= content_tag :div, '', class: 'image-container' do %>
+        <%= content_tag :div, '', class: 'card-image', style: "padding-top: 75%;"  do %>
+          <%= content_tag :div, '', class: 'pm_image', data: { controller: 'images', images_url_value: load_image_post_path(post.id)}, id: ("pm_image_#{post.id}_#{'%.16f' % DateTime.now.to_f}").sub('.', '') %>
+        <% end %>
+      <% end %>
+      <div class="text-container">
+        <%= content_tag :div, '', class: 'post-card-text' do %>
+          <%= content_tag :h3, post.titulo, class: 'post-title' %>
+          <%= content_tag :div, "Publicado em: #{l(post.published_in, format: :momentjs_LLLL)}", class: 'published_in' %>
+          <div class="card-text">
+            <% if post.resumo.present? %>
+              <%= post.resumo.body.to_plain_text[0..500] %>
+            <% else %>
+              <%= post.content.body.to_plain_text[0..500] %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

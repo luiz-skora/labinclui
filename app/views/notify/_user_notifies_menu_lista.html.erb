@@ -1,0 +1,9 @@
+user notifies menu lista
+
+<%# notifies = current_user.notify.order( created_at: :desc).limit(10) %>
+  <%# notifies.each do |n| %>
+    <%#= render partial: 'notify/notify_item', locals: { notify: n } %>
+  <%# end %>
+  <%# if notifies.count > 0 %>
+    <%#= content_tag :li, link_to("Mostrar Todas", all_notify_profile_path(current_user.profile_person.identifier)) %>
+  <%# end %>

@@ -1,0 +1,29 @@
+<% k ||= @alternative %>
+<div class="question-alternative">
+  <% if k.present? %>
+  <% if k.is_discursiva? || k.evaluation_question.tipo == 'Discursiva' %>
+    <%= content_tag :h7, "Palavras: (Mínimo: #{k.min_words} - Máximo: #{k.max_words}) ", class: 'title' %>
+  <% else %>
+    <div class="row">
+      <fieldset class="col-3">
+        <%= content_tag :h7, "Alternativa: #{k.indice}", class: 'title' %>
+      </fieldset>
+      <fieldset class="col-3">
+        <%= content_tag :h7, "#{(k.correta? ? 'CORRETA' : 'Falsa')}", class: 'title' %>
+      </fieldset>
+      <fieldset class="col-6">
+        <div class="alternative-actions">
+          <ul class="aa">
+        <%= content_tag :li, fas_icon('pen-to-square', text: 'Editar'), data: { url: adm_cursos_edit_alternative_path(@curso.id, @modulo.id, (@aula.present? ? @aula.id : -1), @evaluation.id, k.evaluation_question.id, k.id)}, class: 'label-lnk' %>
+        <%= content_tag :li, fas_icon('trash-can', text: 'Excluir'), data: { url: adm_cursos_remove_alternative_path(@curso.id, @modulo.id, (@aula.present? ? @aula.id : -1), @evaluation.id, k.evaluation_question.id, k.id), message: 'Essa ação removerá a alternativa e não poderá ser desfeita!  Deseja continuar?'}, class: 'label-lnk-confirm-script' %>
+      </ul>
+        </div>
+      </fieldset>
+    </div>
+    <div class="trix-content question-alternativa">
+      <%= k.alternative %>
+    </div>
+    
+  <% end %>
+  <% end %>
+</div>

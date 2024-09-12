@@ -1,0 +1,18 @@
+<div class="frm midias _modal">
+  <%#= content_tag :h6, 'Biblioteca', class: 'title' %>
+  <%= render partial: 'gallery/biblioteca', locals: { multiple: false} %>
+
+
+  <%= form_with url: @target, method: :patch,  class: 'gallery-image-selected'  do |f| %>
+    <%= hidden_field_tag :blob_id, '', id: 'selected-blob-id' %>
+    <div class="dialog-image-selected row">
+      <div class="thumbs"></div>
+      <div class="btn-form">
+        <%= submit_tag 'Selecionar', data: { editor_id: params[:editor_id], disable_with: 'Gravando' }, style: 'display: none'  %>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
+
