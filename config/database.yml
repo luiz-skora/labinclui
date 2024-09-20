@@ -83,4 +83,4 @@ production:
   <<: *default
   database: ead
   username: ead
-  password: npk0709
+  password: *****
